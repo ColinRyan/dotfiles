@@ -35,10 +35,13 @@ Plugin 'joonty/vdebug'
 
 Plugin 'vimwiki/vimwiki'
 
-let g:vdebug_options = {'ide_key': 'vim'}
-let g:vdebug_options = {'break_on_open': 0}
-let g:vdebug_options = {'server': 'heyorca.app'}
-let g:vdebug_options = {'port': '9000'}
+Plugin 'lambdatoast/elm.vim'
+
+Plugin 'majutsushi/tagbar'
+
+let g:vdebug_options = {}
+let g:vdebug_options["port"] = 9000
+let g:vdebug_options["break_on_open"] = 1
 
 Plugin 'joonty/vim-taggatron'
 
@@ -78,15 +81,30 @@ filetype plugin indent on
 
 "Plugin config
 
+
 let g:ctrlp_max_files=30001 
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_working_path_mode = 'cr'
+let g:ctrlp_cmd = 'CtrlPTag'
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_by_filename = 1
 
-"let mapleader = "\<space>"
-let mapleader = ","
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_show_linenumbers = 2
+
+let NERDTreeShowLineNumbers = 1
 """"""""""""""""""""""
 "My mappings
 "
 """"""""""""""""""""""
+
+"let mapleader = "\<space>"
+let mapleader = ","
+
+" Tagbar Toggle
+nnoremap <leader>f :TagbarToggle<CR>
+
 " Toggen nerdtree
 map <C-n> :NERDTreeToggle<CR>
 
@@ -108,10 +126,10 @@ nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
 
 " navigate panels
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
 
 " remove highlight
 nnoremap <leader><space> :noh<cr>
@@ -236,9 +254,15 @@ autocmd InsertLeave * :normal! mo`iv`o"iy`o
 noremap <leader>i "ip
 
 
-set tags+=./php.tags
+set tags=./.php.tags;/
 
 " Functions
+
+function SwitchBuffer()
+  b#
+endfunction
+
+nnoremap <Tab> :call SwitchBuffer()<CR>
 
 function! PhpSyntaxOverride()
   hi! def link phpDocTags  phpDefine
