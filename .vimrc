@@ -48,7 +48,7 @@ let g:tagcommands = {
 \    "php" : {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"},
 \    "javascript" : {"tagfile":".js.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"} 
 \}
-let g:taggatron_verbose = 1
+let g:taggatron_verbose = 0
 
 Plugin 'shawncplus/phpcomplete.vim'
 
