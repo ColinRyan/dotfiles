@@ -1,6 +1,7 @@
 # --- Exports --- 
 
 export PATH=~/.bash_me/lib/scripts:$PATH
+export TERM="screen-256color"
 
 # --- Functions --- 
 
@@ -246,7 +247,8 @@ alias vbag='vim ~/.bash_me/lib/aliases/git.sh'
 # Git
 
 alias b='git checkout Beta && git pull origin Beta'
-alias p='git checkout Prod && git pull origin Prod'
+alias P='git checkout Prod && git pull origin Prod'
+alias p='git push origin HEAD'
 alias add='git add -p'
 alias com='git commit -m'
 alias go='git checkout'
