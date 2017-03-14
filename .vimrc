@@ -49,9 +49,9 @@ Plugin 'janko-m/vim-test'
 
 let g:tagcommands = {
 \    "php" : {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"},
-\    "javascript" : {"tagfile":".js.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"} 
+
 \}
-let g:taggatron_verbose = 1
+let g:taggatron_verbose = 0
 
 Plugin 'shawncplus/phpcomplete.vim'
 
@@ -84,7 +84,7 @@ filetype plugin indent on
 
 let g:ctrlp_max_files=30001 
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_working_path_mode = 'cr'
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_cmd = 'CtrlPTag'
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_by_filename = 1
@@ -106,14 +106,14 @@ let mapleader = ","
 nnoremap <leader>f :TagbarToggle<CR>
 
 " Toggen nerdtree
-map <C-n> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " put in quotes
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 " save and quit
 nnoremap <leader>q :wq<cr>
 " save
-nnoremap <C-s> :w<cr>
+nnoremap <leader>w :w<cr>
 
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
@@ -124,6 +124,10 @@ nnoremap <leader>s <C-w>v<C-w>l
 " Movement
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
+
+" Operators
+nnoremap <silent> <leader>r :set opfunc=Replace<cr>g@
+vnoremap <silent> <leader>r :<c-u>call Replace(visualmode())<cr>
 
 " navigate panels
 "nnoremap <C-h> <C-w>h
@@ -142,7 +146,7 @@ noremap <leader>vv :vsplit $MYVIMRC<cr>
 noremap <leader>sv :source $MYVIMRC<cr>
 
 " change the first word to return
-noremap <leader>r :s/^\S\+ \{-}=\{-}/return/<CR>
+" noremap <leader>r :s/^\S\+ \{-}=\{-}/return/<CR>
 
 " bashrc
 noremap <leader>vb :vsplit ~/.bashrc<cr>
@@ -178,11 +182,13 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
+nnoremap j j
+nnoremap k k
 nnoremap <leader>p "0p
 
+"abbrev
 
+iabbrev f Facebook
 
 " Config
 set modelines=0
@@ -286,3 +292,14 @@ endfunction
 
 noremap <leader>t :call PublicPrivateToggle()<cr>
 
+function! Replace(type)
+    if a:type ==# 'v'
+         normal! `<v`>d"0P
+    elseif a:type ==# 'char'
+        normal! `[v`]d"0P
+    else
+        return
+    endif
+
+    echom shellescape(@@)
+endfunction
