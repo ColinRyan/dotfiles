@@ -226,7 +226,7 @@ tt () {
 # Util
 
 alias r='. ~/.bashrc'
-alias ls='ll -tarh'
+#alias ls='ll -tarh'
 alias lg='ls | grep'
 
 alias bm='cd ~/.bash_me'
