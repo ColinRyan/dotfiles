@@ -1,15 +1,35 @@
 # --- Exports --- 
 
-export PATH=~/.bash_me/lib/scripts:$PATH
+export PATH=$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
 export TERM="screen-256color"
 
 # --- Functions --- 
 
+# portage use dir if on gentoo
+
+use () {
+
+ case `uname -r` in 
+     ?*gentoo) cd /etc/portage/package.use;;
+ esac
+}
+
+
+kw () {
+
+ case `uname -r` in 
+     ?*gentoo) cd /etc/portage/package.keywords;;
+ esac
+}
+
+
 #mvp starter
-np () {
+mvp () {
     code
     mcd $1
-    touch index.js
+    touch index.$2
+    touch readme.md
+    git init
     e
 }
 
@@ -172,12 +192,18 @@ t () {
         touch ~/.todo
     fi
 
+    if [ ! -f ./.todo ]; then
+        todo='./.todo'
+    else 
+        todo='~/.todo'
+    fi
+
     if [ ! -z "$1" ]; then
-        echo "- $1" >> ~/.todo
+        echo "- $1" >> $todo
     else 
         while read -r p; do
             echo -e "$p"
-        done <~/.todo
+        done <$todo
     fi
 }
 
@@ -189,12 +215,18 @@ tt () {
         touch ~/.todo
     fi
 
+    if [ ! -f ./.todo ]; then
+        todo='./.todo'
+    else 
+        todo='~/.todo'
+    fi
+
     oldIFS="$IFS"
     IFS='
     '
     IFS=${IFS:0:1}
     options=('exit')
-    options+=($(cat ~/.todo | grep -v "e\[0m"))
+    options+=($(cat $todo | grep -v "e\[0m"))
     IFS="$oldIFS"
 
 

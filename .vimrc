@@ -30,6 +30,11 @@ Plugin 'scrooloose/nerdtree'
 
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
+Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'shawncplus/phpcomplete.vim'
+
+Plugin 'benmills/vimux'
 
 Plugin 'joonty/vdebug'
 
@@ -37,15 +42,53 @@ Plugin 'vimwiki/vimwiki'
 
 Plugin 'lambdatoast/elm.vim'
 
-Plugin 'majutsushi/tagbar'
+Plugin 'swekaj/php-foldexpr.vim'
 
-let g:vdebug_options = {}
-let g:vdebug_options["port"] = 9000
-let g:vdebug_options["break_on_open"] = 1
+Plugin 'majutsushi/tagbar'
 
 Plugin 'joonty/vim-taggatron'
 
 Plugin 'janko-m/vim-test'
+
+Plugin 'mattn/gist-vim'
+
+Plugin 'othree/html5.vim'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'weierophinney/argumentrewrap'
+
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'ternjs/tern_for_vim'
+
+Plugin 'othree/yajs.vim'
+
+Plugin 'othree/javascript-libraries-syntax.vim'
+
+Plugin 'othree/es.next.syntax.vim'
+
+Plugin 'isRuslan/vim-es6'
+
+Plugin 'lvht/phpcd.vim'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+Plugin 'joonty/vim-phpqa.git'
+
+Plugin 'neomake/neomake'
+
+let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
+
+"let g:neomake_verbose=3
+
+
+autocmd! BufWritePost,BufEnter  * Neomake
+
+let g:vdebug_options = {}
+let g:vdebug_options["port"] = 9000
+let g:vdebug_options["break_on_open"] = 1
 
 let g:tagcommands = {
 \    "php" : {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"},
@@ -53,16 +96,22 @@ let g:tagcommands = {
 \}
 let g:taggatron_verbose = 0
 
-Plugin 'shawncplus/phpcomplete.vim'
-
-Plugin 'benmills/vimux'
-
 let test#strategy = "dispatch"
 
+let g:ycm_auto_trigger = 1
+
+
+let g:phpcomplete_search_tags_for_variables = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_enchance_jump_to_definition = 1
+let g:phpcomplete_mapping = {
+ \ 'jump_to_def_vsplit': ',g' 
+ \}
+
+autocmd FileType php set omnifunc=phpcd#CompletePHP
 autocmd StdinReadPre * let s:std_in=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -84,7 +133,7 @@ filetype plugin indent on
 
 let g:ctrlp_max_files=30001 
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_working_path_mode = 'cr'
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_cmd = 'CtrlPTag'
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_by_filename = 1
@@ -113,7 +162,7 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 " save and quit
 nnoremap <leader>q :wq<cr>
 " save
-nnoremap <C-s> :w<cr>
+nnoremap <leader>w :w<cr>
 
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
@@ -178,8 +227,8 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-nnoremap j gj
-nnoremap k gk
+nnoremap j j
+nnoremap k k
 nnoremap <leader>p "0p
 
 
@@ -235,7 +284,7 @@ set omnifunc=syntaxcomplete#Complete
 
 try 
 
-    colorscheme solariszed
+    colorscheme solarized
 catch
 endtry
 
@@ -258,7 +307,7 @@ set tags=./.php.tags;/
 
 " Functions
 
-function SwitchBuffer()
+function! SwitchBuffer()
   b#
 endfunction
 
