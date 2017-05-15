@@ -1,0 +1,18 @@
+" Mappings
+nnoremap x d
+nnoremap d <C-d>
+nnoremap u <C-u>
+
+noremap c b
+
+nnoremap m :tabprevious<CR>
+nnoremap , :tabnext<CR>
+
+" Config
+set noerrorbells 
+
+se hintmatching=contains
+
+set! javascript.options.jit.chrome=true
+
+source! ~/.vimperatorrcc
