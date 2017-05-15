@@ -22,6 +22,18 @@ kw () {
  esac
 }
 
+# mother fucking curry bitch
+# https://gist.github.com/abesto/4286574
+function curry () {
+    exportfun=$1; shift
+    fun=$1; shift
+    params=$*
+    cmd=$"function $exportfun() {
+        more_params=\$*;
+        $fun $params \$more_params;
+    }"
+    eval $cmd
+}     
 
 #mvp starter
 mvp () {
@@ -242,10 +254,6 @@ tt () {
 }
 # --- Alias ---
 
-# Tools
-
-alias meteor="cmd //c meteor"
-
 # Util
 
 alias r='. ~/.bashrc'
@@ -311,5 +319,5 @@ alias hh='halt && hs'
 
 alias am='php artisan migrate'
 alias ci='composer install'
-alias ac='php aritsan cache:clear && php artisan route:clear && composer dump-autoload'
+alias ac='php artisan cache:clear && php aritsan route:clear && composer dump-autoload'
 
