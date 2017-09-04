@@ -2,14 +2,24 @@ set nocompatible
 filetype off
 
 
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 
 
-
 " Plugins
+Plugin 'blueshirts/darcula'
 
+Plugin 'tpope/vim-commentary'
+
+Plugin 'tpope/vim-unimpaired'
+
+Plugin 'machakann/vim-swap'
+
+Plugin 'adoy/vim-php-refactoring-toolbox'
+
+Plugin 'chriskempson/base16-vim'
 
 Plugin 'sniphpets/sniphpets'
 
@@ -17,7 +27,7 @@ Plugin 'sniphpets/sniphpets-common'
 
 Plugin 'Shougo/deoplete.nvim'
 
-Plugin 'padawan-php/deoplete-padawan'
+" Plugin 'padawan-php/deoplete-padawan'
 
 Plugin 'docteurklein/neovim-php'
 
@@ -44,6 +54,7 @@ Plugin 'jwalton512/vim-blade'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'vim-airline/vim-airline'
+
 Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'christoomey/vim-tmux-navigator'
@@ -54,7 +65,7 @@ Plugin 'scrooloose/nerdtree'
 
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'shawncplus/phpcomplete.vim'
 
@@ -66,7 +77,8 @@ Plugin 'vimwiki/vimwiki'
 
 Plugin 'lambdatoast/elm.vim'
 
-Plugin 'swekaj/php-foldexpr.vim'
+" Plugin 'swekaj/php-foldexpr.vim'
+Plugin 'rayburgemeestre/phpfolding.vim'
 
 Plugin 'majutsushi/tagbar'
 
@@ -96,30 +108,26 @@ Plugin 'isRuslan/vim-es6'
 
 Plugin 'lvht/phpcd.vim'
 
-
-
-" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
 Plugin 'SirVer/ultisnips'
 
-Plugin 'joonty/vim-phpqa.git'
+"Plugin 'joonty/vim-phpqa.git'
 
 Plugin 'w0rp/ale'
+
 "Plugin 'neomake/neomake'
+
 
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1
 
 " These lines are here for phpcd
-let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources.php = ['omni']
 
+let g:ale_lint_delay = 1000 
 let g:ale_sign_column_always = 1
-let g:ale_linters = {
-\    'php': ['php', 'phpmd', 'phpcs']
-\}
+let g:ale_lint_on_save = 1
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 0
 let g:ale_open_list = 0
@@ -134,37 +142,31 @@ let g:ale_keep_list_window_open = 0
 "autocmd! BufWritePost,BufEnter  * Neomake
 
 let g:vdebug_options = {}
+let g:vdebug_options["path_map"] = {
+            \"/home/colin/code/heyorca/heyorca/laravel-webapp": "/var/www/heyorca/laravel-webapp"
+            \}
 let g:vdebug_options["port"] = 9000
 let g:vdebug_options["break_on_open"] = 1
 
-let g:tagcommands = {
-\    "php" : {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"},
-\    "javascript" : {"tagfile":".js.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"} 
-\}
+let g:tagcommands = {}
+let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"} 
+
 let g:taggatron_verbose = 0
 
 let test#strategy = "dispatch"
 
-let g:ycm_auto_trigger = 1
+"let g:ycm_auto_trigger = 1
 
 
-let g:phpcomplete_search_tags_for_variables = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_enchance_jump_to_definition = 1
-let g:phpcomplete_mapping = {
- \ 'jump_to_def_vsplit': ',g' 
- \}
-
-autocmd FileType php set omnifunc=phpcd#CompletePHP
 autocmd StdinReadPre * let s:std_in=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<leader>e"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/UltiSnips"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME . '/.vim/snippets/UltiSnips']
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
@@ -180,12 +182,28 @@ filetype plugin indent on
 
 let g:ctrlp_max_files=30001 
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = 'wr'
 let g:ctrlp_cmd = 'CtrlPTag'
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_by_filename = 1
 let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_root_markers =  ['composer.json', '.gitignore']
+
+if executable('ag')
+    " use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --nogroup --hidden 
+                \ --ignore .git
+                \ --ignore .svn
+                \ --ignore .hg
+                \ --ignore .DS_Store
+                \ -g ""'
+
+    "
+    let g:ctrlp_use_caching = 1
+endif
 
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
@@ -196,19 +214,24 @@ let NERDTreeShowLineNumbers = 1
 "My mappings
 "
 """"""""""""""""""""""
-
-"let mapleader = "\<space>"
+" let mapleader = "\<space>"
 let mapleader = ","
 
+" Create/edit snippets
+
+nnoremap <leader>u :UltiSnipsEdit<CR>
 "move line up
 nnoremap <s-j> ddj<s-p>
 nnoremap <s-k> ddk<s-p>
+
+nmap <C-_> gcc
+vmap <C-_> gc
 
 
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : deoplete#mappings#manual_complete()
 " Fold Toggle
-nnoremap <space> za
+nnoremap <space> zazt
 
 " Tagbar Toggle
 nnoremap <leader>f :TagbarToggle<CR>
@@ -226,7 +249,7 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 
 " make a split and switch to it
-nnoremap <leader>s <C-w>v<C-w>l
+nnoremap <leader>s :vnew<cr>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -245,7 +268,7 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " vimrc
-noremap <leader>vv :vsplit $MYVIMRC<cr>
+"noremap <leader>vv :vsplit $MYVIMRC<cr>
 noremap <leader>sv :source $MYVIMRC<cr>
 
 
@@ -293,6 +316,10 @@ nnoremap <leader>p "0p
 
 
 " Config
+" Settings
+
+set exrc " project based vimrc
+
 set modelines=0
 
 set pastetoggle=<F5>
@@ -345,31 +372,70 @@ set omnifunc=syntaxcomplete#Complete
 
 set foldenable
 
-set foldlevelstart=1
+set foldlevelstart=0
 
 set foldnestmax=1
 
 set foldmethod=syntax
+
+let javaScript_fold = 1
+
+highlight Folded ctermbg=black ctermfg=white
+
+
+augroup jsFolds
+    autocmd!
+    autocmd FileType javascript,typescript,json syntax region braceFold start="{" end="}" transparent fold
+    autocmd FileType javascript,typescript,json syntax region bracketFold start="\[" end="\]" transparent fold
+    autocmd FileType javascript,typescript,json syntax sync fromstart
+    autocmd FileType javascript,typescript,json set foldmethod=syntax
+augroup end
+
+autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
+
+function! MyWebpackMixFolds()
+
+    let text = join(getline(v:foldstart, v:foldend))
+    let option = ''
+
+    let path = matchstr(text , 'public/bundle/[-._/a-zA-Z]\+')
+
+    let start = substitute(getline(v:foldstart), 'mix.\|([', '', 'g')
+    let libCount = v:foldend - v:foldstart - 1
+
+    let usedIn = split(system("grep -rwl './resources/views/' -e '" . substitute(path, 'public', '', 'g') . "'"), "\n")
+
+
+    echom usedIn[1]
+
+
+
+    return  path . "    " . join(usedIn, ' ')
+
+endfunction
+
 " Color 
 
+let base16colorspace=256
 
-try 
-
-    colorscheme solarized
-catch
-endtry
-
-set background=dark
-
+colorscheme darcula
 
 au FocusLost * :wa
 
 command! W w !sudo tee % > /dev/null
 
+command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt=nofile | put! a
 
 "autocmd
 autocmd InsertEnter * :normal! mi
 autocmd InsertLeave * :normal! mo`iv`o"iy`o
+
+autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim
+autocmd! bufLeave init.vim g:toggle_config=0
+autocmd! bufLeave init.vim source ~/.config/nvim/init.vim
+
+autocmd! bufLeave *.snippets silent! wall
+autocmd! bufLeave *.snippets :bdelete
 
 noremap <leader>i "ip
 
@@ -389,15 +455,53 @@ function! PhpSyntaxOverride()
   hi! def link phpDocParam phpType
 endfunction
 
+augroup startup
+    autocmd!
+    autocmd VimEnter * badd $MYVIMRC 
+augroup END
+
 augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
 
+
+function! PhpSettings()
+    let g:phpcomplete_search_tags_for_variables = 1
+    let g:phpcomplete_parse_docblock_comments = 1
+    let g:phpcomplete_relax_static_constraint = 1
+    let g:phpcomplete_enchance_jump_to_definition = 1
+    let g:phpcomplete_mapping = {
+     \ 'jump_to_def_vsplit': ',g' 
+     \}
+
+    let g:ale_php_phpcs_standard='PSR2'
+    let g:ale_linters = {
+    \    'php': ['php', 'phpmd', 'phpstan']
+    \}
+
+    let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+    let g:deoplete#ignore_sources.php = ['omni']
+
+    let g:tagcommands["php"] = {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"}
+
+    let b:phpfold_use = 1
+    let b:phpfold_group_args = 0
+    let b:phpfold_docblocks = 1
+    let b:phpfold_group_iftry = 0
+    let b:phpfold_text_right_lines = 0
+endfunction
+
+augroup php
+    autocmd!
+    autocmd FileType php call PhpSettings()
+    autocmd FileType php set omnifunc=phpcd#CompletePHP
+augroup END
+
 function! PublicPrivateToggle()
     let line = getline('.')
-    if (line =~ 'public')
+    if (line =~ 'mappingpublic')
         s/public/private/
     elseif (line =~ 'private')
         s/private/public/
@@ -436,3 +540,30 @@ endfunction
 
 nnoremap <leader>q :call QuickFixToggle()<cr>
 
+function! UltiDispatcher()
+    echo g:makingFunction
+    if(g:makingFunction)
+        call GoBack()
+    endif
+endfunction
+
+function! GoBack()
+    let g:makingFunction = 0
+    execute "normal! 'u"
+endfunction
+
+let g:makingFunction = 0
+function! MakeFunction()
+
+    let g:makingFunction = 1
+    execute "normal! mugg/# funcs\<CR>no\<bs>\<bs>\<cr>pub "
+    call UltiSnips#ExpandSnippetOrJump()
+endfunction
+
+nnoremap <leader>m :call MakeFunction()<cr>
+
+autocmd! User UltiSnipsExitLastSnippet call UltiDispatcher()
+
+nnoremap <leader>vv :call toggle#Config()<cr>
+
+set secure "recommended to be placed at the bottom of the file

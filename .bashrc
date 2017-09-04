@@ -1,9 +1,81 @@
+
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+_why()
+{
+    readarray COMPREPLY <<< $(find ~/code/why/ -type f -printf "%f\n")
+}
+__has_parent_dir () {
+    # Utility function so we can test for things like .git/.hg without firing up a
+    # separate process
+    test -d "$1" && return 0;
+
+    current="."
+    while [ ! "$current" -ef "$current/.." ]; do
+        if [ -d "$current/$1" ]; then
+            return 0;
+        fi
+        current="$current/..";
+    done
+
+    return 1;
+}
+
+__vcs_name() {
+    if [ -d .svn ]; then
+        echo "- [svn]";
+    elif __has_parent_dir ".git"; then
+        echo "- [$(__git_ps1 'git %s')]";
+    elif __has_parent_dir ".hg"; then
+        echo "- [hg $(hg branch)]"
+    fi
+}
+
+black=$(tput -Txterm setaf 0)
+red=$(tput -Txterm setaf 1)
+green=$(tput -Txterm setaf 2)
+yellow=$(tput -Txterm setaf 3)
+dk_blue=$(tput -Txterm setaf 4)
+pink=$(tput -Txterm setaf 5)
+lt_blue=$(tput -Txterm setaf 6)
+
+bold=$(tput -Txterm bold)
+reset=$(tput -Txterm sgr0)
+
+# Nicely formatted terminal prompt
+export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
+
+# --- Source ---
+source /usr/share/git/completion/git-completion.bash
+source /usr/share/git/completion/git-prompt.sh
+source ~/.bashme/heyorca.sh
 # --- Exports --- 
 
 export PATH=$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
 export TERM="screen-256color"
 
 # --- Functions --- 
+
+why () {
+    mkdir -p ~/code/why/$1
+    nvim ~/code/why/$1/$1
+}
+#unzip
+uz () {
+    file=$(ls -f *.zip | fzf -1 -0)
+    dir=$(basename $file .zip)
+
+    mkdir $dir
+    cp $file $dir
+    cd $dir 
+    unzip $file
+
+}
+
+mdiff(){
+   git branch --list -a --merged "$1" | sed 's/^..//;s/ .*//' | xargs git branch --list -a --no-merged "$2"
+}
 
 # portage use dir if on gentoo
 
@@ -49,12 +121,43 @@ mvp () {
 cl () {
     clear
     if [ -z "$1" ]; then
-        cd ..
+        builtin cd ..
     else
-        cd $1
+        builtin cd $1
     fi
     ls
 }
+
+findBuggedCommit () {
+    
+   commits=($(git log --pretty=%h -n 50))
+   change=10
+
+   echo commits
+   index=0
+
+   until [ $change -eq 0 ]; do
+       read -p "Up or Down?" -n 1 -r
+       echo
+
+       if [[ $REPLY  =~ ^[j]$ ]]; then
+           echo ${commits[$((index+change))]}
+           index=$((index+change))
+           echo $((index+change))
+       fi
+       if [[ $REPLY =~ ^[k]$ ]]; then
+           echo ${commits[$((index-change))]}
+           index=$((index-change))
+           echo $((index-change))
+       fi
+   done
+}
+# Go to branch and run npm run dev
+gotobranch () {
+ git checkout $1
+ npm run dev
+}
+
 
 # Makes directory and goes to it
 mcd () {
@@ -66,19 +169,21 @@ mcd () {
 e () {
 
     for f in ./index.*; do
-        vim $f
+        nvim $f
         break
     done
 
 }
 
 
-
+ff () {
+  grep -rnw "$1" -e "$2"
+}
 
 g () {
 
 
-    options=("*BUG-FIX*" "*REFACTORING*" "*CONFIG*" "*FEATURE*" "*MIGRATION*" "*DOC*")
+    options=("*BUG-FIX*" "*REFACTORING*" "*CONFIG*" "*FEATURE*" "*MIGRATION*" "*DOC*" "*BUILD*" "*UTIL*" "*INFRASTRUCTURE*" "*STYLE*")
     git add -p
 
 
@@ -193,10 +298,6 @@ ca () {
     sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 }
 
-test () {
-    PS2="$PS2 test"
-}
-
 # add and list tasks
 t () {
 
@@ -257,46 +358,60 @@ tt () {
 # Util
 
 alias r='. ~/.bashrc'
-#alias ls='ll -tarh'
+alias ls='ls -la'
 alias lg='ls | grep'
+alias i='sudo pacman -S'
 
+alias cd='cl'
 alias bm='cd ~/.bash_me'
 alias bma='cd ~/.bash_me/lib/aliases'
 alias bms='cd ~/.bash_me/lib/scripts'
+alias cr='composer require'
+alias ni='npm install'
+alias nrd='npm run dev'
+
 
 
 # Navigation
 
 alias code='cd ~/code'
+alias why='why'
+complete -F _why why
 alias idea='cd ~/idea'
 
 
 # Edit
 
-alias imv='vim'
-alias vmi='vim'
-alias ivm='vim'
+alias vim='nvim'
+alias imv='nvim'
+alias vmi='nvim'
+alias ivm='nvim'
 alias vb='vim ~/.bashrc && r'
-alias vv='vim ~/.vimrc'
+alias vg='vim ~/.gitconfig'
+alias vv='vim ~/con'
 alias vt='vim ~/.todo'
 alias vx='vim ~/.tmux.conf '
+alias v3='vim ~/.config/i3/config'
 alias vii='vim ~/.inputrc && bind -f ~/.inputrc'
 alias vbab='vim ~/.bash_me/lib/aliases/bashme.sh'
 alias vbag='vim ~/.bash_me/lib/aliases/git.sh'
 
 # Git
 
-alias b='git checkout Beta && git pull origin Beta'
-alias P='git checkout Prod && git pull origin Prod'
+alias gB='git checkout Beta && git fetch && git pull origin Beta && npm run dev'
+alias gP='git checkout Prod && git fetch && git pull origin Prod && npm run dev'
+alias gR='git checkout release && git fetch && git pull origin release'
 alias p='git push origin HEAD'
 alias add='git add -p'
 alias com='git commit -m'
-alias go='git checkout'
+alias go='gotobranch'
 __git_complete go _git_checkout
 alias gpl='git pull origin HEAD'
 alias gph='git push origin HEAD'
 alias gm='git merge'
+alias gmo='git merge origin/'
 __git_complete gm _git_merge
+__git_complete gmo _git_merge
 alias gf='git fetch'
 alias gs='git stash'
 alias gsp='git stash pop'
@@ -304,6 +419,10 @@ alias gcn='git commit -n'
 alias gcb='git checkout -b'
 __git_complete gcb _git_checkout
 alias gb='git branch'
+alias gl='git log'
+alias gc='git commit'
+alias grh='git revert --hard'
+alias gx="git for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch && npm run dev "
 
 
 # Vagrant
@@ -321,3 +440,7 @@ alias am='php artisan migrate'
 alias ci='composer install'
 alias ac='php artisan cache:clear && php aritsan route:clear && composer dump-autoload'
 
+alias sound='alsamixer'
+alias mn='xrandr --output HDMI-1 --right-of eDP-1 --auto'
+alias mf='xrandr --output HDMI-1 --auto'
+alias tv='xrandr --output HDMI-1 --mode 1600x1200'
