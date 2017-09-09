@@ -52,7 +52,7 @@ source /usr/share/git/completion/git-prompt.sh
 source ~/.bashme/heyorca.sh
 # --- Exports --- 
 
-export PATH=$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
+export PATH=$HOME/.gem/ruby/2.4.0/bin:/root/.gem/ruby/2.4.0/bin:$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
 export TERM="screen-256color"
 
 # --- Functions --- 
@@ -369,7 +369,8 @@ alias bms='cd ~/.bash_me/lib/scripts'
 alias cr='composer require'
 alias ni='npm install'
 alias nrd='npm run dev'
-
+alias killw="ps -aux | grep mysql-workbench-bin | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | xargs kill"
+alias dl="cd ~/Downloads"
 
 
 # Navigation

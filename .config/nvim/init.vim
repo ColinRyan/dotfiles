@@ -146,7 +146,7 @@ let g:vdebug_options["path_map"] = {
             \"/home/colin/code/heyorca/heyorca/laravel-webapp": "/var/www/heyorca/laravel-webapp"
             \}
 let g:vdebug_options["port"] = 9000
-let g:vdebug_options["break_on_open"] = 1
+let g:vdebug_options["break_on_open"] = 0
 
 let g:tagcommands = {}
 let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"} 
@@ -478,7 +478,7 @@ function! PhpSettings()
 
     let g:ale_php_phpcs_standard='PSR2'
     let g:ale_linters = {
-    \    'php': ['php', 'phpmd', 'phpstan']
+    \    'php': ['php','phpcs', 'phpmd', 'phpstan']
     \}
 
     let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
