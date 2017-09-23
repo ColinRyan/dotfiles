@@ -2,10 +2,18 @@
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+
+
+_testing()
+{
+    COMPREPLY=($(find ~/code/testing/ -mindepth 1 -type d -printf "%f\n"))
+}
+
 _why()
 {
-    readarray COMPREPLY <<< $(find ~/code/why/ -type f -printf "%f\n")
+    COMPREPLY=($(find ~/code/why/ -type f -printf "%f\n"))
 }
+
 __has_parent_dir () {
     # Utility function so we can test for things like .git/.hg without firing up a
     # separate process
@@ -56,6 +64,12 @@ export PATH=$HOME/.gem/ruby/2.4.0/bin:/root/.gem/ruby/2.4.0/bin:$HOME/.config/co
 export TERM="screen-256color"
 
 # --- Functions --- 
+
+testing () {
+    mkdir -p ~/code/testing/$1
+    tmux new-window 
+    tmux split-window nvim ~/code/testing/$1/$2.$1
+}
 
 why () {
     mkdir -p ~/code/why/$1
@@ -371,6 +385,8 @@ alias ni='npm install'
 alias nrd='npm run dev'
 alias killw="ps -aux | grep mysql-workbench-bin | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | xargs kill"
 alias dl="cd ~/Downloads"
+alias ts="testing"
+complete -F _testing ts
 
 
 # Navigation
@@ -396,6 +412,7 @@ alias v3='vim ~/.config/i3/config'
 alias vii='vim ~/.inputrc && bind -f ~/.inputrc'
 alias vbab='vim ~/.bash_me/lib/aliases/bashme.sh'
 alias vbag='vim ~/.bash_me/lib/aliases/git.sh'
+alias vc='vim ~/.config/composer/composer.json'
 
 # Git
 

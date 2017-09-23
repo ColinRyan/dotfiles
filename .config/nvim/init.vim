@@ -9,6 +9,32 @@ call vundle#begin()
 
 
 " Plugins
+Plugin 'rafi/vim-badge'
+    
+Plugin 'junegunn/vim-peekaboo'
+    
+Plugin 'elzr/vim-json'
+    
+Plugin 'MaxMellon/vim-jsx-pretty'
+    
+Plugin 'kana/vim-textobj-function'
+    
+Plugin 'kana/vim-textobj-user'
+    
+Plugin 'kana/vim-operator-user'
+    
+Plugin 'rafi/vim-denite-z'
+    
+Plugin 'Shougo/denite.nvim'
+    
+Plugin 'MattesGroeger/vim-bookmarks'
+    
+Plugin 'sampson-chen/sack'
+
+Plugin 'metakirby5/codi.vim'
+
+Plugin 'brooth/far.vim'
+
 Plugin 'blueshirts/darcula'
 
 Plugin 'tpope/vim-commentary'
@@ -27,7 +53,7 @@ Plugin 'sniphpets/sniphpets-common'
 
 Plugin 'Shougo/deoplete.nvim'
 
-" Plugin 'padawan-php/deoplete-padawan'
+Plugin 'padawan-php/deoplete-padawan'
 
 Plugin 'docteurklein/neovim-php'
 
@@ -143,7 +169,7 @@ let g:ale_keep_list_window_open = 0
 
 let g:vdebug_options = {}
 let g:vdebug_options["path_map"] = {
-            \"/home/colin/code/heyorca/heyorca/laravel-webapp": "/var/www/heyorca/laravel-webapp"
+            \"/home/colin/code/heyorca/heyorca/laravel-webapp/public": "/var/www/heyorca/laravel-webapp/public"
             \}
 let g:vdebug_options["port"] = 9000
 let g:vdebug_options["break_on_open"] = 0
