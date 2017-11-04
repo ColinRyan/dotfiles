@@ -53,6 +53,7 @@ reset=$(tput -Txterm sgr0)
 
 # Nicely formatted terminal prompt
 export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
+export GNOME_KEYRING_CONTROL=1
 
 # --- Source ---
 source /usr/share/git/completion/git-completion.bash
@@ -399,13 +400,13 @@ alias idea='cd ~/idea'
 
 # Edit
 
-alias vim='nvim'
+# alias vim='nvim'
 alias imv='nvim'
 alias vmi='nvim'
 alias ivm='nvim'
 alias vb='vim ~/.bashrc && r'
 alias vg='vim ~/.gitconfig'
-alias vv='vim ~/con'
+alias vv='vim ~/.config/nvim/init.vim'
 alias vt='vim ~/.todo'
 alias vx='vim ~/.tmux.conf '
 alias v3='vim ~/.config/i3/config'
@@ -427,8 +428,11 @@ __git_complete go _git_checkout
 alias gpl='git pull origin HEAD'
 alias gph='git push origin HEAD'
 alias gm='git merge'
+alias gr='git rebase'
+alias grc='git rebase --continue'
 alias gmo='git merge origin/'
 __git_complete gm _git_merge
+__git_complete gr _git_rebase
 __git_complete gmo _git_merge
 alias gf='git fetch'
 alias gs='git stash'
@@ -462,3 +466,6 @@ alias sound='alsamixer'
 alias mn='xrandr --output HDMI-1 --right-of eDP-1 --auto'
 alias mf='xrandr --output HDMI-1 --auto'
 alias tv='xrandr --output HDMI-1 --mode 1600x1200'
+alias sx='startx'
+alias vi3='vim ~/.config/i3/config'
+source /usr/share/nvm/init-nvm.sh
