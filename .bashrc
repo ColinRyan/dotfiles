@@ -58,7 +58,6 @@ export GNOME_KEYRING_CONTROL=1
 # --- Source ---
 source /usr/share/git/completion/git-completion.bash
 source /usr/share/git/completion/git-prompt.sh
-source ~/.bashme/heyorca.sh
 # --- Exports --- 
 
 export PATH=$HOME/.gem/ruby/2.4.0/bin:/root/.gem/ruby/2.4.0/bin:$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
