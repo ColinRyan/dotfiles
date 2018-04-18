@@ -1,4 +1,5 @@
 set nocompatible
+
 filetype off
 
 
@@ -9,13 +10,33 @@ call vundle#begin()
 
 " Plugins
 
+Plugin 'noahfrederick/vim-laravel' 
+
+Plugin 'danro/rename.vim'
+
+Plugin 'galooshi/vim-import-js' 
+
+Plugin 'brooth/far.vim' 
+
+Plugin 'ton/vim-bufsurf' 
+
+Plugin 'wokalski/autocomplete-flow' 
+
+Plugin 'itchyny/calendar.vim' 
+
+Plugin 'michaeljsmith/vim-indent-object'
+
+Plugin 'raghur/vim-textobj-line'
+
+Plugin 'otheree/jspc.vim'
+
 Plugin 'poetic/vim-textobj-javascript'
 
 Plugin 'thinca/vim-textobj-function-javascript'
 
 Plugin 'whatyouhide/vim-textobj-xmlattr'
      
-Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'jelera/vim-javascript-syntax'
 
 Plugin 'carlitux/deoplete-ternjs'
      
@@ -29,7 +50,7 @@ Plugin 'tpope/vim-projectionist'
 
 Plugin 'pgilad/vim-skeletons'
 
-" Plugin 'roxma/LanguageServer-php-neovim'
+Plugin 'roxma/LanguageServer-php-neovim'
      
 Plugin 'jceb/vim-orgmode'
      
@@ -41,7 +62,7 @@ Plugin 'tpope/vim-cucumber'
      
 Plugin 'c9s/phpunit.vim'
      
-" Plugin 'autozimu/LanguageClient-neovim'
+Plugin 'autozimu/LanguageClient-neovim'
      
 Plugin 'Shougo/echodoc.vim'
      
@@ -63,7 +84,7 @@ Plugin 'Shougo/denite.nvim'
     
 " Plugin 'sampson-chen/sack'
 
-" Plugin 'metakirby5/codi.vim'
+Plugin 'metakirby5/codi.vim'
 
 " Plugin 'brooth/far.vim'
 
@@ -85,7 +106,7 @@ Plugin 'sniphpets/sniphpets-common'
 
 Plugin 'Shougo/deoplete.nvim'
 
-Plugin 'padawan-php/deoplete-padawan'
+" Plugin 'padawan-php/deoplete-padawan'
 
 Plugin 'docteurklein/neovim-php'
 
@@ -93,7 +114,7 @@ Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'noahfrederick/vim-composer'
 
-Plugin 'sjl/gundo.vim'
+Plugin 'simnalamburt/vim-mundo'
 
 Plugin 'jiangmiao/auto-pairs'
 
@@ -156,13 +177,13 @@ Plugin 'airblade/vim-gitgutter'
 
 Plugin 'ternjs/tern_for_vim'
 
-Plugin 'othree/yajs.vim'
+" Plugin 'othree/yajs.vim'
 
 Plugin 'othree/javascript-libraries-syntax.vim'
 
-Plugin 'othree/es.next.syntax.vim'
+" Plugin 'othree/es.next.syntax.vim'
 
-Plugin 'isRuslan/vim-es6'
+" Plugin 'isRuslan/vim-es6'
 
 Plugin 'lvht/phpcd.vim'
 
@@ -198,6 +219,22 @@ let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 0
 let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+\    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
+\    'javascript': ['eslint', 'flow'],
+\    'json': [],
+\    'jsx': [ 'eslint', 'flow']
+\
+\}
+
+let g:ale_fixers = {
+\    'php': ['phpcbf','php_cs_fixer'],
+\    'javascript': ['eslint'],
+\    'jsx': ['eslint']
+\}
+
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
 
 "let g:neomake_verbose=3
@@ -216,11 +253,11 @@ let g:vdebug_options["break_on_open"] = 0
 let g:vdebug_options["on_close"] = 'detach'
 
 let g:tagcommands = {}
-let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R --map-javascript=.jsx --exclude=.git --exclude=node_modules --exclude=vendor"}
+let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R --map-javascript=.jsx --exclude=.git --exclude=vendor"}
 
 let g:taggatron_verbose = 0
 
-let test#strategy = "dispatch"
+let test#strategy = "neovim"
 
 "let g:ycm_auto_trigger = 1
 
@@ -245,6 +282,15 @@ filetype plugin indent on
 
 
 "Plugin config
+
+
+let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
+let skeletons#autoRegister = 1
+
+let g:jsx_ext_required = 0
+
+let g:javscript_plugin_flow = 1
+
 
 let g:loaded_python_provider = 1
 let g:python_host_skip_check=1
@@ -277,28 +323,71 @@ let g:tagbar_compact = 1
 
 let NERDTreeShowLineNumbers = 1
 
-let g:gLanguageClient_diagnosticDisplay = {}
+let g:LanguageClient_autostart = 1
+let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_diagnosticDisplay = {}
 let g:LanguageClient_serverCommands = {
-            \ 'php': ['php', '/home/colin/.config/composer/vendor/bin/php-language-server.php']
+            \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
+            \ 'javascript': ['flow-language-server', '--stdio'],
+            \ 'javascript.jsx': ['flow-language-server', '--stdio'],
             \}
 
 
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', 'Up', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', 'Down', '<denite:move_to_previous_line>', 'noremap')
 
+"Vimux settings
+
+let g:VimuxUseNearest = 1
+
+let mapleader = ","
+let maplocalleader = "-"
+
+
+"Vim test
+
+let test#stategy = "vimux"
+
+let g:dispatch_compilers = { }
+let g:dispatch_compilers['./vendor/bin/'] = ''
+let g:dispatch_compilers['phpunit'] = 'phpunit'
 """"""""""""""""""""""
-"My mappings
-"
-""""""""""""""""""""""
+" Mapping
+
+
+nnoremap <leader>tn :TestNearest<cr>  
+nnoremap <leader>tf :TestFile<cr>  
+nnoremap <leader>ts :TestSuite<cr>  
+nnoremap <leader>tl :TestLast<cr>  
+nnoremap <leader>tv :TestVisit<cr>  
+
+
+
+nnoremap <localleader><localleader> :e ./.nvimrc<cr>
+
+nnoremap <leader>nf : call template#MakeNewFile()<CR>  
+
+vnoremap <leader>rm :call refactor#Move()<CR>  
+
+nnoremap <leader>mp :call template#MakePlugin()<CR>
+nnoremap <leader>ms :call template#MakeSkeleton()<CR>
+nnoremap <leader>mf :call AddFunction()<cr>
+
+nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 nnoremap <leader>w :w<cr> 
 nnoremap <leader>a i<cr><esc>P
+nnoremap <C-v>  :wq<CR> 
 
-inoremap <c-q> :wq<CR> 
+nnoremap <C-q> :wq<CR> 
+inoremap <C-q> :wq<CR> 
 
-nnoremap <c-f> :CtrlPMixed <CR>
+nnoremap <C-f> :CtrlPMixed <CR>
 
 " let mapleader = "\<space>"
-let mapleader = ","
-let maplocalleader = "-"
 
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
@@ -369,11 +458,6 @@ noremap <leader>P diw"0P
 " goto return
 nnoremap <leader>r /return<CR>w
 
-" Delete in
-noremap <leader>[ di[
-noremap <leader>{ di{
-noremap <leader>( di(
-
 " To command mode
 inoremap jj <ESC>
 inoremap kk <ESC>
@@ -398,11 +482,10 @@ nnoremap k k
 nnoremap <leader>p "0p
 
 
-nnoremap <leader>m :call MakeFunction()<cr>
 nnoremap <leader>vv :call toggle#Config()<cr>
 
 noremap <leader>i "ip
-nnoremap <Tab> :call SwitchBuffer()<CR>
+nnoremap <Tab> :call toggle#Buffer()<CR>
 
 
 nnoremap <leader>b :<C-u>Denite buffer<CR>
@@ -411,6 +494,9 @@ nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
 " Config
 " Settings
 
+syntax on
+
+" set termguicolors
 set exrc " project based vimrc
 
 set modelines=0
@@ -440,6 +526,7 @@ set laststatus=2
 set relativenumber
 set number
 set undofile
+set backupcopy=yes 
 
 
 "nnoremap / /\v
@@ -458,7 +545,6 @@ set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=85
 
-set tags=./.php.tags;/
 
 "_________________
 "'"'"'"''""""'"""'
@@ -473,7 +559,6 @@ set foldnestmax=1
 
 set foldmethod=syntax
 
-let javaScript_fold = 1
 
 highlight Folded ctermbg=black ctermfg=white
 
@@ -484,7 +569,7 @@ autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
 
 let base16colorspace=256
 
-colorscheme narcula
+colorscheme sin
 
 
 command! W w !sudo tee % > /dev/null
@@ -492,6 +577,15 @@ command! W w !sudo tee % > /dev/null
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt=nofile | put! a
 
 " augroups
+
+augroup  nvimrc
+    autocmd!
+    autocmd! bufwritepost .nvimrc source ./.nvimrc
+    autocmd! bufLeave .nvimrc g:toggle_config=0
+    autocmd! bufLeave .nvimrc source .nvimrc
+    autocmd! bufEnter .nvimrc call Initvim()
+augroup end 
+
 augroup  jsx
     autocmd!
     autocmd FileType jsx LoadJsxCommands()
@@ -502,17 +596,25 @@ augroup editor
     au FocusLost * :wa
 augroup end
 
-augroup jsFolds
+augroup js
     autocmd!
-    autocmd FileType javascript,typescript,json syntax region braceFold start="{" end="}" transparent fold
-    autocmd FileType javascript,typescript,json syntax region bracketFold start="\[" end="\]" transparent fold
-    autocmd FileType javascript,typescript,json syntax sync fromstart
-    autocmd FileType javascript,typescript,json set foldmethod=syntax
+    autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
+    autocmd FileType javascript,typescript,json,jsx colorscheme sin
+
 augroup end
 
 augroup snippets
     autocmd! bufLeave *.snippets silent! wall
     autocmd! bufLeave *.snippets :bdelete
+augroup end
+
+
+augroup vimrc
+    autocmd!
+    autocmd! bufwritepost .vimrc source ~/.vimrc
+    autocmd! bufLeave .vimrc g:toggle_config=0
+    autocmd! bufLeave .vimrc source ~/.vimrc
+    autocmd! bufEnter .vimrc call Initvim()
 augroup end
 
 augroup init.vim
@@ -526,6 +628,7 @@ augroup end
 augroup startup
     autocmd!
     autocmd VimEnter * badd $MYVIMRC 
+    autocmd VimEnter * call MakePluginMappings()
     autocmd! User UltiSnipsExitLastSnippet call UltiDispatcher()
 augroup END
 
@@ -533,13 +636,6 @@ augroup phpSyntaxOverride
   autocmd!
   autocmd FileType php call PhpSyntaxOverride()
 augroup END
-
-augroup templates
-    autocmd BufNewFile *.php 0r ~/.config/nvim/templates/skeleton.php
-    autocmd BufNewFile *.blade.php 0r ~/.config/nvim/templates/skeleton.blade.php
-    autocmd BufNewFile *.jsx 0r ~/.config/nvim/templates/skeleton.jsx
-augroup end
-
 
 augroup php
     autocmd!
@@ -551,26 +647,87 @@ augroup php
     " autocmd FileType php nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 augroup END
 
-" Functions 
+
+let g:takeMeBack = 0
+" # funcs
+
+fun! JavascriptSettings()
+
+    set foldlevelstart=0
+
+    set foldnestmax=2
+
+    set foldmethod=syntax
+
+    let javaScript_fold = 1
+
+    set tags=./.js.tags;/
+endf 
+
+fun! MakePluginMappings()
+    if exists(":LanguageClientStart")
+        nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+        nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+        nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+    endif
+
+    if exists(":BufSurfForward")
+        nnoremap <s-l> :BufSurfForward<cr> 
+        nnoremap <s-h> :BufSurfBack<cr> 
+    endif
+
+    if exists(":ALENext")
+        
+        nnoremap <leader>j :ALENext<cr> 
+        nnoremap <leader>k h:ALEPrevious<cr> 
+    endif
+    if exists(":ImportJSWord")
+        nnoremap <Leader>if :ImportJSWord<CR>
+        nnoremap <Leader>ix :ImportJSFix<CR>
+    endif
+    if exists(":Denite")
+        
+        nnoremap <leader>ep :execute "Denite file/rec:" . "~/.config/nvim/autoload"<cr>
+        nnoremap <leader>es :execute "Denite file/rec:" . skeletons#skeletonsDir<cr>
+    endif
+
+    if exists(":NERDTreeToggle")
+        
+        call NERDTreeAddMenuItem({
+                \ 'text': '(n) New file from skeleton',
+                \ 'shortcut': 'n',
+                \ 'callback': "template#MakeNewFile"})
+
+    endif
+endf 
+
+
+
 fun!  LoadJsxCommands()
-    nnoremap <localleader>c  
 endf
  
+fun!  AddMapping()
+    let g:takeMeBack = 1
+    execute "normal! mugg/\" Mapping\<CR>jo\<esc>o\<esc>kin "  
+    call UltiSnips#ExpandSnippetOrJump()
+endf 
+
 fun!  AddAuGroup()
     let g:takeMeBack = 1
-    execute "normal! mugg/\" augroups\<CR>o\<bs>\<bs>\ag "  
+    execute "normal! mugg/\" augroups\<CR>jo\<esc>o\<esc>kiag "  
     call UltiSnips#ExpandSnippetOrJump()
 endf 
 
 fun! AddFunction()
     let g:takeMeBack = 1
-    execute "normal! mugg/\" Functions\<CR>o\<bs>\<bs>\Func "  
+    execute "normal! mugg/\# funcs\<CR>jo\<esc>o\<esc>kipub "  
     call UltiSnips#ExpandSnippetOrJump()
 endf
 
+
 fun! AddPlugin()
     let g:takeMeBack = 1
-    execute "normal! mugg/\" Plugins\<CR>o\<bs>\<bs>\p " 
+    execute "normal! mugg/\" Plugins\<CR>jo\<esc>o\<esc>kip " 
          
          
     call UltiSnips#ExpandSnippetOrJump()
@@ -578,6 +735,7 @@ endf
 
 
 fun! Initvim()
+    nnoremap <localleader>n :call AddMapping()<CR>
     nnoremap <localleader>p :call AddPlugin()<CR>
     nnoremap <localleader>f :call AddFunction()<CR> 
     nnoremap <localleader>a :call AddAuGroup()<CR> 
@@ -607,10 +765,6 @@ function! PhpSyntaxOverride()
   hi! def link phpDocParam phpType
 endfunction
 
-function! SwitchBuffer()
-  b#
-endfunction
-
 function! PhpSettings()
     let g:phpcomplete_search_tags_for_variables = 1
     let g:phpcomplete_parse_docblock_comments = 1
@@ -621,16 +775,12 @@ function! PhpSettings()
      \}
 
     let g:ale_php_phpcs_standard='PSR2'
-    let g:ale_linters = {
-    \    'php': ['php','phpcs', 'phpmd', 'phpstan'],
-    \    'javascript': ['eshint']
-    \
-    \}
-
     let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
     let g:deoplete#ignore_sources.php = ['omni']
 
     let g:tagcommands["php"] = {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=.git --exclude=node_modules --exclude=vendor"}
+
+    set tags=./.php.tags;/
 
     let b:phpfold_use = 1
     let b:phpfold_group_args = 0
@@ -692,16 +842,13 @@ function! GoBack()
     execute "normal! 'u"
 endfunction
 
-let g:takeMeBack = 0
-function! MakeFunction()
-
-    let g:takeMeBack = 1
-    execute "normal! mugg/# funcs\<CR>no\<bs>\<bs>\<cr>pub "
-    call UltiSnips#ExpandSnippetOrJump()
-endfunction
-
-
 
 
 set hidden
 set secure "recommended to be placed at the bottom of the file
+
+" To Fix that ctrl+p/ctrl+s bug
+silent !stty -ixon > /dev/null 2>/dev/null
+
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"

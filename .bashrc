@@ -58,13 +58,59 @@ export GNOME_KEYRING_CONTROL=1
 # --- Source ---
 source /usr/share/git/completion/git-completion.bash
 source /usr/share/git/completion/git-prompt.sh
+source ~/.bash_aliases
 # --- Exports --- 
 
-export PATH=$HOME/.gem/ruby/2.4.0/bin:/root/.gem/ruby/2.4.0/bin:$HOME/.config/composer/vendor/bin:~/.bash_me/lib/scripts:$PATH
+export PATH=~/.yarn/bin:$HOME/.gem/ruby/2.5.0/bin:/root/.gem/ruby/2.5.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH
 export TERM="screen-256color"
 
 # --- Functions --- 
 
+# funcs
+
+# takes a alias name and gets the last command from the history. Makes it an alias
+makeAlias() 
+{
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied. You need to pass an alias name"
+else 
+cat  <<EOF >> ~/.bash_aliases
+alias $1="$(history | tail -n 2 | cut -c 8- | sed -e '$ d')"
+EOF
+
+echo $out
+r
+fi 
+} 
+
+npt() 
+{
+    code
+    mcd
+} 
+
+csvIdFieldNull () {
+
+    perl -pe 's/^.+?,/null,/' $2 >> $1
+}
+
+# makes an sh file ($2.sh) from $1 number of commands in the history
+makeCommand () {
+
+cat  <<EOF > ./$2.sh
+#! /usr/bin/env bash
+$(history | tail -n $(($1 + 1)) | cut -c 8- | sed -e '$ d')
+EOF
+
+echo $out
+chmod +x ./$2.sh
+}
+
+query () {
+
+    opn "https://www.google.com/q?"
+}
 testing () {
     mkdir -p ~/code/testing/$1
     tmux new-window 
@@ -169,7 +215,6 @@ findBuggedCommit () {
 # Go to branch and run npm run dev
 gotobranch () {
  git checkout $1
- npm run dev
 }
 
 
@@ -375,6 +420,7 @@ alias r='. ~/.bashrc'
 alias ls='ls -la'
 alias lg='ls | grep'
 alias i='sudo pacman -S'
+alias y='yaourt -S'
 
 alias cd='cl'
 alias bm='cd ~/.bash_me'
@@ -387,7 +433,10 @@ alias killw="ps -aux | grep mysql-workbench-bin | grep -v grep | tr -s ' ' | cut
 alias dl="cd ~/Downloads"
 alias ts="testing"
 complete -F _testing ts
-
+alias tmux="tmux -2"
+alias ..="cd .."
+alias uv="cd ~/.vim/bundle && find ./ -maxdepth 1 -type d | xargs -I x bash -c 'cd x; git fetch; git pull; cd -'"
+alias c="clear"
 
 # Navigation
 
@@ -396,13 +445,24 @@ alias why='why'
 complete -F _why why
 alias idea='cd ~/idea'
 
+alias pma='cd ~/projects/patientme/core/api'
+alias pmw='cd ~/projects/patientme/core/webapp'
+alias pmn='cd ~/projects/patientme/core/native'
+alias pmc='cd ~/projects/patientme/core/client-web'
+
+# Laravel
+
+alias pa='php artisan'
 
 # Edit
 
-# alias vim='nvim'
+alias vim='nvim'
 alias imv='nvim'
 alias vmi='nvim'
 alias ivm='nvim'
+alias nivm='nvim'
+alias nvi='nvim'
+alias nvmi='nvim'
 alias vb='vim ~/.bashrc && r'
 alias vg='vim ~/.gitconfig'
 alias vv='vim ~/.config/nvim/init.vim'
@@ -467,4 +527,10 @@ alias mf='xrandr --output HDMI-1 --auto'
 alias tv='xrandr --output HDMI-1 --mode 1600x1200'
 alias sx='startx'
 alias vi3='vim ~/.config/i3/config'
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

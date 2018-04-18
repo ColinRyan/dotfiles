@@ -1,6 +1,5 @@
-dbus-update-activation-environment --systemmd DISPLAY
-eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+dbus-update-activation-environment --systemd DISPLAY
 export SSH_AUTH_SOCK
 # This line must go last
-exec i3 -l  -V >>~/.i3/i3log >&1
+exec i3 
 

@@ -1,4 +1,4 @@
-set nocompatible
+ set nocompatible
 filetype off
 
 
@@ -7,7 +7,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 
 
-" Plugins
+" Plugin 
+
+Plugin 'roxma/vim-hug-neovim-rpc'
+
+Plugin 'roxma/nvim-yarp'
+
+Plugin 'michaeljsmith/vim-indent-object'
+
+Plugin 'kana/vim-textobj-line'
      
 Plugin 'othree/jspc.vim'
      
@@ -27,7 +35,7 @@ Plugin 'whatyouhide/vim-textobj-xmlattr'
      
 " Plugin 'jelera/vim-javascript-syntax'
 
-" Plugin 'carlitux/deoplete-ternjs'
+Plugin 'carlitux/deoplete-ternjs'
      
 Plugin 'mxw/vim-jsx'
      
@@ -93,7 +101,7 @@ Plugin 'sniphpets/sniphpets'
 
 Plugin 'sniphpets/sniphpets-common'
 
-" Plugin 'Shougo/deoplete.nvim'
+Plugin 'Shougo/deoplete.nvim'
 
 " Plugin 'padawan-php/deoplete-padawan'
 
@@ -277,7 +285,7 @@ endif
 
 let g:lsp_async_completion = 1
 
-autocmd FileType javascript,jsx,typescript setlocal omnifunc=lsp#complete
+"autocmd FileType javascript,jsx,typescript setlocal omnifunc=lsp#complete
 
 let g:loaded_python_provider = 1
 let g:python_host_skip_check=1
@@ -322,12 +330,16 @@ let g:LanguageClient_serverCommands = {
 "
 """"""""""""""""""""""
 
+" Mapping
+
 nnoremap <leader>w :w<cr> 
 nnoremap <leader>a i<cr><esc>P
+nnoremap <C-v>  :wq<CR> 
 
-inoremap <c-q> :wq<CR> 
+nnoremap <C-q> :wq<CR> 
+inoremap <C-q> :wq<CR> 
 
-nnoremap <c-f> :CtrlPMixed <CR>
+nnoremap <C-f> :CtrlPMixed <CR>
 
 " let mapleader = "\<space>"
 let mapleader = ","
@@ -519,7 +531,7 @@ autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
 
 let base16colorspace=256
 
-colorscheme darcula
+colorscheme sin
 
 
 command! W w !sudo tee % > /dev/null
@@ -544,7 +556,7 @@ augroup js
     autocmd FileType javascript,typescript,json,jsx syntax region bracketFold start="\[" end="\]" transparent fold
     autocmd FileType javascript,typescript,json,jsx syntax sync fromstart
     autocmd FileType javascript,typescript,json,jsx set foldmethod=syntax
-    autocmd FileType javascript,typescript,json,jsx colorscheme narcula
+    autocmd FileType javascript,typescript,json,jsx colorscheme sin
 augroup end
 
 augroup snippets
@@ -751,3 +763,6 @@ endfunction
 
 set hidden
 set secure "recommended to be placed at the bottom of the file
+
+" To Fix that ctrl+p/ctrl+s bug
+silent !stty -ixon > /dev/null 2>/dev/null

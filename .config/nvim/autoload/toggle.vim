@@ -16,3 +16,7 @@ function! toggle#Config()
 endfunction
 
 
+
+function! toggle#Buffer()
+  b#
+endfunction
