@@ -4,6 +4,8 @@ $if mode=vi
     set keymap vi-command
     "\e[A":history-search-backward
     "\e[B":history-search-forward
+    "n":"invim\C-m"
+    ",b":"ivb\C-m"
     j:history-search-forward
     k:history-search-backward
     set keymap vi-insert
@@ -12,6 +14,11 @@ $if mode=vi
     "\e[B":history-search-forward
     "\ea":"\C-asudo \C-e"
 $endif
+
+"\C-w":"tmux select-pane -t 1 \\; resize-pane -Z \\; send-keys nvim Enter\C-m"
+"\C-n":"nvim\C-m"
+"\C-b":"vb\C-m"
+
 
 set show-all-if-unmodified on
 set show-all-if-ambiguous on

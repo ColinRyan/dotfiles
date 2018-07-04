@@ -1,0 +1,21 @@
+== $2 ==
+
+= goals =
+  * $3
+
+= steps =
+  * $4
+
+= What else I did  = 
+
+= What else I attempted = 
+
+= Things I want! =
+
+= Things I need to know = 
+
+
+= Log =
+
+$1
+$0

@@ -1,0 +1,56 @@
+snippet e "array entry"
+$1 => $2${3:,}
+endsnippet
+
+snippet c  "constructor"
+	
+public $$1;
+
+public function __construct($$1) {
+    $this->$1;
+}
+
+// #funcs
+
+endsnippet
+
+snippet ut "unit test"
+
+/**
+ * dataProvider for test$2
+ *
+ * @return void
+ */
+public function $2Provider(): Array
+{
+	return [
+		[[$4], $5]
+	];
+}
+
+/**
+ * ${3:A test with no description}
+ *
+ * @dataProvider $2Provider
+ * @return       void
+ */
+public function test$2($inputs, $expectedOutput): Void
+{
+
+	$actualOutput = $2(...$inputs);
+    $this->assertSame($expectedOutput, $actualOutput);
+}
+endsnippet
+
+snippet cred "oauth credentials"
+'$1' => [
+    'client_id' => env('$2'),
+	'client_secret' => env('$3'),
+	'redirect' => '$4'
+]
+endsnippet
+
+
+snippet rg "route get"
+Route::get('$1', '$2');
+endsnippet

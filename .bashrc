@@ -1,4 +1,7 @@
+bind -r '\C-s'
+stty -ixon
 
+ shopt -s histappend
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
@@ -52,12 +55,17 @@ bold=$(tput -Txterm bold)
 reset=$(tput -Txterm sgr0)
 
 # Nicely formatted terminal prompt
+export EDITOR=nvim
+export HISTCONTROL=ignoredups:erasedups 
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
 export GNOME_KEYRING_CONTROL=1
 
 # --- Source ---
+source ~/.bin/tmuxinator.bash
 source /usr/share/git/completion/git-completion.bash
 source /usr/share/git/completion/git-prompt.sh
+source ~/.bash_functions
 source ~/.bash_aliases
 # --- Exports --- 
 
@@ -71,16 +79,16 @@ export TERM="screen-256color"
 # takes a alias name and gets the last command from the history. Makes it an alias
 makeAlias() 
 {
-if [ $# -eq 0 ]
-  then
+if [ $# -eq 0 ]; then
     echo "No arguments supplied. You need to pass an alias name"
 else 
+   sed -i /alias $1=/d ~/.bash_aliases 
 cat  <<EOF >> ~/.bash_aliases
 alias $1="$(history | tail -n 2 | cut -c 8- | sed -e '$ d')"
 EOF
 
-echo $out
-r
+    echo $out
+    . ~/.bashrc
 fi 
 } 
 
@@ -93,6 +101,30 @@ npt()
 csvIdFieldNull () {
 
     perl -pe 's/^.+?,/null,/' $2 >> $1
+}
+
+# make a function from history and put it in .bash_functions named $1
+makeMacro () {
+    if [ $# -eq 0 ]; then
+        echo "No arguments supplied. You need to pass a name"
+    else 
+        commands=$(history | fzf -m | cut -c 8-)
+
+        if [ -z ${command//} ]; then
+            echo "No commands selected."
+
+        else 
+# ugly block but it doesn't seem to work any other way
+cat <<EOF >> ~/.bash_functions
+$1 () {
+    $commands
+}
+EOF
+
+            echo $out
+            . ~/.bashrc
+        fi
+    fi
 }
 
 # makes an sh file ($2.sh) from $1 number of commands in the history
@@ -139,45 +171,6 @@ mdiff(){
 
 # portage use dir if on gentoo
 
-use () {
-
- case `uname -r` in 
-     ?*gentoo) cd /etc/portage/package.use;;
- esac
-}
-
-
-kw () {
-
- case `uname -r` in 
-     ?*gentoo) cd /etc/portage/package.keywords;;
- esac
-}
-
-# mother fucking curry bitch
-# https://gist.github.com/abesto/4286574
-function curry () {
-    exportfun=$1; shift
-    fun=$1; shift
-    params=$*
-    cmd=$"function $exportfun() {
-        more_params=\$*;
-        $fun $params \$more_params;
-    }"
-    eval $cmd
-}     
-
-#mvp starter
-mvp () {
-    code
-    mcd $1
-    touch index.$2
-    touch readme.md
-    git init
-    e
-}
-
-# go to directory and ll inside it 
 cl () {
     clear
     if [ -z "$1" ]; then
@@ -515,6 +508,44 @@ alias destroy='vagrant destroy -y'
 alias hh='halt && hs'
 
 
+alias gmo='git merge origin/'
+__git_complete gm _git_merge
+__git_complete gr _git_rebase
+__git_complete gmo _git_merge
+alias gf='git fetch'
+alias gs='git stash'
+alias gsp='git stash pop'
+alias gcn='git commit -n'
+alias gcb='git checkout -b'
+__git_complete gcb _git_checkout
+alias gb='git branch'
+alias gl='git log'
+alias gmo='git merge origin/'
+__git_complete gm _git_merge
+__git_complete gr _git_rebase
+__git_complete gmo _git_merge
+alias gf='git fetch'
+alias gs='git stash'
+alias gsp='git stash pop'
+alias gcn='git commit -n'
+alias gcb='git checkout -b'
+__git_complete gcb _git_checkout
+alias gb='git branch'
+alias gl='git log'
+alias gc='git commit'
+alias grh='git revert --hard'
+alias gx="git for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch && npm run dev "
+
+
+# Vagrant
+
+alias halt='vagrant halt'
+alias up='vagrant up'
+alias vsh='vagrant ssh'
+alias destroy='vagrant destroy -y'
+alias hh='halt && hs'
+
+
 # Laravel
 
 alias am='php artisan migrate'
@@ -534,3 +565,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash

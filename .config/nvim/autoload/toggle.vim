@@ -20,3 +20,16 @@ endfunction
 function! toggle#Buffer()
   b#
 endfunction
+
+fun!  toggle#Normal(a, b)
+    let x = {'i': 0, '0': a:a, '1': a:b}
+
+    function x.funcall() dict
+        " exe "normal " . self[self.i]
+        " echom self[self.i]
+        " let self.i = (self.i + 1) % 2
+    endfunction
+    return x
+endf 
+
+

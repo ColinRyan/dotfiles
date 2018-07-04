@@ -227,7 +227,6 @@ let g:ale_keep_list_window_open = 0
 
 let g:vdebug_options = {}
 let g:vdebug_options["path_map"] = {
-            \"/home/colin/code/heyorca/heyorca/laravel-webapp/public": "/var/www/heyorca/laravel-webapp/public"
             \}
 let g:vdebug_options["port"] = 9000
 let g:vdebug_options["break_on_open"] = 0

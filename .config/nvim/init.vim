@@ -2,13 +2,39 @@ set nocompatible
 
 filetype off
 
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 
 
 " Plugins
+
+Plugin 'tommcdo/vim-lion' 
+
+Plugin 'bps/vim-textobj-python' 
+
+Plugin 'kana/vim-textobj-lastpat' 
+
+Plugin 'godlygeek/tabular' 
+
+
+Plugin 'pbrisbin/vim-mkdir' 
+
+Plugin 'alvan/vim-closetag' 
+
+Plugin 'tommcdo/vim-express' 
+
+Plugin 'Julian/vim-textobj-variable-segment' 
+
+Plugin 'wellle/targets.vim'
+
+Plugin 'rhysd/vim-textobj-anyblock' 
+
+" Plugin 'thinca/vim-textobj-between' "This caused a bug in delete function
+
+Plugin 'mhinz/vim-startify' 
+
+Plugin 'tmux-plugins/vim-tmux-focus-events' 
 
 Plugin 'noahfrederick/vim-laravel' 
 
@@ -200,6 +226,7 @@ Plugin 'w0rp/ale'
 let g:tmux_navigator_save_on_switch = 2
 
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#auto_complete_start_length = 1
 
 "Add extra filetypes
@@ -224,6 +251,8 @@ let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
 \    'javascript': ['eslint', 'flow'],
+\    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
+\    'flow': ['eslint', 'flow'],
 \    'json': [],
 \    'jsx': [ 'eslint', 'flow']
 \
@@ -231,6 +260,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
+\    'python': ['black', 'isort'],
 \    'javascript': ['eslint'],
 \    'jsx': ['eslint']
 \}
@@ -246,7 +276,7 @@ let g:ale_fixers = {
 
 let g:vdebug_options = {}
 let g:vdebug_options["path_map"] = {
-            \"/home/colin/code/heyorca/heyorca/laravel-webapp/public": "/var/www/heyorca/laravel-webapp/public"
+            \"/home/colin/projects/patientme/core/api/public": "/home/vagrant/api/public"
             \}
 let g:vdebug_options["port"] = 9000
 let g:vdebug_options["break_on_open"] = 0
@@ -267,8 +297,8 @@ autocmd StdinReadPre * let s:std_in=1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<leader>e"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/UltiSnips"
 let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME . '/.vim/snippets/UltiSnips']
 " If you want :UltiSnipsEdit to split your window.
@@ -287,7 +317,7 @@ filetype plugin indent on
 let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
 let skeletons#autoRegister = 1
 
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 
 let g:javscript_plugin_flow = 1
 
@@ -308,12 +338,25 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_root_markers =  ['composer.json', '.gitignore']
 
 if executable('rg')
-    " use ag over grep
+    " use rg for ack
+    let g:ackprg = 'rg --vimgrep --no-heading'
+
+    " use rg over grep
     set grepprg=rg\ --color=never
 
-    " Use ag in CtrlP
+    " Use rg in CtrlP
     let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
     let g:ctrlp_use_caching = 0
+
+
+
+    call denite#custom#var('grep', 'command', ['rg'])
+    call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opts', ['--regexp'])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+
 endif
 
 let g:tagbar_autoclose = 1
@@ -329,8 +372,9 @@ let g:LanguageClient_diagnosticDisplay = {}
 let g:LanguageClient_serverCommands = {
             \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
             \ 'javascript': ['flow-language-server', '--stdio'],
+            \ 'python': ['pyls'],
             \ 'javascript.jsx': ['flow-language-server', '--stdio'],
-            \}
+\}
 
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
@@ -353,33 +397,75 @@ let test#stategy = "vimux"
 let g:dispatch_compilers = { }
 let g:dispatch_compilers['./vendor/bin/'] = ''
 let g:dispatch_compilers['phpunit'] = 'phpunit'
+
 """"""""""""""""""""""
 " Mapping
 
 
-nnoremap <leader>tn :TestNearest<cr>  
-nnoremap <leader>tf :TestFile<cr>  
-nnoremap <leader>ts :TestSuite<cr>  
-nnoremap <leader>tl :TestLast<cr>  
-nnoremap <leader>tv :TestVisit<cr>  
+nnoremap <leader>/ :Denite grep<cr>  
 
+nnoremap <leader>q :call QuickFixToggle()<cr>
+nnoremap <leader>l :call LocationListToggle()<cr>
+nnoremap <leader>t :call PublicPrivateToggle()<cr>
+" let g:openclose = toggle#Normal('dd', 'u')
+" nnoremap <space> :exe g:openclose.funcall()<cr>
+nnoremap <space> zazt
+
+
+
+
+" Wiki stuff
+nnoremap <leader>wr :exe "vsplit ~/vimwiki/diary/week-" . strftime("%V") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
+nnoremap <leader>wd :exe "vsplit ~/vimwiki/diary/" . strftime("%Y-%m-%d") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
+nnoremap <leader>wm :vsplit ~/vimwiki/Scratchpad.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
+
+nnoremap <leader>rn :Rename
+
+nnoremap <leader>zj :call NextClosedFold('j')<cr>
+nnoremap <leader>zk :call NextClosedFold('k')<cr>
+
+nnoremap <leader>gv `[v`]
+
+nnoremap <silent> <Plug>gotoClass gg/class <cr>:noh<cr>zazt
+\:call repeat#set("\<Plug>gotoClass")<CR>
+nmap <localleader>gc <Plug>gotoClass
+nmap <localleader>gt gg/Types<cr>:noh<cr>][ztzO
+nmap <localleader>gf gg/Funcs<cr>:noh<cr>][ztzO
+nmap <localleader>gl gg/Lifecycle<cr>:noh<cr>][ztzO
+nmap <localleader>gr gg/render()<cr>:noh<cr>ztzO
+nmap <localleader>gm gg/" Mapping<cr>:noh<cr>zt
+
+nnoremap <localleader>xx ][ 
+nnoremap <leader>a :A<cr>  
+
+nnoremap tn :TestNearest<cr>  
+nnoremap tf :TestFile<cr>  
+nnoremap ts :TestSuite<cr>  
+nnoremap tl :TestLast<cr>  
+nnoremap tv :TestVisit<cr>  
 
 
 nnoremap <localleader><localleader> :e ./.nvimrc<cr>
 
-nnoremap <leader>nf : call template#MakeNewFile()<CR>  
+nnoremap <leader>nf :call template#MakeNewFile()<CR>  
 
+vnoremap s :s/
 vnoremap <leader>rm :call refactor#Move()<CR>  
 
 nnoremap <leader>mp :call template#MakePlugin()<CR>
 nnoremap <leader>ms :call template#MakeSkeleton()<CR>
-nnoremap <leader>mf :call AddFunction()<cr>
+nnoremap <leader>mf :call AddType("\# Funcs", "pub")<cr>
+nnoremap <leader>mi :call AddType("\# Imports", "i")<CR> 
+
+
+nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR> 
+nnoremap <leader>mt :call AddType("\# Types", "t")<CR> 
 
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 nnoremap <leader>w :w<cr> 
-nnoremap <leader>a i<cr><esc>P
+
 nnoremap <C-v>  :wq<CR> 
 
 nnoremap <C-q> :wq<CR> 
@@ -405,7 +491,7 @@ vmap <C-_> gc
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : deoplete#mappings#manual_complete()
 " Fold Toggle
-nnoremap <space> zazt
+" nnoremap <space> zazt
 
 " Tagbar Toggle
 nnoremap <leader>f :TagbarToggle<CR>
@@ -420,7 +506,7 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 
 " make a split and switch to it
-nnoremap <leader><leader> :vnew<CR>
+nnoremap <leader>v :vnew<CR>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -433,30 +519,45 @@ nnoremap <C-y> 5<C-y>
 "nnoremap <C-l> <C-w>l
 
 " remove highlight
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space><space> :noh<cr>
 
 nnoremap <tab> %
 vnoremap <tab> %
 
 " vimrc
-"noremap <leader>vv :vsplit $MYVIMRC<cr>
-noremap <leader>sv :source $MYVIMRC<cr>
+"noremap <leader><leader> :vsplit $MYVIMRC<cr>
+nnoremap <leader>S :source $MYVIMRC<cr>
 
 
 " change the first word to return
 " noremap <leader>r :s/^\S\+ \{-}=\{-}/return/<CR>
 
-" bashrc
-noremap <leader>vb :vsplit ~/.bashrc<cr>
 
-" yank and paste
+" Delete
+nnoremap <leader>d "dyy"dp
+nnoremap dii  `[ d`]
 
-" duplicates line
-noremap <leader>d "dyy"dp
-" delete word and paste new word
-noremap <leader>P diw"0P
-" goto return
-nnoremap <leader>r /return<CR>w
+" Paste
+nnoremap p$  d$"0P
+nnoremap pt<space>  dt<space>"0P
+nnoremap pp p
+nnoremap p0 "0p
+
+nnoremap paw daw"0P
+nnoremap pa" da""0P
+nnoremap pa' da'"0P
+nnoremap pa[ da["0P
+nnoremap pa( da("0P
+nnoremap pa{ da{"0P
+
+nnoremap piw diw"0P
+nnoremap pi" di""0P
+nnoremap pi' di'"0P
+nnoremap pi[ di["0P
+nnoremap pi( di("0P
+nnoremap pi{ di{"0P
+nnoremap pi` di`"0P
+
 
 " To command mode
 inoremap jj <ESC>
@@ -471,18 +572,15 @@ vnoremap <F1> <ESC>
 
 
 "Disabled 
-"
-
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 nnoremap j j
 nnoremap k k
-nnoremap <leader>p "0p
 
 
-nnoremap <leader>vv :call toggle#Config()<cr>
+nnoremap <leader><leader> :call toggle#Config()<cr>
 
 noremap <leader>i "ip
 nnoremap <Tab> :call toggle#Buffer()<CR>
@@ -507,10 +605,13 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set cino=f.5s
+" set cindent
 
 set encoding=utf-8
 set scrolloff=3
 set autoindent
+set smartindent
 set showmode
 set showcmd
 set hidden
@@ -545,6 +646,11 @@ set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=85
 
+"Codi
+let g:codi#rightalign=1
+let g:codi#rightsplit=0
+let g:codi#raw=1
+let g:codi#width=100
 
 "_________________
 "'"'"'"''""""'"""'
@@ -553,12 +659,23 @@ set colorcolumn=85
 
 set foldenable
 
-set foldlevelstart=0
 
-set foldnestmax=1
 
-set foldmethod=syntax
 
+set foldlevel=0
+
+set foldnestmax=20
+
+set foldmethod=indent
+
+fun! Foldex()
+    "This functions shows off how folds work
+    "Folds will fold like so
+        "catsass
+        "asssss
+            "cat
+            "dog
+endf
 
 highlight Folded ctermbg=black ctermfg=white
 
@@ -576,13 +693,36 @@ command! W w !sudo tee % > /dev/null
 
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt=nofile | put! a
 
+
+
+
+
 " augroups
+
+augroup  wiki
+    autocmd!
+    autocmd! bufEnter ~/vimwiki/Scratchpad.wiki inoremap <buffer> <tab> <esc>:wall<cr>:bdelete<cr>
+    autocmd! bufLeave ~/vimwiki/Scratchpad.wiki silent! wall
+    autocmd! bufLeave ~/vimwiki/Scratchpad.wiki :bdelete
+    autocmd! bufEnter ~/vimwiki/diary/*.wiki inoremap <buffer> <tab> <esc>:wall<cr>:bdelete<cr>
+    autocmd! bufLeave ~/vimwiki/diary/*.wiki silent! wall
+    autocmd! bufLeave ~/vimwiki/diary/*.wiki :bdelete
+    
+augroup end 
+
+augroup  plugins
+    autocmd!
+    autocmd! bufwritepost */nvim/autoload/* :exe "source " .  expand('%:p')
+    
+augroup end 
+
 
 augroup  nvimrc
     autocmd!
     autocmd! bufwritepost .nvimrc source ./.nvimrc
     autocmd! bufLeave .nvimrc g:toggle_config=0
     autocmd! bufLeave .nvimrc source .nvimrc
+    autocmd! bufLeave .nvimrc call JavascriptSettings()
     autocmd! bufEnter .nvimrc call Initvim()
 augroup end 
 
@@ -593,7 +733,8 @@ augroup end
  
 
 augroup editor
-    au FocusLost * :wa
+    au FocusLost * if (len(@%)  < 1) | :wa | endif
+    au VimResized * exe "normal! \<c-w>="
 augroup end
 
 augroup js
@@ -622,6 +763,7 @@ augroup init.vim
     autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim
     autocmd! bufLeave init.vim g:toggle_config=0
     autocmd! bufLeave init.vim source ~/.config/nvim/init.vim
+    autocmd! FileType help wincmd L
     autocmd! bufEnter init.vim call Initvim()
 augroup end
 
@@ -649,17 +791,85 @@ augroup END
 
 
 let g:takeMeBack = 0
-" # funcs
+
+
+
+
+" Funcs
+
+
+fun!  JavascriptFoldText()
+    let startLine = getline(v:foldstart)
+    let endLine  = getline(v:foldend)
+
+    let lines = getline(v:foldstart, v:foldend)
+    let sub = startLine
+
+    if match(startLine, 'const {') >= 0
+        let endNew = substitute(endLine, '^.\+= ', '', 'g')
+        let sub = substitute(startLine, 'const {', 'const {...} = ' . endNew, 'g')
+
+    endif
+
+    let lineCount = len(lines)
+
+    if lineCount < 10
+
+        let lineCount = "0" .  lineCount 
+    endif
+    
+    return substitute(sub, '^\( \+\)', '\1' .  lineCount . " lines: ", 'g')
+endf 
+
+fun!  Swap(text, initPos, finPos)
+
+    echom a:text
+
+endf 
+
+
+" To get snipX to work, I'll need to use items(g:current_ulti_dict_info)
+" and ultiSnips#SnippetsInCurrentScope to find the snippet, get it, and then
+" do regex to replace the parts I want to replace
+fun! SnipX()
+    let lines = getline("'<", "'>")
+
+
+    call inputsave()
+    let snipName = input('Enter Snippet name:')
+    call inputrestore()
+
+
+    execute "normal! `<v`>C" . snipName . " "
+    echo UltiSnips#SnippetsInCurrentScope()
+    call UltiSnips#ExpandSnippetOrJump()
+    for x in lines
+        let fields = split(x, ",")
+        for field in fields
+            echo field
+            execute "normal! i". field
+            call UltiSnips#ExpandSnippetOrJump()
+        endfor
+    endfor
+endf
 
 fun! JavascriptSettings()
 
-    set foldlevelstart=0
+    set foldtext=JavascriptFoldText()
 
-    set foldnestmax=2
+    set foldlevelstart=1
+
+    set foldlevel=1
+
+    set foldminlines=0
+
+    set foldnestmax=4
 
     set foldmethod=syntax
 
     let javaScript_fold = 1
+
+    let javaScript_plugin_flow = 1
 
     set tags=./.js.tags;/
 endf 
@@ -678,8 +888,8 @@ fun! MakePluginMappings()
 
     if exists(":ALENext")
         
-        nnoremap <leader>j :ALENext<cr> 
-        nnoremap <leader>k h:ALEPrevious<cr> 
+        nnoremap <leader>j :ALENextWrap<cr> 
+        nnoremap <leader>k h:ALEPreviousWrap<cr> 
     endif
     if exists(":ImportJSWord")
         nnoremap <Leader>if :ImportJSWord<CR>
@@ -705,41 +915,37 @@ endf
 
 fun!  LoadJsxCommands()
 endf
- 
-fun!  AddMapping()
-    let g:takeMeBack = 1
-    execute "normal! mugg/\" Mapping\<CR>jo\<esc>o\<esc>kin "  
-    call UltiSnips#ExpandSnippetOrJump()
-endf 
 
-fun!  AddAuGroup()
-    let g:takeMeBack = 1
-    execute "normal! mugg/\" augroups\<CR>jo\<esc>o\<esc>kiag "  
-    call UltiSnips#ExpandSnippetOrJump()
-endf 
 
-fun! AddFunction()
+fun! AddType(anchor, trigger)
     let g:takeMeBack = 1
-    execute "normal! mugg/\# funcs\<CR>jo\<esc>o\<esc>kipub "  
+    execute "normal! mugg/" . a:anchor . "\<CR>jo\<esc>o\<esc>ki" . a:trigger . " "
     call UltiSnips#ExpandSnippetOrJump()
 endf
-
-
-fun! AddPlugin()
-    let g:takeMeBack = 1
-    execute "normal! mugg/\" Plugins\<CR>jo\<esc>o\<esc>kip " 
-         
-         
-    call UltiSnips#ExpandSnippetOrJump()
-endf
-
 
 fun! Initvim()
-    nnoremap <localleader>n :call AddMapping()<CR>
-    nnoremap <localleader>p :call AddPlugin()<CR>
-    nnoremap <localleader>f :call AddFunction()<CR> 
-    nnoremap <localleader>a :call AddAuGroup()<CR> 
+    nnoremap <localleader>n :call AddType("\" Mapping", "n")<CR>
+    nnoremap <localleader>v :call AddType("\" Mapping", "v")<CR>
+    nnoremap <localleader>c :call AddType("\" Mapping", "c")<CR>
+    nnoremap <localleader>p :call AddType("\" Plugins", "p")<CR>
+    nnoremap <localleader>f :call AddType("\" Funcs", "pub")<CR> 
+    nnoremap <localleader>a :call AddType("\" augroup", "ag")<CR> 
 endf
+
+fun! NextClosedFold(dir)
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, open] = [0, view.lnum, 1]
+    while l != l0 && open
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let open = foldclosed(l) < 0
+    endwhile
+    if open
+        call winrestview(view)
+    endif
+endf
+
 
 function! MyWebpackMixFolds()
 
@@ -798,7 +1004,6 @@ function! PublicPrivateToggle()
     endif
 endfunction
 
-nnoremap <leader>t :call PublicPrivateToggle()<cr>
 
 let g:location_is_open = 0
 function! LocationListToggle()
@@ -813,7 +1018,6 @@ function! LocationListToggle()
    endif
 endfunction
 
-nnoremap <leader>l :call LocationListToggle()<cr>
 
 let g:quick_fix_is_open = 0
 function! QuickFixToggle()
@@ -828,7 +1032,6 @@ function! QuickFixToggle()
    endif
 endfunction
 
-nnoremap <leader>q :call QuickFixToggle()<cr>
 
 function! UltiDispatcher()
     echo g:takeMeBack

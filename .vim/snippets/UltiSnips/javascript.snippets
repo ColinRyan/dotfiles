@@ -1,0 +1,199 @@
+snippet re "Ramda evolve"
+R.evolve(${1:transform}, ${2:x})
+endsnippet
+
+snippet fl "flatlist"
+<FlatList
+    data={${2: [{id: "1"}]}}
+	keyExtractor={(item) => item.id}
+	renderItem={${1:(item) => <Text>cat</Text>}}
+/>
+endsnippet
+snippet ra "Ramda assoc"
+R.assoc($1, $2)
+endsnippet
+	
+snippet rc "Ramda compose"
+R.compose(
+    $1
+)($2)
+endsnippet
+	
+snippet psa "prevState assoc"
+R.assoc($1, $2, prevState)
+endsnippet
+	
+snippet dsfp "getDerivedStateFromProps"
+static getDerivedStateFromProps(nextProps) {
+    $1
+}
+endsnippet
+snippet op "onPress" i
+onPress={() => {
+    $1
+
+}}
+endsnippet
+snippet ts "this.state" i
+this.state
+endsnippet
+snippet ns "navigation state"
+const { params } = this.props.navigation.state
+endsnippet
+
+snippet nav "navigate" i
+this.props.navigation.navigate($1)
+endsnippet
+
+snippet tr "ternary" i
+? $1 : $2
+endsnippet
+
+snippet cv "const"
+const $1 = $2
+endsnippet
+snippet sp "screenProps" i
+this.props.screenProps.
+endsnippet
+
+snippet api "api request"
+const res = await api.${1:get}(
+            $2,
+			$3
+      )
+endsnippet
+
+snippet o "object"
+const $1 = {
+    $2
+}
+endsnippet
+
+snippet t "type"
+type $1 = {
+    $2
+}
+endsnippet
+
+snippet i "import"
+import $1 from "$2"
+endsnippet
+
+snippet r "render"
+render() {
+	return ($1)
+}
+endsnippet
+
+snippet do "destructure Object"
+const {
+    $1
+} = $2
+endsnippet
+
+snippet rcl "react class"
+class $1 extends React.component{
+
+	constructor(props) {
+	    super(props)
+		this.state = {
+		    $3
+		}
+	}
+
+    //# Funcs
+
+    //# Lifecyle
+	$4
+
+	render() {
+		return (
+		    $2
+	   )
+	}
+}
+endsnippet
+
+snippet ss "setState"
+this.setState((prevState) => {
+    $0
+})
+endsnippet
+
+snippet af "anon function" i
+($1) => $2
+endsnippet
+
+snippet scu "shouldComponetUpdate"
+shouldComponentUpdate(nextProps, nextState) {
+    return false
+}
+endsnippet
+	
+snippet ti "textInput"
+<TextInput
+    style={{$3}}
+	placeholder="$2"
+	onChangeText={$1 => this.setState({$1})}
+	value={this.state.$1}
+/>
+endsnippet
+	
+snippet c "constructor"
+constructor(props) {
+    super(props)
+	this.state = {
+	   $1
+	}
+}
+endsnippet
+
+snippet user "prints out the coreProps user as variables"
+const {
+    first_name,
+	last_name,
+	birthday,
+	gender,
+	picture,
+	health_providers: {
+	    FamilyDoctor,
+		Pharmacy,
+		Phsiotherapist,
+		Optometrist
+	}
+} = this.props.screenProps.user
+endsnippet
+
+snippet sfc "stateless functional component"
+const $1 = ($2) => {
+
+}
+endsnippet
+
+
+snippet pub "public function"
+$1($2) {
+    $3
+}
+endsnippet
+
+snippet apub "async public function"
+async $1($2) {
+    $3
+}
+endsnippet
+
+snippet cdm "componentDidMount"
+async componentDidMount() {
+    $1
+}
+endsnippet
+	
+snippet clv "console log value"
+console.log('$1', $1)
+endsnippet
+
+
+snippet clt "console log test"
+console.log('test')
+endsnippet
