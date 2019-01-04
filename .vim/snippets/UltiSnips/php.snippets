@@ -1,5 +1,180 @@
-snippet e "array entry"
-$1 => $2${3:,}
+snippet wh "where"
+\$$1 = ${1/.*/\u$0/}::where('$2', $request->$2)->first();
+endsnippet
+snippet rr "return" Ab
+return $0
+endsnippet	
+snippet ru "request user" Ab
+$user = $request->user();
+$0
+endsnippet
+snippet res "Resource" Ai
+new $1Resource(\$${1/.*/\l$0/});
+endsnippet
+snippet - "method" Ab
+\$$1 = $2->$3($4);
+endsnippet
+priority 1
+snippet new "nested new object" Ai
+new $1($2)
+endsnippet
+priority 2
+snippet new "new object" Ab
+\$$1 = new $2($3);
+$0
+endsnippet
+snippet [ "array" Ab
+\$$1 = [
+    $2
+];
+$0
+endsnippet
+snippet $ "nested value set by variable" "re.search(r']', snip.buffer[snip.line+1])" Abe
+"$1" => \$$0
+endsnippet
+snippet [ "nested array" "re.search(r']', snip.buffer[snip.line+1])" Abe
+"$1" => [
+    $2
+]
+endsnippet
+priority 1
+snippet " "string within text" Ai
+"$1"$0
+endsnippet
+priority 2
+snippet " "string" "re.search(r'\[|=>', snip.buffer[snip.line-1]) is None" Abe
+\$$1 = "$2";
+$0
+endsnippet
+priority 2
+snippet " "array string" "re.search(r']', snip.buffer[snip.line+1])" Abe
+"$1" => "$2",
+$0
+endsnippet
+snippet foc "firstOrCreate" Ab
+\$${1/.*/\l$0/} = $1::firstOrCreate([
+   $2
+]);
+$0
+endsnippet
+snippet "dd" "dd" Ar
+dd(${VISUAL}$1);
+endsnippet
+snippet { "block" A
+{
+    $1
+}
+endsnippet
+	
+snippet store "a store function for story a model"
+
+endsnippet
+snippet np "notification push"
+Notification::push(
+    $user,
+	[
+	    "body" => $1,
+		"title" => $2,
+		"data" => $3
+	]
+);
+endsnippet
+snippet ra "request all"
+$data = $req->all();
+endsnippet
+snippet mc "create model"
+$1::create([
+    $2
+]);
+snippet pc "pusher constructor"
+$push = Push::of($healthProvider);
+endsnippet
+
+snippet ppu "realtime public notification"
+$push->public("$1", ["$2" => $3]);
+endsnippet
+
+snippet ppr "realtime private notification"
+$push->private($user, "$1", ["$2" => $3]);
+endsnippet
+
+snippet rs "resource"
+new $1Resource($2)
+endsnippet
+	
+snippet cc "If it's inside an array" "re.search(r'\[', snip.buffer[snip.line]) or re.search(r'\[|=>', snip.buffer[snip.line-1])" eA
+"$1" => "${VISUAL}$2"
+endsnippet
+
+snippet u "User" i 
+User $user
+endsnippet
+
+snippet bt "belongsTo"
+public function $1() {
+    return $this->belongsTo("$2");
+}
+endsnippet
+
+snippet hm "hasMany"
+public function $1() {
+    return $this->hasMany("$2");
+}
+endsnippet
+
+snippet muc "updateOrCreate" i
+$1::updateOrCreate($req, ['id' => Uuid::uuid1()]);
+endsnippet
+snippet mfc "firstOrCreate" i
+$1::firstOrCreate($req, ['id' => Uuid::uuid1()]);
+endsnippet
+
+snippet req "request" i
+Request $req
+endsnippet
+
+snippet hp "healthProvider" i
+HealthProvider $healthProvider
+endsnippet
+
+snippet fn "function"
+$1 = function($2) {
+    $3
+	return $4;
+}
+endsnippet
+
+snippet ks "key string"
+"$1" => "$2",
+endsnippet
+	
+snippet cc "create variable" A
+$$1 = ${VISUAL}$2;
+endsnippet
+snippet rp "Request $req"
+Request $req
+endsnippet
+	
+snippet af "anon function" i
+function(${1:$x}) {
+    return $2($x);
+}
+endsnippet
+	
+snippet lt "lookup table"
+${1: $lookupTable} = [
+    $2
+];
+
+$3
+endsnippet
+
+snippet o "output for larave resouces"
+$output = [
+    $1
+];
+
+return $output;
 endsnippet
 
 snippet c  "constructor"

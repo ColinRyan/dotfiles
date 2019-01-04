@@ -1,4 +1,329 @@
-snippet re "Ramda evolve"
+snippet .ca "catch" Ai
+.catch((err) => {
+    log(err)
+})
+$0
+endsnippet
+snippet .th "then" Ai
+.then((${1:res}) => {
+    $2
+})$0
+endsnippet
+snippet eh "component enhancement"
+const $4 = enhance(
+		{
+		    $3
+
+		},
+		{
+		    is: $1,
+
+		},
+		[
+		    $2
+		])
+$0
+endsnippet
+snippet ? "ternary" Ai
+($1) ? $2 : $3
+endsnippet
+snippet wy "test"
+`!p snip.rv = snip.v.text`
+endsnippet
+priority 2
+snippet <{ "flow object in type" Ai
+<{}
+endsnippet	
+snippet cs "styled component" Ab
+const $1 = styled.$2\`
+   $3
+\`
+$0
+endsnippet
+snippet isc "import styled components" Ab
+import styled from "styled-components"
+endsnippet
+snippet "uu "user" Ai
+"user
+endsnippet
+snippet ps "prevState" Abw
+prevState
+endsnippet
+snippet rr "return" Ab
+return $0
+endsnippet
+snippet $ "template" "len(snip.buffer) > snip.line+1 and (re.search(r'`', snip.buffer[snip.line+1]) or re.search(r'`', snip.buffer[snip.line]))" Ae
+\${$1}$0
+endsnippet
+snippet ` "backtick" "len(snip.buffer) > snip.line+1 and re.search(r'^ *]', snip.buffer[snip.line+1])" Ae
+\`${1:${VISUAL}}\`,
+$0
+endsnippet
+snippet ` "single quote" "len(snip.buffer) > snip.line+1 and re.search(r'^ *}$', snip.buffer[snip.line+1])" Ae
+$1: '$2',
+$0
+endsnippet
+snippet " "string" "len(snip.buffer) > snip.line+1 and re.search(r'^ *]', snip.buffer[snip.line+1])" Ae
+"${1:${VISUAL}}",
+$0
+endsnippet
+priority 1
+snippet '(?<=\$){' "object" Air
+{$1}
+endsnippet	
+priority 2
+snippet '(?<=, ){' "object" Air
+{$1}$0
+endsnippet	
+snippet '(?<=[=\(]){' "object" Air
+{$1}$0
+endsnippet	
+priority 1
+snippet '(?<![=\$]){' "object" Air
+{
+    $1
+}
+endsnippet	
+priority 1
+snippet '\((?!\))' "braces" Air
+($1)
+endsnippet
+priority 3
+snippet ' "nested quote" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+$1: '$2',
+$0
+endsnippet
+snippet ` "nested backtick" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+$1: \`$2\`,
+$0
+endsnippet
+snippet fn "nested function" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+$1 : ($2) => {
+   ${3:${VISUAL}}
+
+},
+$0
+endsnippet
+snippet " "nested string" "len(snip.buffer) > snip.line+1 and re.search(r'^ *}', snip.buffer[snip.line+1])" Ae
+$1: "$2",
+$0
+endsnippet
+snippet { "nested object" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+$1 : {
+    $2
+},
+$0
+endsnippet
+snippet ] "key integretation" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+[$1]: $2,
+$0
+endsnippet
+snippet [ "nested array" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+$1 : [
+   $2
+],
+$0
+endsnippet
+priority 1
+snippet [ "array"  "len(snip.buffer) > snip.line+1 and re.search(r']', snip.buffer[snip.line+1])" eA
+[
+    $1
+],
+$0
+endsnippet	
+snippet "(?<=: )\[" "array"  Ar
+[
+    $1
+],
+$0
+endsnippet	
+snippet "(?<== )\[" "array"  Ar
+[
+    $1
+]
+endsnippet	
+priority 2
+snippet { "object"  "len(snip.buffer) > snip.line+1 and re.search(r']', snip.buffer[snip.line+1])" eA
+{
+    $1
+},
+$0
+endsnippet	
+priority 1
+snippet ' "quote" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+const $1 = '$2'
+
+$0
+endsnippet
+snippet ` "backtick" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+const $1 = \`$2\`
+
+$0
+endsnippet
+snippet " "string" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+const $1 = "$2"
+
+$0
+endsnippet
+snippet "\[" "array" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Areb
+
+const $1 = [
+   $2
+]
+
+$0
+endsnippet
+priority 4
+snippet "{" "object in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Areb
+
+const $1 = {
+    $2
+}
+
+$0
+endsnippet
+priority 1
+snippet fn "function" "len(snip.buffer) > snip.line+1 or re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+const $1 = ($2) =>  {
+    $3
+
+}
+
+$0
+endsnippet
+snippet "{" "object" "len(snip.buffer) > snip.line+1 or re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None" Areb
+
+const $1 = {
+    $2
+}
+$0
+
+endsnippet
+priority 1
+snippet cla "class" A
+class $1 {
+    $2
+
+	// # Methods
+
+}
+endsnippet
+snippet  ty "type" Ab
+type $1 = {
+    $2
+}
+endsnippet
+snippet "^[ ]*(=|cc)" "constant" Ar
+const $1 = ${2:${VISUAL}}
+$0
+endsnippet
+snippet "^im" "import" Ar
+import $2 from "$1"
+endsnippet
+	
+snippet : "key value pair" A
+$1 : $2 
+$0
+endsnippet
+snippet '"(?!")' "string" Ar
+"$1"
+endsnippet
+snippet sc "styled component"
+styled.$1`
+    $2
+`
+endsnippet
+
+snippet rif "R.ifElse"
+R.ifElse(
+  $2,
+  $3,
+  $4
+)($1)
+endsnippet
+
+snippet rf "R.filter" i
+R.filter($1)
+endsnippet
+snippet ex "expect"
+expect($1).toBe($2)	
+endsnippet
+snippet test "create test"
+test($1, () => {
+   $2
+})
+$3
+endsnippet
+snippet func "function loading into variable"
+const $1 = ($2) => {
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet fn "function" Ai
+($1) => {
+   ${2:${VISUAL}}
+
+}
+endsnippet
+snippet ato "translate object"
+  {
+	  $1: $2.interpolate({
+	  inputRange: [$3, $4],
+	  outputRange: [$5, $6]
+			  })
+  }
+endsnippet
+snippet ant "animated timing"
+Animated.timing(
+    this.state.animation.$1,
+	{
+	    toValue: ${2:1},
+		duration: ${3:1000},
+		$3
+	}
+).start()
+endsnippet
+snippet dsp "destructure screenProps" i
+  {
+screenProps: {
+        $1
+			 }
+  }
+endsnippet
+snippet rpo "path or" i
+R.pathOr(${1:default},[${2:path}],${3:object})
+endsnippet
+	
+snippet cdu "componet did update"
+componentDidUpdate(prevProps, prevState) {
+    $1
+}
+endsnippet
+	
+snippet tp "type Promise" i
+Promise<${1:mixed}>
+endsnippet
+
+
+snippet : "key value"
+$1:$2,
+$3
+endsnippet
+
+snippet ta "type array" i
+Array<$1>
+endsnippet
+
+snippet rm "Ramda map" i
+R.map(${1:func}, ${2: functor})
+endsnippet
+
+snippet re "Ramda evolve" i
 R.evolve(${1:transform}, ${2:x})
 endsnippet
 
@@ -9,22 +334,22 @@ snippet fl "flatlist"
 	renderItem={${1:(item) => <Text>cat</Text>}}
 />
 endsnippet
-snippet ra "Ramda assoc"
-R.assoc($1, $2)
+snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
+R.assoc("${1:prop}", ${2:value}, ${3:object})
 endsnippet
 	
-snippet rc "Ramda compose"
+snippet rc "Ramda compose" i
 R.compose(
-    $1
-)($2)
+    $2
+)($1)
 endsnippet
 	
-snippet psa "prevState assoc"
+snippet psa "prevState assoc" i
 R.assoc($1, $2, prevState)
 endsnippet
 	
-snippet dsfp "getDerivedStateFromProps"
-static getDerivedStateFromProps(nextProps) {
+snippet gdsfp "getDerivedStateFromProps"
+static getDerivedStateFromProps(nextProps, currentState) {
     $1
 }
 endsnippet
@@ -45,7 +370,7 @@ snippet nav "navigate" i
 this.props.navigation.navigate($1)
 endsnippet
 
-snippet tr "ternary" i
+snippet ? "ternary" i
 ? $1 : $2
 endsnippet
 
@@ -63,11 +388,6 @@ const res = await api.${1:get}(
       )
 endsnippet
 
-snippet o "object"
-const $1 = {
-    $2
-}
-endsnippet
 
 snippet t "type"
 type $1 = {
@@ -76,7 +396,7 @@ type $1 = {
 endsnippet
 
 snippet i "import"
-import $1 from "$2"
+import $2 from "$1"
 endsnippet
 
 snippet r "render"
@@ -85,10 +405,10 @@ render() {
 }
 endsnippet
 
-snippet do "destructure Object"
+snippet "^[ ]*do" "destructure Object" r
 const {
-    $1
-} = $2
+    $2
+} = $1
 endsnippet
 
 snippet rcl "react class"
@@ -114,7 +434,7 @@ class $1 extends React.component{
 }
 endsnippet
 
-snippet ss "setState"
+snippet ss "setState" Aw
 this.setState((prevState) => {
     $0
 })
@@ -126,7 +446,7 @@ endsnippet
 
 snippet scu "shouldComponetUpdate"
 shouldComponentUpdate(nextProps, nextState) {
-    return false
+    return ${1: false}
 }
 endsnippet
 	
@@ -172,7 +492,7 @@ endsnippet
 
 
 snippet pub "public function"
-$1($2) {
+$1 = ($2) => {
     $3
 }
 endsnippet
@@ -189,8 +509,8 @@ async componentDidMount() {
 }
 endsnippet
 	
-snippet clv "console log value"
-console.log('$1', $1)
+snippet clv "console log value" Ai
+console.log("$1", $1)
 endsnippet
 
 

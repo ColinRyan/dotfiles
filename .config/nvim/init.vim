@@ -9,6 +9,32 @@ call vundle#begin()
 
 " Plugins
 
+
+Plugin 'thalesmello/vim-textobj-methodcall' 
+
+
+Plugin 'idanarye/vim-vebugger' 
+
+Plugin 'Shougo/vimproc.vim'
+
+Plugin 'neoclide/jsonc.vim' 
+
+Plugin 'rbong/pimodoro' 
+
+Plugin 'neoclide/coc.nvim' 
+
+Plugin 'Chun-Yang/vim-textobj-chunk' 
+
+" Plugin 'neoclide/vim-jsx-improve' 
+
+Plugin 'tweekmonster/dyslexic.vim' 
+
+" Plugin 'jacobsimpson/nvim-example-lua-plugin' 
+
+" Plugin 'ludovicchabant/vim-gutentags' 
+
+Plugin 'kentaro/vim-textobj-function-php' 
+
 Plugin 'tommcdo/vim-lion' 
 
 Plugin 'bps/vim-textobj-python' 
@@ -16,7 +42,6 @@ Plugin 'bps/vim-textobj-python'
 Plugin 'kana/vim-textobj-lastpat' 
 
 Plugin 'godlygeek/tabular' 
-
 
 Plugin 'pbrisbin/vim-mkdir' 
 
@@ -46,7 +71,7 @@ Plugin 'brooth/far.vim'
 
 Plugin 'ton/vim-bufsurf' 
 
-Plugin 'wokalski/autocomplete-flow' 
+" Plugin 'wokalski/autocomplete-flow' 
 
 Plugin 'itchyny/calendar.vim' 
 
@@ -64,17 +89,17 @@ Plugin 'whatyouhide/vim-textobj-xmlattr'
      
 " Plugin 'jelera/vim-javascript-syntax'
 
-Plugin 'carlitux/deoplete-ternjs'
+" Plugin 'carlitux/deoplete-ternjs'
      
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
      
-Plugin 'chemzqm/vim-jsx-improve'
+" Plugin 'chemzqm/vim-jsx-improve'
      
 Plugin 'tpope/vim-repeat'
 
 Plugin 'tpope/vim-projectionist'
 
-Plugin 'pgilad/vim-skeletons'
+Plugin 'ColinRyan/vim-skeletons'
 
 Plugin 'roxma/LanguageServer-php-neovim'
      
@@ -88,13 +113,13 @@ Plugin 'tpope/vim-cucumber'
      
 Plugin 'c9s/phpunit.vim'
      
-Plugin 'autozimu/LanguageClient-neovim'
+" Plugin 'autozimu/LanguageClient-neovim'
      
 Plugin 'Shougo/echodoc.vim'
      
 Plugin 'elzr/vim-json'
     
-Plugin 'MaxMellon/vim-jsx-pretty'
+" Plugin 'MaxMellon/vim-jsx-pretty'
     
 Plugin 'kana/vim-textobj-function'
     
@@ -122,7 +147,7 @@ Plugin 'tpope/vim-unimpaired'
 
 Plugin 'machakann/vim-swap'
 
-Plugin 'adoy/vim-php-refactoring-toolbox'
+" Plugin 'adoy/vim-php-refactoring-toolbox'
 
 " Plugin 'chriskempson/base16-vim'
 
@@ -130,7 +155,7 @@ Plugin 'sniphpets/sniphpets'
 
 Plugin 'sniphpets/sniphpets-common'
 
-Plugin 'Shougo/deoplete.nvim'
+" Plugin 'Shougo/deoplete.nvim'
 
 " Plugin 'padawan-php/deoplete-padawan'
 
@@ -142,7 +167,7 @@ Plugin 'noahfrederick/vim-composer'
 
 Plugin 'simnalamburt/vim-mundo'
 
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'ColinRyan/auto-pairs'
 
 Plugin 'gmarik/Vundle.vim'
 
@@ -176,7 +201,7 @@ Plugin 'shawncplus/phpcomplete.vim'
 
 Plugin 'benmills/vimux'
 
-Plugin 'joonty/vdebug'
+" Plugin 'joonty/vdebug'
 
 Plugin 'vimwiki/vimwiki'
 
@@ -205,13 +230,13 @@ Plugin 'ternjs/tern_for_vim'
 
 " Plugin 'othree/yajs.vim'
 
-Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'othree/javascript-libraries-syntax.vim'
 
 " Plugin 'othree/es.next.syntax.vim'
 
 " Plugin 'isRuslan/vim-es6'
 
-Plugin 'lvht/phpcd.vim'
+" Plugin 'lvht/phpcd.vim'
 
 Plugin 'honza/vim-snippets'
 
@@ -223,6 +248,16 @@ Plugin 'w0rp/ale'
 
 "Plugin 'neomake/neomake'
 
+
+let javaScript_plugin_flow = 1
+
+" vimwiki VimWiki
+
+" let g:vimwiki_list = []
+            " \{'path': '~/vimwiki/foreshadowme/', 'index': 'index'},
+            " \{'path': '~/vimwiki/streaming/', 'index': 'index'},
+            " \{'path': '~/vimwiki/writing/', 'index': 'index'}
+ 
 let g:tmux_navigator_save_on_switch = 2
 
 let g:deoplete#enable_at_startup = 1
@@ -238,6 +273,7 @@ let g:deoplete#sources#ternjs#filetypes = [
 
 " These lines are here for phpcd
 
+let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_delay = 1000 
 let g:ale_sign_column_always = 1
@@ -251,6 +287,7 @@ let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
 \    'javascript': ['eslint', 'flow'],
+\    'javascript.jsx': ['eslint', 'flow'],
 \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
 \    'flow': ['eslint', 'flow'],
 \    'json': [],
@@ -261,8 +298,9 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
 \    'python': ['black', 'isort'],
-\    'javascript': ['eslint'],
-\    'jsx': ['eslint']
+\    'javascript': ['importjs', 'prettier_eslint'],
+\    'javascript.jsx': ['importjs', 'prettier_eslint' ],
+\    'jsx': ['importjs', 'prettier_eslint']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -282,8 +320,11 @@ let g:vdebug_options["port"] = 9000
 let g:vdebug_options["break_on_open"] = 0
 let g:vdebug_options["on_close"] = 'detach'
 
+let g:gutentags_file_list_command = 'rg --files'
 let g:tagcommands = {}
-let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R --map-javascript=.jsx --exclude=.git --exclude=vendor"}
+let g:tagcommands["php"] = {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=node_modules --exclude=.git --exclude=vendor"}
+let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R."}
+let g:tagcommands["javascript.jsx"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R."}
 
 let g:taggatron_verbose = 0
 
@@ -311,7 +352,15 @@ call vundle#end()            " required
 filetype plugin indent on
 
 
-"Plugin config
+"Plugins config
+
+let g:closetag_filenames='*.html,*.xhtml,*.phtml,*.js'
+let g:closetag_xhtml_filenames='*.xhtml,*.jsx,*.js'
+let g:closetag_filetypes='html,xhtml,phtml,js'
+let g:closetag_xhtml_filetypes='xhtml,jsx,js'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
 
 
 let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
@@ -366,15 +415,19 @@ let g:tagbar_compact = 1
 
 let NERDTreeShowLineNumbers = 1
 
+
+let g:LanguageClient_rootMarkers = ['.flowconfig']
 let g:LanguageClient_autostart = 1
-let g:LanguageClient_loggingLevel = 'DEBUG'
+" let g:LanguageClient_loggingLevel = 'DEBUG'
+let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 let g:LanguageClient_diagnosticDisplay = {}
 let g:LanguageClient_serverCommands = {
-            \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
-            \ 'javascript': ['flow-language-server', '--stdio'],
-            \ 'python': ['pyls'],
-            \ 'javascript.jsx': ['flow-language-server', '--stdio'],
-\}
+    \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
+    \ 'javascript': ['./node_modules/.bin/flow', 'lsp'],
+    \ 'javascript.jsx': ['./node_modules/.bin/flow', 'lsp'],
+    \ 'python': ['pyls']
+        \}
 
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
@@ -398,15 +451,106 @@ let g:dispatch_compilers = { }
 let g:dispatch_compilers['./vendor/bin/'] = ''
 let g:dispatch_compilers['phpunit'] = 'phpunit'
 
+" Debugger
+
+let g:vebugger_leader='<leader>d'
 """"""""""""""""""""""
 " Mapping
+
+
+nmap mcat vat<localleader>mc  
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> pumvisible() ? "<C-y>" : "\<C-g>u\<CR>"
+
+
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+
+nnoremap <leader>A :AV<cr>
+
+
+nmap sil vil,e
+nmap si{ vi{,e
+nmap sic vic,e
+
+vnoremap pp p
+vnoremap po "_dP
+
+nnoremap <expr> p PutOperator()
+nnoremap <silent> pp p
+
+nnoremap C-I C-I  
+nnoremap C-O C-O  
+
+
+nnoremap zA zAzt  
+
+
+nmap du( "ddi(dil"d]p
+nmap du{ "ddi{dal"d]p
+nmap dut "dditdat"d]p
+
+nnoremap s, /,<cr>:noh<cr>  
+
+nnoremap d; dv/;<cr>:noh<cr>  
+
+nnoremap 'a 'azt  
+
+nnoremap 's 'szt  
+
+
+
+nmap ss %
+
+onoremap r; v/;<cr>:noh<cr>
+onoremap r) /)<cr>:noh<cr>
+onoremap r( /($\\|(\()\)\@!<cr>:noh<cr>
+onoremap r} /}\( from\\| =\)\@!/e<cr>:noh<cr>
+onoremap r{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>:noh<cr>
+onoremap rt /\(\/\/.*\\|\w\)\@<!<\w/e<cr>:noh<cr>
+nnoremap s; /;/e<cr>
+nnoremap s) /)$/e<cr>
+nnoremap s( /($\\|(\()\)\@!/e<cr>
+nnoremap s} /}\( from\\| =\)\@!/e<cr>
+nnoremap s{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>
+nnoremap st /\(\/\/.*\\|\w\)\@<!<\w/e<cr>
+nnoremap sdo /\(const \)\@<={/e<cr>
+
+nnoremap <leader>tt :lua translateWordUnderCursor()<cr>
+
+
+snoremap <c-j> <esc>:call UltiSnips#JumpForwards()<cr>
+snoremap <c-k> <esc>:call UltiSnips#JumpBackwards()<cr>
+
+inoremap <c-j> <esc>:call UltiSnips#JumpForwards()<cr>
+inoremap <c-k> <esc>:call UltiSnips#JumpBackwards()<cr>
+
+nnoremap ri( df(f)x 
+
+
+nnoremap <Leader>if :ImportJSWord<CR>
+nnoremap <Leader>ix :ImportJSFix<CR>
+
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : "") . 'gk'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : "") . 'gj' 
 
 
 nnoremap <leader>/ :Denite grep<cr>  
 
 nnoremap <leader>q :call QuickFixToggle()<cr>
 nnoremap <leader>l :call LocationListToggle()<cr>
-nnoremap <leader>t :call PublicPrivateToggle()<cr>
+" I never use the following. Change PublicPrivateToggle to just togle and use it!
+" 2018-09-12 Wed 05:44 PM
+" nnoremap <leader>t :call PublicPrivateToggle()<cr> 
+
 " let g:openclose = toggle#Normal('dd', 'u')
 " nnoremap <space> :exe g:openclose.funcall()<cr>
 nnoremap <space> zazt
@@ -415,10 +559,15 @@ nnoremap <space> zazt
 
 
 " Wiki stuff
-nnoremap <leader>wr :exe "vsplit ~/vimwiki/diary/week-" . strftime("%V") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
-nnoremap <leader>wd :exe "vsplit ~/vimwiki/diary/" . strftime("%Y-%m-%d") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
-nnoremap <leader>wm :vsplit ~/vimwiki/Scratchpad.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>o
+" nnoremap <leader>wr :exe "vsplit ~/vimwiki/diary/week-" . strftime("%V") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
+" nnoremap <leader>wd :exe "vsplit ~/vimwiki/diary/" . strftime("%Y-%m-%d") . ".wiki"<cr>Go<cr><C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
+nnoremap <leader>wss :vsplit ~/vimwiki/Scratchpad.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
+nnoremap <leader>wp :vsplit ~/vimwiki/Problems.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
+nnoremap <leader>wl :vsplit ~/vimwiki/LessonsLearned.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
+nnoremap <leader>wf :vsplit ~/vimwiki/improvements.wiki<CR>O<esc>i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><CR><Esc>o
 
+" Forgot this existed
+" 2018-09-12 Wed 05:44 PM
 nnoremap <leader>rn :Rename
 
 nnoremap <leader>zj :call NextClosedFold('j')<cr>
@@ -426,14 +575,19 @@ nnoremap <leader>zk :call NextClosedFold('k')<cr>
 
 nnoremap <leader>gv `[v`]
 
-nnoremap <silent> <Plug>gotoClass gg/class <cr>:noh<cr>zazt
+nnoremap <silent> <Plug>gotoClass /class <cr>:noh<cr>zazt
 \:call repeat#set("\<Plug>gotoClass")<CR>
-nmap <localleader>gc <Plug>gotoClass
-nmap <localleader>gt gg/Types<cr>:noh<cr>][ztzO
-nmap <localleader>gf gg/Funcs<cr>:noh<cr>][ztzO
-nmap <localleader>gl gg/Lifecycle<cr>:noh<cr>][ztzO
-nmap <localleader>gr gg/render()<cr>:noh<cr>ztzO
-nmap <localleader>gm gg/" Mapping<cr>:noh<cr>zt
+" These mappings are confusing me. localleader stuff in the project .nvimrc uses g{x} 
+" to designate traveling to a file. I don't rememeber them either. Probably overloaded
+" 2018-09-12 Wed 05:44 PM
+nmap <localleader>gcc <Plug>gotoClass
+nmap <localleader>gcdm /componentDidMount()<cr>:noh<cr>ztzO
+nmap <localleader>gt /# Types<cr>:noh<cr>ztzO
+nmap <localleader>gf /# Funcs<cr>:noh<cr>]]ztzO
+nmap <localleader>gs /# Stories<cr>:noh<cr>]]ztzO
+nmap <localleader>gl /# Lifecycle<cr>:noh<cr>]]ztzO
+nmap <localleader>gr /render()<cr>:noh<cr>ztzO
+nmap <localleader>gm /" Mapping<cr>:noh<cr>zt
 
 nnoremap <localleader>xx ][ 
 nnoremap <leader>a :A<cr>  
@@ -445,25 +599,29 @@ nnoremap tl :TestLast<cr>
 nnoremap tv :TestVisit<cr>  
 
 
-nnoremap <localleader><localleader> :e ./.nvimrc<cr>
+nnoremap <localleader><localleader> :vsplit ./.nvimrc<cr>
 
-nnoremap <leader>nf :call template#MakeNewFile()<CR>  
 
 vnoremap s :s/
 vnoremap <leader>rm :call refactor#Move()<CR>  
 
-nnoremap <leader>mp :call template#MakePlugin()<CR>
-nnoremap <leader>ms :call template#MakeSkeleton()<CR>
-nnoremap <leader>mf :call AddType("\# Funcs", "pub")<cr>
-nnoremap <leader>mi :call AddType("\# Imports", "i")<CR> 
-
-
-nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR> 
-nnoremap <leader>mt :call AddType("\# Types", "t")<CR> 
+nnoremap <leader>mnf :call template#MakeNewFile()<CR>  
+nnoremap <leader>mca :call template#MakeConfigAfter()<CR>
+nnoremap <leader>mp  :call template#MakePlugin()<CR>
+nnoremap <leader>msk  :call template#MakeSkeleton()<CR>
+nnoremap <leader>mr  :call AddType("rules", "ri")<cr>
+nnoremap <leader>mf  :call AddType("\# Funcs", "cv")<cr>
+nnoremap <leader>mst  :call AddType("\# Stories", "pub")<cr>
+nnoremap <leader>msc  :call AddType("\# Styled", "cs")<cr>
+nnoremap <leader>mm  :call AddType("\# Methods", "pub")<cr>
+nnoremap <leader>mi  :call AddType("\# Imports", "i")<CR>
+nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR>
+nnoremap <leader>mt :call AddType("\# Types", "t")<CR>
 
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
+" Never use it 2018-09-12 Wed 05:44 PM
 nnoremap <leader>w :w<cr> 
 
 nnoremap <C-v>  :wq<CR> 
@@ -483,7 +641,7 @@ nnoremap <leader>u :UltiSnipsEdit<CR>
 "move line up
 nnoremap <s-j> ddj<s-p>
 nnoremap <s-k> ddk<s-p>
-
+    
 nmap <C-_> gcc
 vmap <C-_> gc
 
@@ -494,19 +652,18 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : deoplete#mappings#manual_complete
 " nnoremap <space> zazt
 
 " Tagbar Toggle
+" not used often 2018-09-12 Wed 05:45 PM
 nnoremap <leader>f :TagbarToggle<CR>
 
-" Toggen nerdtree
+" Toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
-
-" put in quotes
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
 nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 
 " make a split and switch to it
 nnoremap <leader>v :vnew<CR>
+nmap <leader>V :vnew<CR><C-f>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -521,8 +678,8 @@ nnoremap <C-y> 5<C-y>
 " remove highlight
 nnoremap <leader><space><space> :noh<cr>
 
-nnoremap <tab> %
-vnoremap <tab> %
+" nnoremap <tab> %
+" vnoremap <tab> %
 
 " vimrc
 "noremap <leader><leader> :vsplit $MYVIMRC<cr>
@@ -534,29 +691,29 @@ nnoremap <leader>S :source $MYVIMRC<cr>
 
 
 " Delete
-nnoremap <leader>d "dyy"dp
+nnoremap <leader>D "dyy"dp
 nnoremap dii  `[ d`]
 
 " Paste
-nnoremap p$  d$"0P
-nnoremap pt<space>  dt<space>"0P
-nnoremap pp p
-nnoremap p0 "0p
+" nnoremap p$  d$"0P
+" nnoremap pt<space>  dt<space>"0P
+" nnoremap pp p
+" nnoremap p0 "0p
 
-nnoremap paw daw"0P
-nnoremap pa" da""0P
-nnoremap pa' da'"0P
-nnoremap pa[ da["0P
-nnoremap pa( da("0P
-nnoremap pa{ da{"0P
+" nnoremap paw daw"0P
+" nnoremap pa" da""0P
+" nnoremap pa' da'"0P
+" nnoremap pa[ da["0P
+" nnoremap pa( da("0P
+" nnoremap pa{ da{"0P
 
-nnoremap piw diw"0P
-nnoremap pi" di""0P
-nnoremap pi' di'"0P
-nnoremap pi[ di["0P
-nnoremap pi( di("0P
-nnoremap pi{ di{"0P
-nnoremap pi` di`"0P
+" nnoremap piw diw"0P
+" nnoremap pi" di""0P
+" nnoremap pi' di'"0P
+" nnoremap pi[ di["0P
+" nnoremap pi( di("0P
+" nnoremap pi{ di{"0P
+" nnoremap pi` di`"0P
 
 
 " To command mode
@@ -576,14 +733,12 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-nnoremap j j
-nnoremap k k
 
 
-nnoremap <leader><leader> :call toggle#Config()<cr>
+nnoremap <leader><leader> :vsplit $MYVIMRC<cr>
 
 noremap <leader>i "ip
-nnoremap <Tab> :call toggle#Buffer()<CR>
+nnoremap <C-Tab> :call toggle#Buffer()<CR>
 
 
 nnoremap <leader>b :<C-u>Denite buffer<CR>
@@ -594,8 +749,10 @@ nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
 
 syntax on
 
+set scrolloff=999 " Changes how the cursor behaves
 " set termguicolors
 set exrc " project based vimrc
+set shortmess=a " It deals with prompts and fixes a bug for me
 
 set modelines=0
 
@@ -609,8 +766,9 @@ set cino=f.5s
 " set cindent
 
 set encoding=utf-8
-set scrolloff=3
+" set scrolloff=3
 set autoindent
+" set cindent
 set smartindent
 set showmode
 set showcmd
@@ -624,8 +782,8 @@ set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber
-set number
+" set relativenumber " set line numbers to relative
+set nonumber " remove line numbers
 set undofile
 set backupcopy=yes 
 
@@ -649,7 +807,7 @@ set colorcolumn=85
 "Codi
 let g:codi#rightalign=1
 let g:codi#rightsplit=0
-let g:codi#raw=1
+let g:codi#raw=0
 let g:codi#width=100
 
 "_________________
@@ -700,14 +858,6 @@ command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt
 " augroups
 
 augroup  wiki
-    autocmd!
-    autocmd! bufEnter ~/vimwiki/Scratchpad.wiki inoremap <buffer> <tab> <esc>:wall<cr>:bdelete<cr>
-    autocmd! bufLeave ~/vimwiki/Scratchpad.wiki silent! wall
-    autocmd! bufLeave ~/vimwiki/Scratchpad.wiki :bdelete
-    autocmd! bufEnter ~/vimwiki/diary/*.wiki inoremap <buffer> <tab> <esc>:wall<cr>:bdelete<cr>
-    autocmd! bufLeave ~/vimwiki/diary/*.wiki silent! wall
-    autocmd! bufLeave ~/vimwiki/diary/*.wiki :bdelete
-    
 augroup end 
 
 augroup  plugins
@@ -719,11 +869,14 @@ augroup end
 
 augroup  nvimrc
     autocmd!
-    autocmd! bufwritepost .nvimrc source ./.nvimrc
-    autocmd! bufLeave .nvimrc g:toggle_config=0
-    autocmd! bufLeave .nvimrc source .nvimrc
-    autocmd! bufLeave .nvimrc call JavascriptSettings()
-    autocmd! bufEnter .nvimrc call Initvim()
+    autocmd! bufEnter $MYVIMRC nnoremap <buffer> <tab> <esc>:wall<cr>ZZ
+    autocmd! bufEnter .nvimrc nnoremap <buffer> <tab> <esc>:wall<cr>ZZ
+    autocmd! bufEnter $MYVIMRC inoremap <buffer> <tab> <esc>:wall<cr>ZZ
+    autocmd! bufEnter .nvimrc inoremap <buffer> <tab> <esc>:wall<cr>ZZ
+    autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+    autocmd! bufwritepost */nvim/skeletons :SkeletonsReload
+    autocmd! bufLeave $MYVIMRC :w | :bdelete
+    autocmd! bufEnter $MYVIMRC call Initvim()
 augroup end 
 
 augroup  jsx
@@ -733,14 +886,22 @@ augroup end
  
 
 augroup editor
+    au BufLeave * if (len(@%)  < 1) | :wa | endif
     au FocusLost * if (len(@%)  < 1) | :wa | endif
-    au VimResized * exe "normal! \<c-w>="
+    au VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" | endif
+    au VimResized * if (winwidth('%') < 70) | exe "normal! \<c-w>|" | endif
+    au bufEnter * if (winwidth('%') >= 70) | exe "normal! \<c-w>="| endif
+    au bufEnter * if (winwidth('%') < 70) | exe "normal! \<c-w>|"| endif
 augroup end
 
 augroup js
     autocmd!
     autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
     autocmd FileType javascript,typescript,json,jsx colorscheme sin
+    autocmd! BufEnter *.js,*jsx nnoremap [[ [m
+    autocmd! BufEnter *.js,*jsx nnoremap ]] ]m
+    autocmd! BufEnter *.js,*jsx nnoremap [m [[
+    autocmd! BufEnter *.js,*jsx nnoremap ]m ]] 
 
 augroup end
 
@@ -760,9 +921,9 @@ augroup end
 
 augroup init.vim
     autocmd!
-    autocmd! bufwritepost init.vim source ~/.config/nvim/init.vim
+    autocmd! bufwritepost init.vim source $MYVIMRC
     autocmd! bufLeave init.vim g:toggle_config=0
-    autocmd! bufLeave init.vim source ~/.config/nvim/init.vim
+    autocmd! bufLeave init.vim source $MYVIMRC
     autocmd! FileType help wincmd L
     autocmd! bufEnter init.vim call Initvim()
 augroup end
@@ -782,6 +943,7 @@ augroup END
 augroup php
     autocmd!
     autocmd FileType php call PhpSettings()
+    " When the filetype is FILETYPE then make AutoPairs only match for parenthesis
     
     " autocmd FileType php LanguageClientStart
     " autocmd FileType php nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
@@ -798,6 +960,36 @@ let g:takeMeBack = 0
 " Funcs
 
 
+fun!  GetQuarter()
+    let weekNum =  strftime("%W") + 1
+
+    if weekNum <= 13
+        return 1
+    endif
+
+    if weekNum <= 13 * 2
+        return 2
+    endif
+
+    if weekNum <= 13 * 3
+        return 3
+    endif
+
+    if weekNum <= 13 * 4
+        return 4
+    endif
+endf 
+
+fun!  TestNearest()
+    if expand('%') =~# '\v\.php$'
+        let tag = TagBarCurrentTag
+        execute "PhpUnit" expand('%') tag
+    else
+        TestNearest
+    endif
+endf 
+
+
 fun!  JavascriptFoldText()
     let startLine = getline(v:foldstart)
     let endLine  = getline(v:foldend)
@@ -805,10 +997,21 @@ fun!  JavascriptFoldText()
     let lines = getline(v:foldstart, v:foldend)
     let sub = startLine
 
+
+    if match(startLine, 'import type {') >= 0
+        let endNew = substitute(endLine, '^.\+from ', '', 'g')
+        let sub = substitute(startLine, 'import type {', 'import type {...} = ' . endNew, 'g')
+    endif
+
+
+    if match(startLine, 'import {') >= 0
+        let endNew = substitute(endLine, '^.\+from ', '', 'g')
+        let sub = substitute(startLine, 'import {', 'import {...} = ' . endNew, 'g')
+    endif
+
     if match(startLine, 'const {') >= 0
         let endNew = substitute(endLine, '^.\+= ', '', 'g')
         let sub = substitute(startLine, 'const {', 'const {...} = ' . endNew, 'g')
-
     endif
 
     let lineCount = len(lines)
@@ -855,11 +1058,14 @@ endf
 
 fun! JavascriptSettings()
 
+
+    let g:AutoPairsInsert = 0
+
     set foldtext=JavascriptFoldText()
 
     set foldlevelstart=1
 
-    set foldlevel=1
+    set foldlevel=0
 
     set foldminlines=0
 
@@ -867,9 +1073,9 @@ fun! JavascriptSettings()
 
     set foldmethod=syntax
 
+
     let javaScript_fold = 1
 
-    let javaScript_plugin_flow = 1
 
     set tags=./.js.tags;/
 endf 
@@ -888,8 +1094,8 @@ fun! MakePluginMappings()
 
     if exists(":ALENext")
         
-        nnoremap <leader>j :ALENextWrap<cr> 
-        nnoremap <leader>k h:ALEPreviousWrap<cr> 
+        nmap <silent> <leader>j <Plug>(ale_next_wrap)
+        nmap <silent> <leader>k <Plug>(ale_previous_wrap)
     endif
     if exists(":ImportJSWord")
         nnoremap <Leader>if :ImportJSWord<CR>
@@ -897,6 +1103,7 @@ fun! MakePluginMappings()
     endif
     if exists(":Denite")
         
+        nnoremap <leader>eca :execute "Denite file/rec:" . "~/.config/nvim/after/ftplugin"<cr>
         nnoremap <leader>ep :execute "Denite file/rec:" . "~/.config/nvim/autoload"<cr>
         nnoremap <leader>es :execute "Denite file/rec:" . skeletons#skeletonsDir<cr>
     endif
@@ -919,8 +1126,8 @@ endf
 
 fun! AddType(anchor, trigger)
     let g:takeMeBack = 1
-    execute "normal! mugg/" . a:anchor . "\<CR>jo\<esc>o\<esc>ki" . a:trigger . " "
-    call UltiSnips#ExpandSnippetOrJump()
+    execute "normal! m':1/" . a:anchor . "\<CR>jo\<esc>o\<esc>ko" . a:trigger . " "
+    call UltiSnips#ExpandSnippetOrJump() | echom "catsass"
 endf
 
 fun! Initvim()
@@ -972,6 +1179,7 @@ function! PhpSyntaxOverride()
 endfunction
 
 function! PhpSettings()
+    let g:AutoPairsInsert = 0
     let g:phpcomplete_search_tags_for_variables = 1
     let g:phpcomplete_parse_docblock_comments = 1
     let g:phpcomplete_relax_static_constraint = 1
@@ -1042,10 +1250,21 @@ endfunction
 
 function! GoBack()
     let g:makingFunction = 0
-    execute "normal! 'u"
+    " execute "normal! ''"
 endfunction
 
 
+function! PutOperator(...) abort
+  if !a:0
+    return ":set opfunc=PutOperator\<cr>\"" . v:register . "g@"
+  endif
+  let visual = get({'line': 'V', 'block': "\<c-v>"}, a:1, 'v')
+  let [rv, rt] = [@@, getregtype('"')]
+  execute 'normal! `[' . visual . '`]"' . v:register . 'p'
+  if v:register == '"'
+    call setreg('"', rv, rt)
+  endif
+endfunction
 
 set hidden
 set secure "recommended to be placed at the bottom of the file
@@ -1055,3 +1274,31 @@ silent !stty -ixon > /dev/null 2>/dev/null
 
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+
+
+
+lua <<EOF
+
+function translateWordUnderCursor()
+    local wordToTranslate = vim.api.nvim_call_function("expand", { "<cword>" })
+    local translations = {}
+    
+    translations["end"] = "begin"
+    translations["begin"] = "end"
+    translations["px"] = "em"
+    translations["em"] = "rem"
+    translations["rem"] = "px"
+    translations["false"] = "true"
+    translations["true"] = "false"
+    translations["public"] = "private"
+    translations["private"] = "protected"
+    translations["protected"] = "public"
+    
+    if translations[wordToTranslate] then 
+        vim.api.nvim_command("normal! ciw" .. translations[wordToTranslate] )
+    else
+        print('word not in translations')
+    end
+end
+
+EOF

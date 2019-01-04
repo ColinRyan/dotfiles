@@ -1,0 +1,61 @@
+[ignore]
+
+; Ignore md files
+.*/*.md
+
+; We fork some components by platform
+.*/*[.]android.js
+
+; Ignore templates for 'react-native init'
+.*/local-cli/templates/.*
+
+; Ignore broken json
+<PROJECT_ROOT>/node_modules/config-chain/test/.*
+
+
+; Ignore the website subdir
+<PROJECT_ROOT>/node_modules/react-native/website/.*
+
+; Ignore the Dangerfile
+<PROJECT_ROOT>/node_modules/react-native/danger/dangerfile.js
+
+; Ignore "BUCK" generated dirs
+<PROJECT_ROOT>/node_modules/react-native/\.buckd/
+
+; Ignore unexpected extra "@providesModule"
+.*/node_modules/.*/node_modules/fbjs/.*
+.*/node_modules/fbemitter/.*
+
+; Ignore duplicate module providers
+; For RN Apps installed via npm, "Libraries" folder is inside
+; "node_modules/react-native" but in the source repo it is in the root
+.*/Libraries/react-native/React.js
+
+; Ignore polyfills
+.*/Libraries/polyfills/.*
+
+; Ignore misbehaving dev-dependencies
+.*/node_modules/reqwest/.*
+.*/node_modules/xdl/.*
+
+; Ignore expo dependencies
+
+; Ignore Expo SDK + some of it's dependencies temporarily:
+; https://github.com/expo/expo/issues/162
+.*/node_modules/expo/src/.*
+.*/node_modules/react-native-gesture-handler/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+module.name_mapper='^react-native$' -> '<PROJECT_ROOT>/node_modules/react-native-web'
+
+[strict]
+
+[version]
+^0.84.0

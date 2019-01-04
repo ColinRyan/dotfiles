@@ -1,3 +1,17 @@
+snippet u "usage"
+# Usage
+if [ $# -eq ${1:0} ]; then
+   echo "Usage: $2"
+   exit 1
+fi
+endsnippet
+
+snippet cv "function"
+$1() 
+{
+    $2
+}
+endsnippet
 snippet pub "function"
 $1() 
 {

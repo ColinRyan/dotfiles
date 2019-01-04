@@ -55,11 +55,13 @@ bold=$(tput -Txterm bold)
 reset=$(tput -Txterm sgr0)
 
 # Nicely formatted terminal prompt
+export NODE_ENV=development
 export EDITOR=nvim
 export HISTCONTROL=ignoredups:erasedups 
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
 export GNOME_KEYRING_CONTROL=1
+export ANDROID_SDK=/opt/android-sdk
 
 # --- Source ---
 source ~/.bin/tmuxinator.bash
@@ -69,12 +71,111 @@ source ~/.bash_functions
 source ~/.bash_aliases
 # --- Exports --- 
 
-export PATH=~/.yarn/bin:$HOME/.gem/ruby/2.5.0/bin:/root/.gem/ruby/2.5.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH
+export PATH=$HOME/.gem/ruby/2.5.0/bin:/root/.gem/ruby/2.5.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export TERM="screen-256color"
 
 # --- Functions --- 
 
-# funcs
+# Funcs
+
+
+startTesting() 
+{
+    if [[ -f artisan ]]; then
+        ./vendor/bin/phpunit
+    elif [[ -f package.json ]]; then
+        yarn test
+    fi
+
+} 
+
+
+startEditing() 
+{
+    if [ -f 'App.js' ]; then 
+        nvim 'App.js'; 
+    elif [ -f 'index.js' ]; then 
+        nvim 'index.js'; 
+    elif [ -f 'index.js' ]; then 
+        nvim 'index.js'; 
+    elif [ -f 'src/App.js' ]; then
+        nvim 'src/App.js'
+    elif [ -f 'src/index.js' ]; then
+        nvim 'src/index.js'
+    else 
+        nvim; 
+    fi
+} 
+
+startServing() 
+
+{
+    if [[ -f artisan ]]; then
+        php artisan serve
+    fi
+
+    if [[ -f package.json ]]; then
+        yarn start
+    fi
+}
+
+
+mvp() 
+{
+
+   clear
+   read -p "Enter new project name: " projectName
+
+   if [ -z ${projectName//} ]; then
+       echo "No project name given"
+       exit 1
+   fi 
+
+   types=('react-native-js' 'react-web-js' 'react-native-clojure' 'laravel' 'nodejs' 'cli-js')
+   echo "Select a project type"
+   projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
+
+   if [ -z ${projectType//} ]; then
+       echo "No project type selected."
+   fi 
+
+   cd ~/projects/
+   if [[ $projectType = "react-web" ]]; then
+       nvm use 11.6
+       create-react-app $projectName
+   fi
+   if [[ $projectType = "react-native-js" ]]; then
+       nvm use 11.6
+       create-react-native-app $projectName
+   fi
+   if [[ $projectType = "laravel" ]]; then
+       laravel new $projectName
+   fi
+   if [[ $projectType = "nodejs" ]]; then
+       //
+   fi
+   if [[ $projectType = "cli-js" ]]; then
+       //
+   fi
+   if [[ $projectType = "react-native-clojure" ]]; then
+       lein new expo $projectName
+       cd $projectName && yarn install
+       lein figwheel
+       cd ..
+   fi
+   if [[ $projectType = "react-web-clojure" ]]; then
+       //
+   fi
+
+   mcd $projectName
+   git init
+   touch "Readme.md"
+   mux start project $projectName
+
+
+   return 1
+} 
 
 # takes a alias name and gets the last command from the history. Makes it an alias
 makeAlias() 
@@ -112,7 +213,6 @@ makeMacro () {
 
         if [ -z ${command//} ]; then
             echo "No commands selected."
-
         else 
 # ugly block but it doesn't seem to work any other way
 cat <<EOF >> ~/.bash_functions
@@ -215,16 +315,6 @@ gotobranch () {
 mcd () {
  mkdir $1
  cd $1
-}
-
-# opens the index file of a directory in vim
-e () {
-
-    for f in ./index.*; do
-        nvim $f
-        break
-    done
-
 }
 
 
@@ -357,7 +447,7 @@ t () {
         touch ~/.todo
     fi
 
-    if [ ! -f ./.todo ]; then
+    if [ -f ./.todo ]; then
         todo='./.todo'
     else 
         todo='~/.todo'
@@ -380,7 +470,7 @@ tt () {
         touch ~/.todo
     fi
 
-    if [ ! -f ./.todo ]; then
+    if [ -f ./.todo ]; then
         todo='./.todo'
     else 
         todo='~/.todo'
@@ -439,8 +529,8 @@ complete -F _why why
 alias idea='cd ~/idea'
 
 alias pma='cd ~/projects/patientme/core/api'
-alias pmw='cd ~/projects/patientme/core/webapp'
-alias pmn='cd ~/projects/patientme/core/native'
+alias pmw='cd ~/projects/patientme/core/patientme/packages/web-app'
+alias pmn='cd ~/projects/patientme/core/patientme/packages/native-app'
 alias pmc='cd ~/projects/patientme/core/client-web'
 
 # Laravel

@@ -1,21 +1,22 @@
-== $2 ==
+= $2 =
 
-= goals =
+== goals ==
   * $3
 
-= steps =
+== steps ==
   * $4
 
-= What else I did  = 
+== What else I did  ==
 
-= What else I attempted = 
+== What else I attempted ==
 
-= Things I want! =
+== Things I want! ==
 
-= Things I need to know = 
+== Things I need to know ==
 
+== Retrospect checklist == 
 
-= Log =
+== Log ==
 
 $1
 $0

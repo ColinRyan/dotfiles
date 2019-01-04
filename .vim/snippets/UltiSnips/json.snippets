@@ -1,0 +1,34 @@
+snippet ",,$" "next entry" Air
+,
+$0
+endsnippet
+snippet " "string" "len(snip.buffer) > snip.line+1 and re.search(r']', snip.buffer[snip.line+1])" Abe
+"$1",
+$0
+endsnippet
+snippet " "string" "len(snip.buffer) > snip.line+1 and re.search(r'}', snip.buffer[snip.line+1])" Abe
+"$1": "$2",
+$0
+endsnippet
+snippet [  "key: array" Ab
+"$1": [$2],
+$3
+endsnippet
+snippet { "object" Aib
+{
+    $1
+}
+endsnippet
+snippet {  "key: object" "len(snip.buffer) > snip.line+1 and re.search(r'}', snip.buffer[snip.line+1])" Abe
+"$1": {
+   $2
+},
+$3
+endsnippet
+snippet ri "rule with indent"
+		"$1": ["error", $2],
+endsnippet
+
+snippet r "rule"
+"$1": ["error", $2],
+endsnippet

@@ -16,7 +16,8 @@ $if mode=vi
 $endif
 
 "\C-w":"tmux select-pane -t 1 \\; resize-pane -Z \\; send-keys nvim Enter\C-m"
-"\C-n":"nvim\C-m"
+"\C-n":"nv\C-m"
+"\C-p":"tmux new-window \\; send-keys mvp Enter\C-m"
 "\C-b":"vb\C-m"
 
 
