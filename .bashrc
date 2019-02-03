@@ -80,6 +80,14 @@ export TERM="screen-256color"
 # Funcs
 
 
+selectProject() 
+{
+    directory=$(find ~/projects/ -maxdepth 1 -type d | grep -P "[\w\-]+$" -o | fzf)
+    [[ ! -z "$directory" ]] && mux start project $directory
+
+} 
+
+
 startTesting() 
 {
     if [[ -f artisan ]]; then
@@ -132,7 +140,7 @@ mvp()
        exit 1
    fi 
 
-   types=('react-native-js' 'react-web-js' 'react-native-clojure' 'laravel' 'nodejs' 'cli-js')
+   types=('react-native-js' 'react-web-js' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
    echo "Select a project type"
    projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
 
@@ -145,25 +153,41 @@ mvp()
        nvm use 11.6
        create-react-app $projectName
    fi
+
+
+   if [[ $projectType = "parcel-js-vanilla" ]]; then
+       nvm use 11.6
+       mcd $projectName
+       yo parcel-js-vanilla
+       cd -
+   fi
+
    if [[ $projectType = "react-native-js" ]]; then
        nvm use 11.6
        create-react-native-app $projectName
    fi
+
    if [[ $projectType = "laravel" ]]; then
        laravel new $projectName
    fi
+
+
+
    if [[ $projectType = "nodejs" ]]; then
        //
    fi
+
    if [[ $projectType = "cli-js" ]]; then
        //
    fi
+
    if [[ $projectType = "react-native-clojure" ]]; then
        lein new expo $projectName
        cd $projectName && yarn install
        lein figwheel
        cd ..
    fi
+
    if [[ $projectType = "react-web-clojure" ]]; then
        //
    fi

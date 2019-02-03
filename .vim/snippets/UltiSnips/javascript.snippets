@@ -1,3 +1,34 @@
+snippet mm "method"
+
+$1($2) {
+    $3
+}
+$0
+endsnippet
+snippet dqs "document.querySelector" Abi
+
+const $1 = document.querySelector("$2")
+
+endsnippet
+	
+snippet .ih "innerHTML"
+
+$1.innerHTML = \`$2\`
+
+$0
+endsnippet
+snippet dba "document.body" Abi
+
+document.body.appendChild($1)
+
+$0
+endsnippet
+snippet dce "document.createElement" Abi
+
+const $1 = document.createElement('$2')
+
+$0
+endsnippet
 snippet .ca "catch" Ai
 .catch((err) => {
     log(err)
@@ -24,7 +55,7 @@ const $4 = enhance(
 		])
 $0
 endsnippet
-snippet ? "ternary" Ai
+snippet ? "ternary"  Ai
 ($1) ? $2 : $3
 endsnippet
 snippet wy "test"
@@ -79,7 +110,7 @@ snippet '(?<=[=\(]){' "object" Air
 {$1}$0
 endsnippet	
 priority 1
-snippet '(?<![=\$]){' "object" Air
+snippet '(?<![=\$]){' "object" "len(snip.buffer) > snip.line+1 and re.search(r':|}*', snip.buffer[snip.line+1]) == None" Aier
 {
     $1
 }
@@ -89,36 +120,36 @@ snippet '\((?!\))' "braces" Air
 ($1)
 endsnippet
 priority 3
-snippet ' "nested quote" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+snippet ' "nested quote" "len(snip.buffer) > snip.line+1 and re.search(r':', snip.buffer[snip.line]) == None and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
 $1: '$2',
 $0
 endsnippet
-snippet ` "nested backtick" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+snippet ` "nested backtick" "len(snip.buffer) > snip.line+1 and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
 $1: \`$2\`,
 $0
 endsnippet
-snippet fn "nested function" "len(snip.buffer) > snip.line+1 and re.search(r'},*', snip.buffer[snip.line+1])" Ae
+snippet fn "nested function" "len(snip.buffer) > snip.line+1 and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
 $1 : ($2) => {
    ${3:${VISUAL}}
 
 },
 $0
 endsnippet
-snippet " "nested string" "len(snip.buffer) > snip.line+1 and re.search(r'^ *}', snip.buffer[snip.line+1])" Ae
+snippet " "nested string" "len(snip.buffer) > snip.line+1 and re.search(r':', snip.buffer[snip.line]) == None and re.search(r'^ *}|:', snip.buffer[snip.line+1])" Ae
 $1: "$2",
 $0
 endsnippet
-snippet { "nested object" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+snippet { "nested object" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
 $1 : {
     $2
 },
 $0
 endsnippet
-snippet ] "key integretation" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+snippet ] "key integretation" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
 [$1]: $2,
 $0
 endsnippet
-snippet [ "nested array" "len(snip.buffer) > snip.line+1 and re.search(r' *},*', snip.buffer[snip.line+1])" Ae
+snippet [ "nested array" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
 $1 : [
    $2
 ],
@@ -162,7 +193,7 @@ const $1 = \`$2\`
 
 $0
 endsnippet
-snippet " "string" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+snippet " "string" "len(snip.buffer) > snip.line+1 and (re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)" Aeb
 
 const $1 = "$2"
 
@@ -212,12 +243,12 @@ class $1 {
 
 }
 endsnippet
-snippet  ty "type" Ab
+snippet  ty "type" "re.search(r':', snip.buffer[snip.line]) == None" Abe
 type $1 = {
     $2
 }
 endsnippet
-snippet "^[ ]*(=|cc)" "constant" Ar
+snippet cc "constant" Ab
 const $1 = ${2:${VISUAL}}
 $0
 endsnippet
@@ -246,9 +277,6 @@ R.ifElse(
 )($1)
 endsnippet
 
-snippet rf "R.filter" i
-R.filter($1)
-endsnippet
 snippet ex "expect"
 expect($1).toBe($2)	
 endsnippet
@@ -319,12 +347,66 @@ snippet ta "type array" i
 Array<$1>
 endsnippet
 
-snippet rm "Ramda map" i
-R.map(${1:func}, ${2: functor})
+
+
+
+snippet red "Ramda reduce"  Aib
+
+R.reduce(${1:func}, ${2:init}, ${3:collection})
 endsnippet
 
-snippet re "Ramda evolve" i
-R.evolve(${1:transform}, ${2:x})
+snippet red "Ramda reduce" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+R.reduce(${1:func}, ${2:init}),
+endsnippet
+
+snippet rtp "Ramda toPairs"  Aib
+R.toPairs(${1:obj})
+endsnippet
+
+snippet rtp "Ramda toPairs" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+R.toPairs,
+endsnippet
+
+snippet rv "Ramda values"  Aib
+R.values(${1:obj})
+endsnippet
+
+snippet rv "Ramda values" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+R.values,
+endsnippet
+
+snippet rfl "Ramda filter"  Aib
+R.filter(${1:isWhatImLookingFor}, ${2:collection})
+endsnippet
+
+snippet rfl "Ramda filter" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+R.filter(${1:isWhatImLookingFor}),
+endsnippet
+
+snippet rfi "Ramda find"  Aib
+R.find(${1:needle}, ${2:haystack})
+endsnippet
+
+snippet rfi "Ramda find" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei
+R.find(${1:needle}),
+endsnippet
+
+
+snippet rm "Ramda map"  Aib
+R.map(${1:func}, ${2: collection})
+endsnippet
+
+snippet rm "Ramda map" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei
+R.map(${1:func}),
+endsnippet
+
+
+snippet rev "Ramda evolve"  Aib 
+R.evolve(${1:transform}, ${2:object})
+endsnippet
+
+snippet rev "Ramda evolve" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei 
+R.evolve(${1:transform}),
 endsnippet
 
 snippet fl "flatlist"
@@ -338,13 +420,13 @@ snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
 R.assoc("${1:prop}", ${2:value}, ${3:object})
 endsnippet
 	
-snippet rc "Ramda compose" i
+snippet rc "Ramda compose" AiB
 R.compose(
     $2
 )($1)
 endsnippet
 	
-snippet psa "prevState assoc" i
+snippet psa "prevState assoc" Aib
 R.assoc($1, $2, prevState)
 endsnippet
 	
@@ -405,7 +487,7 @@ render() {
 }
 endsnippet
 
-snippet "^[ ]*do" "destructure Object" r
+snippet "^[ ]*do" "destructure Object" Air
 const {
     $2
 } = $1

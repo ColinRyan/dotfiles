@@ -10,8 +10,12 @@ call vundle#begin()
 " Plugins
 
 
-Plugin 'thalesmello/vim-textobj-methodcall' 
+Plugin 'vim-scripts/matchit.zip' 
 
+
+Plugin 'fvictorio/vim-yank-queue' 
+
+Plugin 'thalesmello/vim-textobj-methodcall' 
 
 Plugin 'idanarye/vim-vebugger' 
 
@@ -298,9 +302,6 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
 \    'python': ['black', 'isort'],
-\    'javascript': ['importjs', 'prettier_eslint'],
-\    'javascript.jsx': ['importjs', 'prettier_eslint' ],
-\    'jsx': ['importjs', 'prettier_eslint']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -458,6 +459,20 @@ let g:vebugger_leader='<leader>d'
 " Mapping
 
 
+
+
+nmap <leader>I   }I
+
+
+nnoremap } :call search('^\s*$', '')<CR>
+nnoremap { :call search('^\s*$', 'b')<CR>
+
+
+nnoremap zk zk%^
+nnoremap zj zj^
+
+
+
 nmap mcat vat<localleader>mc  
 
 inoremap <silent><expr> <TAB>
@@ -494,8 +509,8 @@ nnoremap C-O C-O
 nnoremap zA zAzt  
 
 
-nmap du( "ddi(dil"d]p
-nmap du{ "ddi{dal"d]p
+nmap du( "ddi(dack"d]p
+nmap du{ "ddi{dack"d]p
 nmap dut "dditdat"d]p
 
 nnoremap s, /,<cr>:noh<cr>  
@@ -516,6 +531,7 @@ onoremap r( /($\\|(\()\)\@!<cr>:noh<cr>
 onoremap r} /}\( from\\| =\)\@!/e<cr>:noh<cr>
 onoremap r{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>:noh<cr>
 onoremap rt /\(\/\/.*\\|\w\)\@<!<\w/e<cr>:noh<cr>
+nnoremap sf /[^ .]\w*(/<cr>
 nnoremap s; /;/e<cr>
 nnoremap s) /)$/e<cr>
 nnoremap s( /($\\|(\()\)\@!/e<cr>
@@ -1139,6 +1155,7 @@ fun! Initvim()
     nnoremap <localleader>a :call AddType("\" augroup", "ag")<CR> 
 endf
 
+
 fun! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -1284,6 +1301,8 @@ function translateWordUnderCursor()
     local translations = {}
     
     translations["end"] = "begin"
+    translations["const"] = "let"
+    translations["let"] = "const"
     translations["begin"] = "end"
     translations["px"] = "em"
     translations["em"] = "rem"
