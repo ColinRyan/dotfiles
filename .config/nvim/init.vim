@@ -10,6 +10,12 @@ call vundle#begin()
 " Plugins
 
 
+Plugin 'fvictorio/vim-extract-variable' 
+
+
+Plugin 'justinmk/vim-sneak' 
+
+
 Plugin 'vim-scripts/matchit.zip' 
 
 
@@ -262,6 +268,7 @@ let javaScript_plugin_flow = 1
             " \{'path': '~/vimwiki/streaming/', 'index': 'index'},
             " \{'path': '~/vimwiki/writing/', 'index': 'index'}
  
+let g:sneak#label = 1
 let g:tmux_navigator_save_on_switch = 2
 
 let g:deoplete#enable_at_startup = 1
@@ -288,6 +295,8 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_fix_on_save = 1
 
+
+
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
 \    'javascript': ['eslint', 'flow'],
@@ -302,6 +311,9 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
 \    'python': ['black', 'isort'],
+\    'javascript': ['prettier-eslint', 'importjs'],
+\    'javascript.jsx': ['prettier-eslint'. 'importjs'],
+\    'jsx': [ 'prettier-eslint', 'importjs']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -492,9 +504,9 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <leader>A :AV<cr>
 
 
-nmap sil vil,e
-nmap si{ vi{,e
-nmap sic vic,e
+nmap ril vil,e
+nmap ri{ vi{,e
+nmap ric vic,e
 
 vnoremap pp p
 vnoremap po "_dP
@@ -513,7 +525,7 @@ nmap du( "ddi(dack"d]p
 nmap du{ "ddi{dack"d]p
 nmap dut "dditdat"d]p
 
-nnoremap s, /,<cr>:noh<cr>  
+" nnoremap s, /,<cr>:noh<cr>  
 
 nnoremap d; dv/;<cr>:noh<cr>  
 
@@ -523,7 +535,7 @@ nnoremap 's 'szt
 
 
 
-nmap ss %
+" nmap ss %
 
 onoremap r; v/;<cr>:noh<cr>
 onoremap r) /)<cr>:noh<cr>
@@ -531,14 +543,14 @@ onoremap r( /($\\|(\()\)\@!<cr>:noh<cr>
 onoremap r} /}\( from\\| =\)\@!/e<cr>:noh<cr>
 onoremap r{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>:noh<cr>
 onoremap rt /\(\/\/.*\\|\w\)\@<!<\w/e<cr>:noh<cr>
-nnoremap sf /[^ .]\w*(/<cr>
-nnoremap s; /;/e<cr>
-nnoremap s) /)$/e<cr>
-nnoremap s( /($\\|(\()\)\@!/e<cr>
-nnoremap s} /}\( from\\| =\)\@!/e<cr>
-nnoremap s{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>
-nnoremap st /\(\/\/.*\\|\w\)\@<!<\w/e<cr>
-nnoremap sdo /\(const \)\@<={/e<cr>
+" nnoremap sf /[^ .]\w*(/<cr>
+" nnoremap s; /;/e<cr>
+" nnoremap s) /)$/e<cr>
+" nnoremap s( /($\\|(\()\)\@!/e<cr>
+" nnoremap s} /}\( from\\| =\)\@!/e<cr>
+" nnoremap s{ /\(={\)\@<={\\|\([=:]\s\+\)\@<={\\|\([,(]\s\{0,1}\)\@<={/e<cr>
+" nnoremap st /\(\/\/.*\\|\w\)\@<!<\w/e<cr>
+" nnoremap sdo /\(const \)\@<={/e<cr>
 
 nnoremap <leader>tt :lua translateWordUnderCursor()<cr>
 
@@ -624,15 +636,15 @@ vnoremap <leader>rm :call refactor#Move()<CR>
 nnoremap <leader>mnf :call template#MakeNewFile()<CR>  
 nnoremap <leader>mca :call template#MakeConfigAfter()<CR>
 nnoremap <leader>mp  :call template#MakePlugin()<CR>
-nnoremap <leader>msk  :call template#MakeSkeleton()<CR>
+nnoremap <leader>msk :call template#MakeSkeleton()<CR>
 nnoremap <leader>mr  :call AddType("rules", "ri")<cr>
 nnoremap <leader>mf  :call AddType("\# Funcs", "cv")<cr>
-nnoremap <leader>mst  :call AddType("\# Stories", "pub")<cr>
-nnoremap <leader>msc  :call AddType("\# Styled", "cs")<cr>
+nnoremap <leader>mst :call AddType("\# Stories", "pub")<cr>
+nnoremap <leader>msc :call AddType("\# Styled", "cs")<cr>
 nnoremap <leader>mm  :call AddType("\# Methods", "pub")<cr>
 nnoremap <leader>mi  :call AddType("\# Imports", "i")<CR>
 nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR>
-nnoremap <leader>mt :call AddType("\# Types", "t")<CR>
+nnoremap <leader>mt  :call AddType("\# Types", "t")<CR>
 
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
@@ -812,12 +824,12 @@ set smartcase
 set gdefault
 set incsearch
 set showmatch
-set hlsearch
+" set hlsearch
 
 
 set wrap
 set textwidth=79
-set formatoptions=qrn1
+set formatoptions=tcqrn1
 set colorcolumn=85
 
 "Codi
@@ -902,12 +914,12 @@ augroup end
  
 
 augroup editor
-    au BufLeave * if (len(@%)  < 1) | :wa | endif
-    au FocusLost * if (len(@%)  < 1) | :wa | endif
-    au VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" | endif
-    au VimResized * if (winwidth('%') < 70) | exe "normal! \<c-w>|" | endif
-    au bufEnter * if (winwidth('%') >= 70) | exe "normal! \<c-w>="| endif
-    au bufEnter * if (winwidth('%') < 70) | exe "normal! \<c-w>|"| endif
+    au  BufLeave   * if (len(@%)        < 1)  | :wa |        endif
+    au  FocusLost  * if (len(@%)        < 1)  | :wa |        endif
+    au  VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>="  | endif
+    au  VimResized * if (winwidth('%') <  70) | exe "normal! \<c-w>|"  | endif
+    au  bufEnter   * if (winwidth('%') >= 70) | exe "normal! \<c-w>="| endif
+    au  bufEnter   * if (winwidth('%') <  70) | exe "normal! \<c-w>|"| endif
 augroup end
 
 augroup js

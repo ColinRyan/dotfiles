@@ -226,7 +226,7 @@ const $1 = ($2) =>  {
 
 $0
 endsnippet
-snippet "{" "object" "len(snip.buffer) > snip.line+1 or re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None" Areb
+snippet "{" "object" "len(snip.buffer) > snip.line+1 and re.search(r'\[|{|,$|\<|>', snip.buffer[snip.line-1]) == None" Areb
 
 const $1 = {
     $2
