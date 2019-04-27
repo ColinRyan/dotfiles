@@ -1,0 +1,14 @@
+{
+  "presets": ["flow", "stage-1"],
+  "env": {
+    "targets": {
+    },
+    "development": {
+      "plugins": [ "transform-runtime", "transform-class-properties", "transform-object-rest-spread"]
+    },
+
+    "production": {
+      "plugins": ["transform-runtime", "transform-remove-console", "transform-class-properties", "transform-object-rest-spread"]
+    }
+  }
+}

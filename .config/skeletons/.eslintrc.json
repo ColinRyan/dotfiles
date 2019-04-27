@@ -1,0 +1,60 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:flowtype/recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "flowtype"
+    ],
+    "settings": {
+        "flowtype": {
+          "onlyFilesWithFlowAnnotation": true
+        }
+    },
+    "rules": {
+
+        "flowtype/valid-syntax": 1,
+        "flowtype/union-intersection-spacing": 2,
+        "flowtype/use-flow-type": 2,
+        "flowtype/space-before-type-colon": 2,
+        "flowtype/space-before-generic-bracket": 2,
+        "flowtype/boolean-style": 2,
+        "flowtype/generic-spacing": 2,
+        "flowtype/define-flow-type": 1,
+        "flowtype/no-types-missing-file-annotation": 2,
+        "flowtype/space-after-type-colon": 2,
+
+        "no-console": 0,
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ]
+    }
+}
