@@ -1,0 +1,1578 @@
+!SESSION 2019-05-02 14:43:21.353 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:31.304
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:31.772
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:31.876
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:31.879
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:31.954
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:32.075
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:43:32.499
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.363
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.743
+!MESSAGE Workspace initialized in 141829ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.865
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.889
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.942
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:53.946
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:54.383
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:55.793
+!MESSAGE Reconciled 0. Took 228 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.510
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.551
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.556
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.562
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.626
+!MESSAGE begin problem for /ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.640
+!MESSAGE The method newInstance() from the type Class<capture#2-of ?> is deprecated since version 9 is of type UsingDeprecatedSinceVersionMethod
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.644
+!MESSAGE XXX Set Properties. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.650
+!MESSAGE TODO Set Properties. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.652
+!MESSAGE 3 problems reported for /ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:45:56.657
+!MESSAGE Validated 1. Took 461 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:47:08.236
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 14:47:08.253
+!MESSAGE Clearing problems for /ExecuteSearchProcessor.java
+!SESSION 2019-05-02 16:32:32.261 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:32:35.507
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:32:41.452
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:32:41.937
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:32:42.083
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:32:42.087
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:32:42.188
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:33:09.175 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:33:12.176
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:33:16.869
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:33:17.346
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:33:17.435
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:33:17.439
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:33:17.552
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:34:08.218 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:34:11.538
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:34:16.572
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:34:17.109
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:34:17.235
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:34:17.239
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:34:17.338
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:35:52.842 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:35:56.072
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:01.096
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:01.594
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:01.702
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:01.717
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:01.840
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.132
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.355
+!MESSAGE Workspace initialized in 153066ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.442
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.465
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.539
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:50.547
+!MESSAGE >> document/didOpen
+!SESSION 2019-05-02 16:36:47.931 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:36:51.968
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:52.607
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:54.082
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:54.389
+!MESSAGE Reconciled 0. Took 313 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.296
+!MESSAGE begin problem for /ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.304
+!MESSAGE The method newInstance() from the type Class<capture#2-of ?> is deprecated since version 9 is of type UsingDeprecatedSinceVersionMethod
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.309
+!MESSAGE XXX Set Properties. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.312
+!MESSAGE TODO Set Properties. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.314
+!MESSAGE 3 problems reported for /ExecuteSearchProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.327
+!MESSAGE Validated 1. Took 529 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.607
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.847
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.854
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:55.860
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:59.426
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:36:59.947
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:37:00.100
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:37:00.104
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:37:00.214
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:39:04.684 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:39:08.037
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:12.929
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:13.377
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:13.461
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:13.464
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:13.565
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:31.182
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:39:31.193
+!MESSAGE Clearing problems for /ExecuteSearchProcessor.java
+!SESSION 2019-05-02 16:40:01.100 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:40:04.236
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:40:09.106
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:40:09.568
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:40:09.685
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:40:09.690
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:40:09.788
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:42:46.745 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:42:49.786
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:42:54.475
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:42:54.949
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:42:55.043
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:42:55.046
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:42:55.149
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:44:00.036 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:44:03.171
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:44:08.046
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:44:08.502
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:44:08.596
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:44:08.599
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:44:08.715
+!MESSAGE >> initialized
+!SESSION 2019-05-02 16:45:17.158 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-02 16:45:20.222
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:45:24.933
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:45:25.433
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:45:25.519
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:45:25.522
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-02 16:45:25.626
+!MESSAGE >> initialized
+!SESSION 2019-05-03 08:46:37.102 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:46:37.821
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:46:39.195
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:46:39.328
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:46:39.353
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:46:39.354
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:46:39.380
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.082
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.141
+!MESSAGE Workspace initialized in 32775ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.226
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.243
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.262
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.264
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:12.383
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/generated/service/src/net/msi/schema/services/sisSearch/ExecuteSearchRequestDocument.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.065
+!MESSAGE Reconciled 0. Took 43 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.451
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.498
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.500
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.502
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.577
+!MESSAGE begin problem for /ExecuteSearchRequestDocument.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.578
+!MESSAGE 0 problems reported for /ExecuteSearchRequestDocument.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:47:13.579
+!MESSAGE Validated 1. Took 76 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:22.431
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:24.172
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:28.019
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:30.248
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:38.662
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:38.664
+!MESSAGE Clearing problems for /ExecuteSearchRequestDocument.java
+!SESSION 2019-05-03 08:50:56.801 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:50:57.510
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:58.812
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:58.954
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:58.985
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:58.987
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:50:59.016
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.446
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.472
+!MESSAGE Workspace initialized in 30940ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.511
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.516
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.529
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.530
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.594
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/generated/service/src/net/msi/schema/services/sisSearch/SearchRequestType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.919
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.927
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.929
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:30.930
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:31.115
+!MESSAGE Reconciled 0. Took 72 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:31.585
+!MESSAGE begin problem for /SearchRequestType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:31.586
+!MESSAGE 0 problems reported for /SearchRequestType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:31.587
+!MESSAGE Validated 1. Took 70 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:47.693
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:51:51.667
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:52:04.516
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:52:23.496
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:52:30.808
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:52:30.810
+!MESSAGE Clearing problems for /SearchRequestType.java
+!SESSION 2019-05-03 08:53:53.971 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:53:54.680
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:53:56.174
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:53:56.313
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:53:56.349
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:53:56.351
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:53:56.383
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.391
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.418
+!MESSAGE Workspace initialized in 30986ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.504
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.509
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.522
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.523
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.567
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/skeleton-src/net/msi/sis/services/search/SISSearchWrapper.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.811
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.819
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.821
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:27.823
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:28.091
+!MESSAGE Reconciled 0. Took 89 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:28.556
+!MESSAGE begin problem for /SISSearchWrapper.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:28.557
+!MESSAGE 0 problems reported for /SISSearchWrapper.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:28.557
+!MESSAGE Validated 1. Took 64 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:29.572
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:33.429
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:39.515
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:48.202
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:49.185
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:49.693
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:51.454
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:51.928
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:54:52.720
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:55:28.430
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:55:28.433
+!MESSAGE Clearing problems for /SISSearchWrapper.java
+!SESSION 2019-05-03 08:56:43.680 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:56:44.480
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:56:45.851
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:56:46.013
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:56:46.046
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:56:46.047
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:56:46.122
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.138
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.166
+!MESSAGE Workspace initialized in 30839ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.170
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.177
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.191
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.193
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.254
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/SISSearchImpl.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.499
+!MESSAGE >> document/didChange
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.788
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.798
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.800
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:17.803
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:18.028
+!MESSAGE Reconciled 0. Took 59 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:18.543
+!MESSAGE begin problem for /SISSearchImpl.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:18.544
+!MESSAGE 0 problems reported for /SISSearchImpl.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:18.544
+!MESSAGE Validated 1. Took 114 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:30.415
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:30.757
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:32.066
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:32.729
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:33.053
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:33.550
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:34.173
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:35.004
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:36.460
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:36.861
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:41.799
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:43.268
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:51.267
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:57:54.390
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:00.761
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:03.117
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:03.119
+!MESSAGE Clearing problems for /SISSearchImpl.java
+!SESSION 2019-05-03 08:58:19.737 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:58:20.419
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:21.735
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:21.908
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:21.940
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:21.942
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:21.970
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.104
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.133
+!MESSAGE Workspace initialized in 30936ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.195
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.211
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.229
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.230
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.276
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/validation/RequestValidator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.512
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.521
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.523
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.524
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:53.744
+!MESSAGE Reconciled 0. Took 29 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.194
+!MESSAGE begin problem for /RequestValidator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.195
+!MESSAGE XXX Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.196
+!MESSAGE TODO Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.197
+!MESSAGE XXX Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.197
+!MESSAGE TODO Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.198
+!MESSAGE XXX Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.198
+!MESSAGE TODO Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.199
+!MESSAGE XXX Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.199
+!MESSAGE TODO Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.200
+!MESSAGE XXX Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.200
+!MESSAGE TODO Actually Validate! is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.201
+!MESSAGE 10 problems reported for /RequestValidator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:54.202
+!MESSAGE Validated 1. Took 57 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:58.379
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:58:59.291
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:00.180
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:02.868
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:03.397
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:04.595
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:24.184
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:24.642
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:25.098
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:25.594
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:26.030
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:27.037
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:27.490
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:28.504
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:30.258
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:30.260
+!MESSAGE Clearing problems for /RequestValidator.java
+!SESSION 2019-05-03 08:59:56.093 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 08:59:56.794
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:58.159
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:58.309
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:58.339
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:58.340
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 08:59:58.369
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.689
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.716
+!MESSAGE Workspace initialized in 31106ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.795
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.800
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.811
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.813
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:29.875
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/SearchDAO.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.203
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.211
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.213
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.215
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.369
+!MESSAGE Reconciled 0. Took 49 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.912
+!MESSAGE begin problem for /SearchDAO.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.912
+!MESSAGE 0 problems reported for /SearchDAO.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:30.912
+!MESSAGE Validated 1. Took 91 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:32.138
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:39.744
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:42.717
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:00:59.067
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:01:02.462
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:01:25.874
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:01:57.790
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:02:07.098
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:02:11.874
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:02:48.722
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:04.809
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:13.264
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:20.261
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:46.336
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:47.183
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:49.022
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:54.468
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:03:58.474
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:04:02.146
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:25.754
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:26.881
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:28.630
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:30.555
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:36.905
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:37.403
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:39.144
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:39.526
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:05:40.305
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:02.191
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:02.194
+!MESSAGE Clearing problems for /SearchDAO.java
+!SESSION 2019-05-03 09:06:16.746 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:06:17.441
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:18.636
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:18.748
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:18.776
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:18.777
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:18.805
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:06:48.785 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:06:49.500
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:50.652
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:50.753
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:50.776
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:50.777
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:06:50.796
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:07:01.676 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:07:02.396
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:07:03.594
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:07:03.696
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:07:03.719
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:07:03.720
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:07:03.741
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:09:12.629 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:09:13.361
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:09:14.502
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:09:14.606
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:09:14.630
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:09:14.631
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:09:14.652
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:10:29.298 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:10:30.033
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:10:31.175
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:10:31.282
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:10:31.305
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:10:31.306
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:10:31.328
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.484
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.525
+!MESSAGE Workspace initialized in 31209ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.606
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.620
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.641
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.643
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:02.770
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/generated/service/src/net/msi/schema/services/sisSearch/SearchParametersType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:03.280
+!MESSAGE Reconciled 0. Took 56 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:03.790
+!MESSAGE begin problem for /SearchParametersType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:03.790
+!MESSAGE 0 problems reported for /SearchParametersType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:03.794
+!MESSAGE Validated 1. Took 112 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:04.837
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:04.844
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:04.846
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:04.847
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:12.865
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:12.869
+!MESSAGE Clearing problems for /SearchParametersType.java
+!SESSION 2019-05-03 09:11:18.336 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:11:19.154
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:20.357
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:20.490
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:20.521
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:20.522
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:20.552
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.023
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.049
+!MESSAGE Workspace initialized in 30760ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.146
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.155
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.170
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.171
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.244
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISSearch/generated/service/src/net/msi/schema/services/sisSearch/SearchParameterType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:52.766
+!MESSAGE Reconciled 0. Took 76 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.262
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.273
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.275
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.278
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.292
+!MESSAGE begin problem for /SearchParameterType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.293
+!MESSAGE 0 problems reported for /SearchParameterType.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:53.293
+!MESSAGE Validated 1. Took 119 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:11:56.741
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:01.057
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:04.569
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:26.302
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:50.224
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:53.731
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:54.960
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:12:54.962
+!MESSAGE Clearing problems for /SearchParameterType.java
+!SESSION 2019-05-03 09:16:01.255 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:16:01.969
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:03.190
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:03.322
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:03.352
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:03.353
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:03.381
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:16:25.357 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:16:26.056
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:27.230
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:27.331
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:27.353
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:27.354
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:16:27.371
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:17:06.690 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:17:07.428
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:08.663
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:08.773
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:08.793
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:08.794
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:08.814
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:17:22.108 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:17:22.853
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:24.079
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:24.190
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:24.214
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:24.215
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:24.234
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.097
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.132
+!MESSAGE Workspace initialized in 30909ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.223
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.230
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.243
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.244
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.328
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colinryan/projects/SIS/modules/SISCore/src/net/msi/sis/core/services/Properties.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.936
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.946
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.947
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.949
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:55.953
+!MESSAGE Reconciled 0. Took 33 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:56.412
+!MESSAGE begin problem for /Properties.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:56.413
+!MESSAGE 0 problems reported for /Properties.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:56.413
+!MESSAGE Validated 1. Took 59 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:58.375
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:17:58.378
+!MESSAGE Clearing problems for /Properties.java
+!SESSION 2019-05-03 09:18:20.510 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:18:21.238
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:22.527
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:22.681
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:22.712
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:22.714
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:22.735
+!MESSAGE >> initialized
+!SESSION 2019-05-03 09:18:52.171 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 09:18:52.914
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:54.172
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:54.276
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:54.296
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:54.296
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 09:18:54.317
+!MESSAGE >> initialized
+!SESSION 2019-05-03 14:30:04.081 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.3
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_79afa71e1e80f579909e374d93a5365f
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-05-03 14:30:04.888
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 14:30:06.071
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 14:30:06.164
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 14:30:06.190
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 14:30:06.191
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-05-03 14:30:06.211
+!MESSAGE >> initialized

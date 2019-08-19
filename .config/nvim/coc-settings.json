@@ -1,0 +1,17 @@
+{
+    "languageserver": {
+        "phplang": {
+           "command": "php",
+           "args": ["vendor/felixfbecker/language-server/bin/php-language-server.php"],
+           "filetypes": ["php"]
+        },
+        "bash": {
+           "command": "bash-language-server",
+           "filetypes": ["sh"],
+           "args": ["start"]
+        }
+        
+    },
+    "diagnostic.displayByAle": true   
+}
+

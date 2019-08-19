@@ -1,0 +1,33 @@
+{
+  "location": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolinryan%2Fprojects%2FSIS%2Fmodules%2FSISClient": [
+      "MyLa"
+    ],
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "test"
+      ]
+    }
+  },
+  "diagnostics": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2FSIS%2Fmodules%2FSISClient": [
+        "     "
+      ]
+    }
+  },
+  "folders": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "cats"
+      ]
+    }
+  },
+  "outline": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "next"
+      ]
+    }
+  }
+}

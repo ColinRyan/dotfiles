@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+/home/colin/.config/coc/extensions/coc-java-data/jdt_ws_d8319def04d66b5d071ab2398a001c10/.metadata/.plugins/org.eclipse.jdt.core
+1934181126.index
+563658094.index
+2325170986.index
+3842426239.index

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>jdt.ls-java-project</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>src/net/msi/sis/test/search/SISSearchTest.java</name>
+			<type>1</type>
+			<location>//mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/test/search/SISSearchTest.java</location>
+		</link>
+		<link>
+			<name>src/net/msi/sis/services/search/executesearch/wfssearch/WFSResponseProcessor.java</name>
+			<type>1</type>
+			<location>//mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSResponseProcessor.java</location>
+		</link>
+		<link>
+			<name>src/net/msi/sis/services/search/executesearch/wfssearch/WFSSearchRunner.java</name>
+			<type>1</type>
+			<location>//mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSSearchRunner.java</location>
+		</link>
+		<link>
+			<name>src/net/msi/sis/services/search/executesearch/wfssearch/WFSXMLGenerator.java</name>
+			<type>1</type>
+			<location>//mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSXMLGenerator.java</location>
+		</link>
+	</linkedResources>
+</projectDescription>

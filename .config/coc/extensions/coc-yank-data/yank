@@ -1,0 +1,359 @@
+0f5264038205edfb1ac05fbb0e8c5e94|file:///home/colin/.vim/bundle/vim-taggatron/autoload/taggatron.vim|214|22|v|vim
+	long
+b45cffe084dd3d20d928bee85e7b0f21|file:///home/colin/.vim/bundle/vim-taggatron/autoload/taggatron.vim|285|14|v|vim
+	string
+c9303e3cc0dcd0d68fb1f8622353df4e|file:///home/colin/.vim/bundle/vim-taggatron/autoload/taggatron.vim|285|25|v|vim
+	line, 
+2c4634dd2a0293c11f87044b3320532c|file:///home/colin/.vim/bundle/vim-taggatron/autoload/taggatron.vim|291|1|V|vim
+	   def stripTags(self, tagsFile, sources):
+	      AutoTag.LOGGER.info("Stripping tags for %s from tags file %s", ",".join(sources), tagsFile)
+	      backup = ".SAFE"
+	      input = fileinput.FileInput(files=tagsFile, inplace=True, backup=backup)
+	      try:
+	         for l in input:
+	            l = l.strip()
+	            if self.goodTag(l, sources):
+	               print l
+	      finally:
+	         input.close()
+	         try:
+	            os.unlink(tagsFile + backup)
+	         except StandardError:
+	            pass
+b29c083e232808f3a71f8ae95b626bef|file:///home/colin/.config/nvim/coc-settings.json|15|5|V|jsonc
+	    :
+b52dfe3423014cf2da575dcf8c3a0ac7|file:///home/colin/.config/nvim/coc-settings.json|15|5|V|jsonc
+	    "": "",
+0cf31b2c283ce3431794586df7b0996d|file:///home/colin/.config/nvim/coc-settings.json|15|1|V|jsonc
+	    
+7957699f49f32c255e647f7b985ea67e|file:///home/colin/.config/nvim/coc-settings.json|15|6|v|jsonc
+	coc.
+81980821a950113eb8fc945216a17569|file:///home/colin/.config/nvim/coc-settings.json|15|1|v|jsonc
+	    "preferences": {
+	        "diagnostic": {
+	           "displayByAle": true
+	           
+	        }
+	        
+	    }
+	
+64056f34921d86431f7fe57687fc5ac9|file:///home/colin/.config/nvim/coc-settings.json|15|1|v|jsonc
+	    {
+	        
+	    }
+	
+b4d1607f06375a79121cb5f3b8fc7b75|file:///home/colin/.config/nvim/coc-settings.json|15|1|v|jsonc
+	    "": {
+	       
+	    },
+	
+68934a3e9455fa72420237eb05902327|file:///home/colin/.config/nvim/coc-settings.json|15|29|v|jsonc
+	false
+6d7e423e99befb791a7db6ae51126747|file:///home/colin/.config/nvim/init.vim|269|34|v|vim
+	ctags
+7839fab6767c3ef52ef1c9586178b3cb|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/StandardUserInterface/StandardUserInterface.jsx|193|37|V|javascriptreact
+	                                    <LayersExplorerWindow terria={terria} viewState={this.props.viewState}/>
+4e38ab7d47e3ac269f477735e967fa70|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/StandardUserInterface/StandardUserInterface.jsx|6|1|V|javascriptreact
+	import LayersExplorerWindow from '../LayerExplorerWindow/LayerExplorerWindow';
+69d11dd2a9f1a436c850adde0c764bf6|file:///home/colin/.bashrc|58|1|V|sh
+	export NODE_ENV=development
+4f13e1a2738a9c270c72a7e341875409|file:///home/colin/.bashrc|58|8|v|sh
+	NODE_ENV
+759b74ce43947f5f4c91aeddc3e5bad3|file:///home/colin/.bashrc|58|17|v|sh
+	development
+c431ff2f4897e6d484fa326e707ebca6|file:///home/colin/.bashrc|58|1|V|sh
+	export JDK_HOME="/usr/lib/jvm/java-12-openjdk"
+7c1fc4afe75075f4adbab4a89e12f161|file:///home/colin/.bashrc|59|1|V|sh
+	export JAVA_HOME="/usr/lib/jvm/java-12-openjdk/"
+1da582cf6aef8875b78300f858dffe68|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/index.js|4|1|v|javascriptreact
+	const cats  = [
+	   
+	].map(() => {
+	
+428abe57ac4fe06a64ab5a41416ac50e|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/LayerExplorerWindow/LayerItem.jsx|5|1|V|javascriptreact
+	import * as R from "ramda";
+d5496515667f47ec38ca368df5a7c2e6|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|1|1|V|javascriptreact
+	// # Imports
+	
+	
+	import * as R from "ramda"; 
+	
+	import React from 'react';
+	import createReactClass from 'create-react-class';
+	import PropTypes from 'prop-types';
+	import addedByUser from 'terriajs/lib/Core/addedByUser';
+	import CatalogGroup from './CatalogGroup';
+	import DataCatalogMember from './DataCatalogMember';
+	import getAncestors from 'terriajs/lib/Models/getAncestors';
+	import ObserveModelMixin from 'terriajs/lib/ReactViews/ObserveModelMixin';
+	
+	const DataCatalogGroup = createReactClass({
+	  displayName: 'DataCatalogGroup',
+	  mixins: [ObserveModelMixin],
+	
+	  propTypes: {
+	    group: PropTypes.object.isRequired,
+	    searchText: PropTypes.string.isRequired,
+	    viewState: PropTypes.object.isRequired,
+	    /** Overrides whether to get the open state of the group from the group model or manage it internally */
+	    manageIsOpenLocally: PropTypes.bool,
+	    userData: PropTypes.bool
+	  },
+	
+	  getDefaultProps() {
+	    return {
+	      manageIsOpenLocally: false,
+	      userData: false
+	    };
+	  },
+	
+	  getInitialState() {
+	    return {
+	      /** Only used if manageIsOpenLocally === true */
+	      isOpen: false
+	    };
+	  },
+	
+	  toggleStateIsOpen() {
+	    this.setState({
+	      isOpen: !this.state.isOpen
+	    });
+	  },
+	
+	  // # Methods
+	
+	  isOpen() {
+	    if (this.props.manageIsOpenLocally) {
+	      return this.state.isOpen;
+	    }
+	    return this.props.group.isOpen;
+	  },
+	
+	  toggleOpen() {
+	    if (this.props.manageIsOpenLocally) {
+	      this.toggleStateIsOpen();
+	    }
+	    this.props.group.toggleOpen();
+	  },
+	
+	  clickGroup() {
+	    this.toggleOpen();
+	    this.props.viewState.viewCatalogMember(this.props.group);
+	  },
+	
+	  isTopLevel() {
+	    const parent = this.props.group.parent;
+	    return !parent || !parent.parent;
+	  },
+	
+	  isSelected() {
+	    return addedByUser(this.props.group) ?
+	        this.props.viewState.userDataPreviewedItem === this.props.group :
+	        this.props.viewState.previewedItem === this.props.group;
+	  },
+	
+	  // # Lifecycle
+	
+	  render() {
+	    const group = this.props.group;
+	    return (
+	        <CatalogGroup
+	            text={group.nameInCatalog}
+	            searchText={this.props.searchText}
+	            pageLimit={this.props.viewState.terria.configParameters.pageLimit}
+	            title={getAncestors(group).map(member => member.nameInCatalog).join(' → ')}
+	            topLevel={this.isTopLevel()}
+	            open={this.isOpen()}
+	            loading={group.isLoading}
+	            emptyMessage='This group is empty'
+	            onClick={this.clickGroup}
+	            selected ={this.isSelected()}>
+	          <If condition={this.isOpen()}>
+	              <For each='item' of={group.items.filter(o => {
+	                    if (o.typeName === 'Collection') {
+	                        return false;
+	                    }
+	
+	                    if (o.items !== undefined) {
+	                        return true;
+	                    }
+	
+	                    if (R.test(new RegExp(this.props.searchText, "i"), o.name)) {
+	                        return true;
+	                    }
+	                    
+	                    return false;
+	                    
+	              }).reverse()}>
+	              <DataCatalogMember
+	                  key={item.uniqueId}
+	                  member={item}
+	                  searchText={this.props.searchText}
+	                  viewState={this.props.viewState}
+	                  userData={this.props.userData}
+	                  overrideOpen={this.props.manageIsOpenLocally}
+	              />
+	            </For>
+	          </If>
+	        </CatalogGroup>
+	    );
+	  },
+	});
+	
+	export default DataCatalogGroup;
+5f9e34c4d9cbd15a346720893f6921cb|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogList.jsx|1|1|V|javascriptreact
+	// # Imports
+	
+	import React from 'react';
+	import PropTypes from 'prop-types';
+	
+	
+	
+	class 
+	Hextends React.Component {
+	
+	
+	   constructor(props) {
+	       super(props);
+	
+	       this.state = {}
+	   }
+	
+	    // # Methods
+	
+	    // # Lifecycle
+	
+	    render() {
+	
+	        return ()
+	    }
+	
+	}
+	
+	.propTypes = {
+	    
+	}
+	
+	export default 
+03937134cedab9078be39a77ee3a48a0|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogList.jsx|15|18|v|javascriptreact
+	Group
+0da60f591506684680cc9a1b09f73756|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|51|1|v|javascriptreact
+	    flattenGroup = () => {
+	        
+	    }
+	
+e9f1dc945634b3a96d7c5f528e7c8cf8|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|52|1|v|javascriptreact
+	        return R.map((item) => {
+	           return 
+	        
+	        })
+	
+b326b5062b2f0e69046810717534cb09|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|53|16|v|javascriptreact
+	true
+4b0696d0a16f6124e7f9edd38a1c1505|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|52|9|v|javascriptreact
+	flatten
+7bb0edd98f22430a03b67f853e83c2ca|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|57|8|V|javascriptreact
+	        
+a1fd57f4ed50c6a069928cda534bccef|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|52|30|v|javascriptreact
+	(item) => {
+	           if (item.isGroup) {
+	               return groupToArray(item.items)
+	           }
+	           return item
+	        }
+ccd1e4ca649e0e8a20716a6a7e5f0160|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|59|9|v|javascriptreact
+	groupToArray = 
+c1370f7e178accd2912266cd9ceab056|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|59|9|V|javascriptreact
+	        R.map()
+7363e72f436253f37eb57f4af47cc6b3|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|52|1|v|javascriptreact
+	        const collectAsList = (item) => {
+	           if (item.isGroup) {
+	               return groupToArray(item.items)
+	           }
+	           return item
+	        }
+	
+03e5bcdb27cc5b4142166b66183dd198|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|54|23|v|javascriptreact
+	groupToArray
+547c6680748f66ea0f6998a3c25b37f5|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|52|1|v|javascriptreact
+	        const reduceToList = (list, item) => {
+	           return (item.isGroup) ? reduceToList(list) : 
+	        
+	        }
+	
+47c617da89b92339894a290fd6c7faf0|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|65|11|v|javascriptreact
+	group.
+394474989eadc8345f128f1146d124e4|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|61|9|V|javascriptreact
+	        Sgr
+db0f6f37ebeb6ea09489124345af2a45|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|51|18|v|javascriptreact
+	group
+c1dcd5bf3e224bf986f3742ac86415f2|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|60|9|V|javascriptreact
+	        console.log("group.items", group.items);
+bc2a0e043fe08106cc2743f8079241eb|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|60|9|V|javascriptreact
+	        console.log("R.map", R.map);
+e6bc2a9f5b41e14cf7b0777b4a89e6c7|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|60|9|v|javascriptreact
+	return 
+fca822e1449f068bc56206e7095b38df|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|63|1|V|javascriptreact
+	            R.tap(console.log)
+ea91157c71457318891b08ff116ab387|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|55|42|v|javascriptreact
+	(item.items)
+3452d2877ff19e5e8cc7112ea4940e18|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|62|9|V|javascriptreact
+	            R.tap(console.log),
+c84505fe6f4e894957391aee53e2b491|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|114|36|v|javascriptreact
+	this.flattenGroup
+f449825c0f530afe8137db0eb5bfb3c2|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|114|36|v|javascriptreact
+	group.items.
+e267c99f9a6835d71b9e5c4ceb31688f|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|129|40|v|javascriptreact
+	.items
+c649b75d2a0076ed6460dea2a1198380|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|111|13|V|javascriptreact
+	            onClick={this.clickGroup}
+7eef1555f49590fc8f241c354b39d688|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|103|13|V|javascriptreact
+	            text={group.nameInCatalog}
+b52812e09e1cd37f6809cde56efba0aa|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/data-catalog-group.scss|6|11|v|scss
+	data-catalog-color
+9df22f196a33acd0b372fe502de51211|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|35|15|v|scss
+	auto
+5187263fbc0a1c1f4aed6506b82293bb|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|35|3|V|scss
+	  height:100%;
+1d5e5023addcc5543762188ecd4fd656|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|32|3|V|scss
+	  position: relative;
+ea4392f94170929295a6ca614f9dbf35|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|35|3|V|scss
+	  padding: 0 $padding-small;
+64c1cf9bfca6cc38355c9b5f249d6525|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|34|3|V|scss
+	  width: 100%;
+b854741ff7b66f02127341d5bd7cd854|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench.scss|5|3|V|scss
+	  height: 100%;
+07d2585a2de1eb054dbdf04a4403c29e|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/WorkbenchListMapLayers.jsx|97|21|V|javascriptreact
+	                    <div>
+6efe362b97f90a358613aaa247d914a6|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/WorkbenchListMapLayers.jsx|131|1|V|javascriptreact
+	                    </div>
+58286f798d7c6b340414ae999c916ae1|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|9|1|V|scss
+	  display: flex;
+	  flex-direction: column;
+	  height: 100%;
+	  background: rgb(45, 52, 54);
+	  border: 1px solid rgb(83, 88, 90);
+	  padding: $padding-small;
+	  color: white;
+05d8fe6f63c9fa98d6d2e8a67535c4e8|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|5|3|V|scss
+	    display
+3e74a5f74a42a3feef97b1a9886dc236|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|21|3|V|scss
+	  color: white;
+1f90f9ed5520bbf7e31c47fe73d81c17|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|19|1|V|scss
+	  border: 1px solid rgb(83, 88, 90);
+a69f36628e902217fe7b7291b1266f2c|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|18|3|V|scss
+	  background: rgb(45, 52, 54);
+30bd7ce7de206924302499f197c7a966|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|7|11|v|scss
+	100%
+d3de6e42e232899825cf7bfc098f905e|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/DataCatalog/DataCatalogGroup.jsx|103|19|v|javascriptreact
+	group.nameInCatalog
+f701c49f578b5d443b92dfd9b346c6b4|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/workbench-list.scss|41|3|V|scss
+	  display: flex;
+621e80b192ac500bdeb612e6d97d557b|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/LayerExplorerWindow/LayerItem.jsx|14|29|v|javascriptreact
+	terriajs/lib/ReactViews/
+51fff6d53f28670153a6a485f3a1cff0|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/Controls/opacity-section.scss|6|3|V|scss
+	  border-bottom: 1px solid $border-color;
+ef9af71169308eefce5fba776484cbdb|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/Controls/opacity-section.scss|12|5|V|scss
+	    float: left;
+cb728dc067174b9218873292273f0a73|file:///mnt/c/Users/colin.ryan/projects/sis-front-end/Client/lib/Components/Workbench/Controls/opacity-section.scss|11|5|V|scss
+	    margin-right: $padding-small;

@@ -1,0 +1,540 @@
+!SESSION 2019-07-11 14:28:51.552 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=12.0.1
+java.vendor=N/A
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_d8319def04d66b5d071ab2398a001c10
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:02.480
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:03.101
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:03.231
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:03.236
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:03.374
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:03.605
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-11 14:29:04.278
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+!SESSION 2019-07-12 08:39:01.259 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=12.0.1
+java.vendor=N/A
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/colin/.config/coc/extensions/coc-java-data/jdt_ws_d8319def04d66b5d071ab2398a001c10
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:02.970
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.090
+!MESSAGE Main thread is waiting
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.109
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.110
+!MESSAGE Initializing Java Language Server 0.38.0.201905012307
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.129
+!MESSAGE >> initialized
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.153
+!MESSAGE Creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:39:03.247
+!MESSAGE Finished creating the Java project jdt.ls-java-project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.714
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.795
+!MESSAGE Workspace initialized in 107675ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.829
+!MESSAGE >> initialization job finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.836
+!MESSAGE >> workspace/didChangeConfiguration
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.849
+!MESSAGE >>New configuration: {java={jdt={ls={vmargs=-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication}}, errors={incompleteClasspath={severity=warning}}, configuration={checkProjectSettingsExclusions=true, updateBuildConfiguration=interactive}, trace={server=off}, import={gradle={enabled=true}, maven={enabled=true}, exclusions=[**/node_modules/**, **/.metadata/**, **/archetype-resources/**, **/META-INF/maven/**]}, referencesCodeLens={enabled=false}, signatureHelp={enabled=false}, implementationsCodeLens={enabled=false}, format={enabled=true, comments={enabled=true}, onType={enabled=true}}, autobuild={enabled=true}, maxConcurrentBuilds=1.0, completion={enabled=true, overwrite=true, guessMethodArguments=false, favoriteStaticMembers=[org.junit.Assert.*, org.junit.Assume.*, org.junit.jupiter.api.Assertions.*, org.junit.jupiter.api.Assumptions.*, org.junit.jupiter.api.DynamicContainer.*, org.junit.jupiter.api.DynamicTest.*, org.mockito.Mockito.*, org.mockito.ArgumentMatchers.*, org.mockito.Answers.*], importOrder=[java, javax, com, org]}, progressReports={enabled=true}, foldingRange={enabled=true}, maven={downloadSources=false}, codeGeneration={hashCodeEquals={useJava7Objects=false, useInstanceof=false}, useBlocks=false, generateComments=false, toString={template=${object.className} [${member.name()}=${member.value}, ${otherMembers}], codeStyle=STRING_CONCATENATION, skipNullValues=false, listArrayContents=true, limitElements=0.0}}}}
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.852
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:50.975
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:51.549
+!MESSAGE Reconciled 0. Took 103 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:51.845
+!MESSAGE >> build jobs finished
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:51.854
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:51.855
+!MESSAGE >> registerFeature 'workspace/didChangeWatchedFiles'
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:51.857
+!MESSAGE >> watchers registered
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.104
+!MESSAGE begin problem for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.106
+!MESSAGE XXX Hardcoded check for datatypes, is there a better way to do this? is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.107
+!MESSAGE TODO: Deal with null here. Don't want to set null result values; is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.108
+!MESSAGE TODO: remove hard coded description deal is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.108
+!MESSAGE XXX:4326"+"\""+">"+ is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.109
+!MESSAGE TODO: decide how to deal with null values in results is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.109
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.110
+!MESSAGE 6 problems reported for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:40:52.111
+!MESSAGE Validated 1. Took 161 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:15.935
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:26.284
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:39.421
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:39.432
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:39.885
+!MESSAGE Reconciled 0. Took 42 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.446
+!MESSAGE begin problem for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.447
+!MESSAGE TODO is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.449
+!MESSAGE TODO Auto-generated method stub is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.450
+!MESSAGE 2 problems reported for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.523
+!MESSAGE begin problem for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.524
+!MESSAGE XXX Hardcoded check for datatypes, is there a better way to do this? is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.524
+!MESSAGE TODO: Deal with null here. Don't want to set null result values; is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.525
+!MESSAGE TODO: remove hard coded description deal is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.525
+!MESSAGE XXX:4326"+"\""+">"+ is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.526
+!MESSAGE TODO: decide how to deal with null values in results is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.526
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.527
+!MESSAGE 6 problems reported for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:40.527
+!MESSAGE Validated 2. Took 241 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:46.334
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:54.163
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:56.877
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:41:57.877
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:42:40.145
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:42:41.307
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:26.680
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:28.145
+!MESSAGE >> document/references
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:37.529
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:41.982
+!MESSAGE >> document/references
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:49.728
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:55.787
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:44:57.663
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:01.698
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:02.119
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:02.436
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:44.370
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:44.982
+!MESSAGE >> document/definition
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:45:46.374
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:23.220
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:25.016
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:31.479
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:41.002
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:42.389
+!MESSAGE >> document/definition
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:43.765
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:46.195
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:47.076
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:48.066
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:48.613
+!MESSAGE >> document/definition
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:49.000
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:53.184
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:53.911
+!MESSAGE >> document/definition
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:54.406
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:46:55.722
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:02.348
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:02.360
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/services/search/executesearch/wfssearch/WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:02.799
+!MESSAGE Reconciled 0. Took 29 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.448
+!MESSAGE begin problem for /WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.449
+!MESSAGE TODO: figure out how to do this using instanceof is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.449
+!MESSAGE TODO: Some supported operators have not been implemented yet. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.450
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.450
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.451
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.452
+!MESSAGE TODO: Fix this to use instanceof is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.452
+!MESSAGE TODO: Support other data types. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.453
+!MESSAGE TODO: This seems a little hackish but it works. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.453
+!MESSAGE TODO: Implement the geometry value stuff. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.454
+!MESSAGE TODO: hit csw to get the required fields here so they can be added to the query. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.455
+!MESSAGE TODO Is there a nicer way to do this? This seems like a hack to me. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.455
+!MESSAGE 11 problems reported for /WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.490
+!MESSAGE begin problem for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.491
+!MESSAGE TODO is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.492
+!MESSAGE TODO Auto-generated method stub is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.492
+!MESSAGE 2 problems reported for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.553
+!MESSAGE begin problem for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.554
+!MESSAGE XXX Hardcoded check for datatypes, is there a better way to do this? is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.555
+!MESSAGE TODO: Deal with null here. Don't want to set null result values; is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.555
+!MESSAGE TODO: remove hard coded description deal is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.556
+!MESSAGE XXX:4326"+"\""+">"+ is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.556
+!MESSAGE TODO: decide how to deal with null values in results is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.557
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.557
+!MESSAGE 6 problems reported for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:03.558
+!MESSAGE Validated 3. Took 306 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:05.392
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:06.849
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:11.623
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:11.969
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:14.696
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:21.671
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:47:50.987
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:48:02.061
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:48:16.283
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-12 08:48:23.160
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-15 07:29:24.020
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-15 07:29:28.555
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:09.381
+!MESSAGE >> document/didOpen
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:09.404
+!MESSAGE Classpath is incomplete. Only syntax errors will be reported for file:///mnt/c/Users/colin.ryan/projects/SIS/modules/SISSearch/src/net/msi/sis/test/search/SISSearchTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:09.850
+!MESSAGE Reconciled 0. Took 33 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.525
+!MESSAGE begin problem for /WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.526
+!MESSAGE TODO: figure out how to do this using instanceof is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.527
+!MESSAGE TODO: Some supported operators have not been implemented yet. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.528
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.529
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.530
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.531
+!MESSAGE TODO: Fix this to use instanceof is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.532
+!MESSAGE TODO: Support other data types. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.533
+!MESSAGE TODO: This seems a little hackish but it works. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.534
+!MESSAGE TODO: Implement the geometry value stuff. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.535
+!MESSAGE TODO: hit csw to get the required fields here so they can be added to the query. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.536
+!MESSAGE TODO Is there a nicer way to do this? This seems like a hack to me. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.537
+!MESSAGE 11 problems reported for /WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.596
+!MESSAGE begin problem for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.597
+!MESSAGE TODO is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.599
+!MESSAGE TODO Auto-generated method stub is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.600
+!MESSAGE 2 problems reported for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.653
+!MESSAGE begin problem for /SISSearchTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.654
+!MESSAGE TODO Auto-generated constructor stub is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.655
+!MESSAGE TODO: assert something. is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.656
+!MESSAGE TODO : Fill in the getSearchOptionsRequest92 here is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.657
+!MESSAGE TODO : Fill in the executeSearchRequest94 here is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.658
+!MESSAGE TODO : Fill in the getSearchStatusRequest96 here is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.658
+!MESSAGE TODO : Fill in the getSearchResultRequest98 here is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.659
+!MESSAGE 6 problems reported for /SISSearchTest.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.723
+!MESSAGE begin problem for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.725
+!MESSAGE XXX Hardcoded check for datatypes, is there a better way to do this? is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.726
+!MESSAGE TODO: Deal with null here. Don't want to set null result values; is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.727
+!MESSAGE TODO: remove hard coded description deal is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.728
+!MESSAGE XXX:4326"+"\""+">"+ is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.728
+!MESSAGE TODO: decide how to deal with null values in results is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.729
+!MESSAGE TODO Auto-generated catch block is of type Task
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.729
+!MESSAGE 6 problems reported for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:10.730
+!MESSAGE Validated 4. Took 474 ms
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:11.566
+!MESSAGE >> document/documentHighlight
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.240
+!MESSAGE >> document/willSaveWaitUntil
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.259
+!MESSAGE >> document/didSave
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.284
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.287
+!MESSAGE Clearing problems for /WFSResponseProcessor.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.294
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.297
+!MESSAGE Clearing problems for /WFSSearchRunner.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.301
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.304
+!MESSAGE Clearing problems for /WFSXMLGenerator.java
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.311
+!MESSAGE >> document/didClose
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2019-07-16 08:59:13.313
+!MESSAGE Clearing problems for /SISSearchTest.java

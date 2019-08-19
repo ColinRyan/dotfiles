@@ -10,6 +10,9 @@ call vundle#begin()
 " Plugins
 
 
+Plugin 'liuchengxu/vista.vim' 
+
+
 Plugin 'ColinRyan/sin' 
 
 Plugin 'fvictorio/vim-extract-variable'
@@ -259,6 +262,12 @@ Plugin 'w0rp/ale'
 
 "Plugin 'neomake/neomake'
 
+
+
+" VISTA
+
+let g:vista_default_executive = 'coc'
+
 let g:sneak#label = 1
 
 let javaScript_plugin_flow = 1
@@ -503,6 +512,8 @@ onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 
 " nmap <leader>ss $%
 
+let b:coc_root_patterns = ['.git', '.env']
+
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
@@ -550,12 +561,26 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "<C-y>" : "\<C-g>u\<CR>"
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gd :call CocAction("jumpDefinition") <bar> normal -gr<cr>
+nmap <silent> gd :call CocAction("jumpDefinition")<cr>
 nmap <silent> gr <Plug>(coc-references)
 
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 nnoremap <leader>av :AV<cr>
 nnoremap <leader>aa :A<cr>  
@@ -750,8 +775,8 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 
 " make a split and switch to it
-nnoremap <leader>v :vnew<CR>
-nmap <leader>V :vnew<CR><C-f>
+nnoremap <leader>V :vnew<CR>
+nmap <leader>v :vnew<CR><C-f>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -940,6 +965,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
 
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Color 
 
