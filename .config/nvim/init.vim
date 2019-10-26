@@ -10,8 +10,9 @@ call vundle#begin()
 " Plugins
 
 
-Plugin 'liuchengxu/vista.vim' 
+" Plugin 'OmniSharp/omnisharp-vim' 
 
+Plugin 'liuchengxu/vista.vim' 
 
 Plugin 'ColinRyan/sin' 
 
@@ -97,7 +98,7 @@ Plugin 'otheree/jspc.vim'
 
 Plugin 'poetic/vim-textobj-javascript'
 
-Plugin 'thinca/vim-textobj-function-javascript'
+" Plugin 'thinca/vim-textobj-function-javascript'
 
 Plugin 'whatyouhide/vim-textobj-xmlattr'
      
@@ -135,7 +136,7 @@ Plugin 'elzr/vim-json'
     
 " Plugin 'MaxMellon/vim-jsx-pretty'
     
-Plugin 'kana/vim-textobj-function'
+" Plugin 'kana/vim-textobj-function'
     
 Plugin 'kana/vim-textobj-user'
     
@@ -263,6 +264,13 @@ Plugin 'w0rp/ale'
 "Plugin 'neomake/neomake'
 
 
+" OmniSharp
+
+" Use ctrlp.vim
+let g:OmniSharp_selector_ui = 'ctrlp'  
+
+" Use the stdio version of OmniSharp-roslyn:
+let g:OmniSharp_server_stdio = 1
 
 " VISTA
 
@@ -315,7 +323,8 @@ let g:ale_linters = {
 \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
 \    'flow': ['eslint', 'flow', 'tsserver'],
 \    'json': [],
-\    'jsx': [ 'eslint', 'flow', 'tsserver']
+\    'jsx': [ 'eslint', 'flow', 'tsserver'],
+\    'cs': [ 'OmniSharp' ]
 \
 \}
 
@@ -533,8 +542,14 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Remap for do codeAction of selected region, ex: `<leader>acap` for current paragraph
-vmap <leader>ac  <Plug>(coc-codeaction-selected)
-nmap <leader>ac  <Plug>(coc-codeaction-selected)
+vmap <leader>ac  <Plug>(coc-codeaction-selected)<cr>
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -854,8 +869,8 @@ noremap <leader>i "ip
 nnoremap <C-Tab> :call toggle#Buffer()<CR>
 
 
-nnoremap <leader>b :<C-u>Denite buffer<CR>
-nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
+nnoremap <leader>b :<C-u>Denite buffer -split=floating<CR>
+nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer -split=floating<CR>
 
 " Config
 " Settings
@@ -1027,10 +1042,6 @@ augroup js
     autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
     " autocmd FileType javascript,typescript,json,jsx colorscheme sin
     autocmd FileType javascript,typescript,json,jsx colorscheme darcula
-    autocmd! BufEnter *.js,*jsx nnoremap [[ [m
-    autocmd! BufEnter *.js,*jsx nnoremap ]] ]m
-    autocmd! BufEnter *.js,*jsx nnoremap [m [[
-    autocmd! BufEnter *.js,*jsx nnoremap ]m ]] 
 
 augroup end
 
@@ -1277,9 +1288,28 @@ fun! MakePluginMappings()
     endif
     if exists(":Denite")
         
-        nnoremap <leader>eca :execute "Denite file/rec:" . "~/.config/nvim/after/ftplugin"<cr>
-        nnoremap <leader>ep :execute "Denite file/rec:" . "~/.config/nvim/autoload"<cr>
-        nnoremap <leader>es :execute "Denite file/rec:" . skeletons#skeletonsDir<cr>
+        nnoremap <leader>eca :execute "Denite -split=floating file/rec:" . "~/.config/nvim/after/ftplugin"<cr>
+        nnoremap <leader>ep :execute "Denite -split=floating file/rec:" . "~/.config/nvim/autoload"<cr>
+        nnoremap <leader>es :execute "Denite -split=floating file/rec:" . skeletons#skeletonsDir<cr>
+
+                " Define mappings
+        autocmd FileType denite call s:denite_my_settings()
+        function! s:denite_my_settings() abort
+          nnoremap <silent><buffer><expr> <CR>
+          \ denite#do_map('do_action')
+          nnoremap <silent><buffer><expr> d
+          \ denite#do_map('do_action', 'delete')
+          nnoremap <silent><buffer><expr> p
+          \ denite#do_map('do_action', 'preview')
+          nnoremap <silent><buffer><expr> <ESC>
+          \ denite#do_map('quit')
+          nnoremap <silent><buffer><expr> q
+          \ denite#do_map('quit')
+          nnoremap <silent><buffer><expr> i
+          \ denite#do_map('open_filter_buffer')
+          nnoremap <silent><buffer><expr> <Space>
+          \ denite#do_map('toggle_select').'j'
+        endfunction
     endif
 
     if exists(":NERDTreeToggle")

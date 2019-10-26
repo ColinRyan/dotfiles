@@ -1,0 +1,100 @@
+snippet ws "weekly sprint" Ab
+
+- Did we reach our goal? ${1:yes}
+
+What did we do?
+- $2
+
+What went well (key takeaways)?
+- $3
+
+What could have gone better (key takeaways)?
+- $4
+
+Synapsis:
+$5
+
+endsnippet
+snippet : "tag" Aw
+:${VISUAL}$1: $0
+endsnippet
+snippet pds "patientme daily sprint" Ab
+	
+Yesterday:
+
+- Number of micro sprints: $1
+- Did we reach our goal? ${2:yes}
+
+What did we do?
+- $6
+
+What went well (key takeaways)?
+- $7
+
+What could have gone better (key takeaways)?
+- $8
+
+Synapsis:
+$10
+
+Today:
+
+What are we going to work on?
+- $11
+
+What are we going to do different?
+- $12
+
+endsnippet
+
+snippet ds "daily sprint" Ab
+- Number of micro sprints: $1
+- Habits
+  - follow priorty list? ${2:yes}
+  - Listen to audio book? ${3:yes}
+  - Review audio book? ${4:yes}
+  - Meditate? ${5:yes}
+  - Exercise? ${6:yes}
+  - Clean? ${7:yes}
+  - Going to bed at 10:30? ${8:yes}
+  - Smack yourself when you're distracted? ${9:yes}
+- Distractions? ${9:0}
+What did we do?
+- $10
+
+What went well (key takeaways)?
+- $11
+
+What could gone better (and lessons learned)?
+- $12
+
+Synapsis:
+$13
+
+
+endsnippet
+
+snippet ms "micro sprint" Ab
+Focused? ${1:yes}
+Flow? ${2:no}
+VimFu? ${3:yes}
+Doing 
+- $4
+
+What went well (key takeaways)? 
+- $5
+
+What Could have gone Better (and lessons learned)?
+- $7
+
+
+Synapsis:
+$8
+
+What's next?
+- $9
+
+What will we do different?
+- $10
+
+endsnippet

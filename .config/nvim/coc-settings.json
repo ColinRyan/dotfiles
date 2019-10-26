@@ -12,6 +12,8 @@
         }
         
     },
-    "diagnostic.displayByAle": true   
+    "diagnostic.displayByAle": true,
+    "tsserver.implicitProjectConfig.checkJs": true,
+    "tsserver.implicitProjectConfig.experimentalDecorators": true
 }
 
