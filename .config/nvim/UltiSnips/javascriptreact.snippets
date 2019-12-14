@@ -1,3 +1,4 @@
+
 global !p
 
 def gotoViewStateProperties(name):
@@ -18,6 +19,15 @@ def onPreviousLine(snip, regex):
 def onNextLine(snip, regex):
     return re.search(regex, snip.buffer[snip.line+1])
 endglobal
+
+
+snippet us "useState"
+const [$1, $2] = React.useState($3)
+$0
+endsnippet
+snippet tp "this.props" Ai
+this.props.$0
+endsnippet
 
 post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
 snippet vs "ViewState Prop" Abi
@@ -63,7 +73,7 @@ return {
 endsnippet
 
 snippet cn "classname" Ai
-className={$1} $2
+className={${1:Styles.}} $2
 endsnippet
 
 snippet mm "method"
@@ -197,7 +207,7 @@ snippet '\((?!\))' "braces" Air
 endsnippet
 priority 3
 
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':') == None and onNextLine(snip, r':|},*')"
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
 snippet ' "nested quote"  A
 $1: '$2',
 $0
@@ -218,7 +228,7 @@ $1 : ($2) => {
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':') == None and onNextLine(snip, r'^ *}|:')"
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r'^ *}|:')"
 snippet " "nested string"  A
 $1: "$2",
 $0
@@ -378,7 +388,7 @@ context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) !=
 snippet ' "single quote"  Ab
 '$1',
 endsnippet
-snippet '"(?!")' "single quotes" Ar
+snippet "'(?!')" "single quotes" Ar
 '$1'
 endsnippet
 snippet '"(?!")' "double quotes" Ar

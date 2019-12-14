@@ -1,3 +1,25 @@
+snippet ive "if variable empty"
+if [[ ! -z $1 ]]; then
+    $2
+fi
+
+$0
+endsnippet
+	
+snippet ife "if file exists"
+if [[ -f $1 ]]; then
+    $2
+fi
+
+$0
+endsnippet
+snippet ifne "if file not exists"
+if [[ ! -f $1 ]]; then
+    $2
+fi
+
+$0
+endsnippet
 snippet u "usage"
 # Usage
 if [ $# -eq ${1:0} ]; then
