@@ -54,14 +54,6 @@ lt_blue=$(tput -Txterm setaf 6)
 bold=$(tput -Txterm bold)
 reset=$(tput -Txterm sgr0)
 
-# Nicely formatted terminal prompt
-export NODE_ENV=development
-export EDITOR=nvim
-export HISTCONTROL=ignoredups:erasedups 
-export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
-export GNOME_KEYRING_CONTROL=1
-export ANDROID_SDK=/opt/android-sdk
 
 # --- Source ---
 source ~/.bin/tmuxinator.bash
@@ -71,9 +63,18 @@ source ~/.bash_functions
 source ~/.bash_aliases
 # --- Exports --- 
 
-export PATH=$HOME/.gem/ruby/2.5.0/bin:/root/.gem/ruby/2.5.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin
+export PATH=$HOME/.gem/ruby/2.6.0/bin:/root/.gem/ruby/2.6.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export TERM="screen-256color"
+
+# Nicely formatted terminal prompt
+export NODE_ENV=development
+export EDITOR=nvim
+export HISTCONTROL=ignoredups:erasedups 
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
+export GNOME_KEYRING_CONTROL=1
+export ANDROID_SDK=/opt/android-sdk
 
 # --- Functions --- 
 
@@ -93,6 +94,7 @@ startTesting()
     if [[ -f artisan ]]; then
         ./vendor/bin/phpunit
     elif [[ -f package.json ]]; then
+        echo cats
         yarn test
     fi
 
@@ -103,14 +105,22 @@ startEditing()
 {
     if [ -f 'App.js' ]; then 
         nvim 'App.js'; 
+    elif [ -f 'App.tsx' ]; then 
+        nvim 'App.tsx'; 
     elif [ -f 'index.js' ]; then 
         nvim 'index.js'; 
-    elif [ -f 'index.js' ]; then 
-        nvim 'index.js'; 
+    elif [ -f 'index.tsx' ]; then 
+        nvim 'index.tsx'; 
     elif [ -f 'src/App.js' ]; then
         nvim 'src/App.js'
     elif [ -f 'src/index.js' ]; then
         nvim 'src/index.js'
+    elif [ -f 'src/index.tsx' ]; then
+        nvim 'src/index.tsx'
+    elif [ -f 'src/App.tsx' ]; then
+        nvim 'src/App.tsx'
+    elif [ -f 'generators/app/index.js' ]; then
+        nvim 'generators/app/index.js'
     else 
         nvim; 
     fi
@@ -137,23 +147,36 @@ mvp()
 
    if [ -z ${projectName//} ]; then
        echo "No project name given"
-       exit 1
+       return
    fi 
 
-   types=('react-native-js' 'react-web-js' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
+   types=('chrome-extension' 'generator' 'react-native-js' 'parcel-elm' 'react-web-js'
+   'react-web-clojure' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
    echo "Select a project type"
    projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
 
    if [ -z ${projectType//} ]; then
        echo "No project type selected."
+       return
    fi 
 
    cd ~/projects/
-   if [[ $projectType = "react-web" ]]; then
+   if [[ $projectType = "generator" ]]; then
        nvm use 11.6
-       create-react-app $projectName
+       yo generator
    fi
 
+   if [[ $projectType = "react-web-js" ]]; then
+       nvm use 11.6
+       yarn create react-app $projectName --typescript
+       amplify init
+       yarn add aws-amplify aws-amplify-react ramda partial.lenses flutures date-fns @material-ui/core
+   fi
+
+   if [[ $projectType = "parcel-elm" ]]; then
+       nvm use 11.6
+       elm-app-gen $projectName
+   fi
 
    if [[ $projectType = "parcel-js-vanilla" ]]; then
        nvm use 11.6
@@ -164,7 +187,15 @@ mvp()
 
    if [[ $projectType = "react-native-js" ]]; then
        nvm use 11.6
-       create-react-native-app $projectName
+       yarn create react-native-app $projectName
+   fi
+
+
+   if [[ $projectType = "chrome-extension" ]]; then
+       nvm use 11.6
+       mcd $projectName
+       yo chrome-extension
+       cd -
    fi
 
    if [[ $projectType = "laravel" ]]; then
@@ -189,7 +220,7 @@ mvp()
    fi
 
    if [[ $projectType = "react-web-clojure" ]]; then
-       //
+       lein new reagent-frontend $projectName
    fi
 
    mcd $projectName
@@ -686,3 +717,7 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash

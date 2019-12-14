@@ -1,6 +1,73 @@
-snippet mm "method"
+global !p
 
-$1($2) {
+def gotoViewStateProperties(name):
+    vim.command("normal gg")
+    vim.command('exe search("knockout.track")')
+    vim.command("normal zo")
+    vim.command("normal j")
+    snip.expand_anon("    '" + name + "',$0\n")
+    vim.command("normal ctrl+i")
+    vim.command("normal ctrl+o")
+
+def notTheEndOfFile(snip):
+    return len(snip.buffer) > snip.line+1 
+def onCurrentLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line])
+def onPreviousLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line-1])
+def onNextLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line+1])
+endglobal
+
+post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
+snippet vs "ViewState Prop" Abi
+this.$1 = $2
+$0
+endsnippet
+
+snippet intl "internationalizeation" i
+intl.formatMessage({id: '$1'})$2
+endsnippet
+snippet <b "button" Abi
+<button 
+  type='button'
+  onClick={${7:(e) => {
+    console.log("click")
+  }}}
+  className={Styles.${6:btn}}
+  disabled={${5:false}}
+  title={intl.formatMessage({
+    id: '${4:app.title}',
+    defaultMessage: '${3:DEFAULT TITLE}'
+  })}
+>
+  <FormattedMessage 
+    id='${2:app.message}' 
+	defaultMessage='${1:DEFAULT MESSAGE}'
+  />
+</button>
+
+endsnippet
+snippet oc "onClick"
+onClick={$1}$0
+endsnippet
+
+snippet S. "Styles" A
+Styles.$1
+endsnippet
+
+snippet r{ "return object" Abi
+return {
+    $1
+}
+endsnippet
+
+snippet cn "classname" Ai
+className={$1} $2
+endsnippet
+
+snippet mm "method"
+$1 = ($2) => {
     $3
 }
 $0
@@ -29,10 +96,11 @@ const $1 = document.createElement('$2')
 
 $0
 endsnippet
-snippet .ca "catch" Ai
-.catch((err) => {
-    log(err)
-})
+snippet ).ca "catch" Ai
+).catch((err) => {
+    console.error(err)
+});
+
 $0
 endsnippet
 snippet .th "then" Ai
@@ -83,18 +151,26 @@ endsnippet
 snippet rr "return" Ab
 return $0
 endsnippet
-snippet $ "template" "len(snip.buffer) > snip.line+1 and (re.search(r'`', snip.buffer[snip.line+1]) or re.search(r'`', snip.buffer[snip.line]))" Ae
+
+context "notTheEndOfFile(snip) and (onNextLine(snip, r'`') or onCurrentLine(snip,r'`'))"
+snippet $ "template"  A
 \${$1}$0
 endsnippet
-snippet ` "backtick" "len(snip.buffer) > snip.line+1 and re.search(r'^ *]', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
+snippet ` "backtick"  A
 \`${1:${VISUAL}}\`,
 $0
 endsnippet
-snippet ` "single quote" "len(snip.buffer) > snip.line+1 and re.search(r'^ *}$', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r'^ *}$', snip.buffer[snip.line+1])"
+snippet ` "single quote"  A
 $1: '$2',
 $0
 endsnippet
-snippet " "string" "len(snip.buffer) > snip.line+1 and re.search(r'^ *]', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
+snippet " "string"  A
 "${1:${VISUAL}}",
 $0
 endsnippet
@@ -120,43 +196,59 @@ snippet '\((?!\))' "braces" Air
 ($1)
 endsnippet
 priority 3
-snippet ' "nested quote" "len(snip.buffer) > snip.line+1 and re.search(r':', snip.buffer[snip.line]) == None and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':') == None and onNextLine(snip, r':|},*')"
+snippet ' "nested quote"  A
 $1: '$2',
 $0
 endsnippet
-snippet ` "nested backtick" "len(snip.buffer) > snip.line+1 and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
+snippet ` "nested backtick"  A
 $1: \`$2\`,
 $0
 endsnippet
-snippet fn "nested function" "len(snip.buffer) > snip.line+1 and re.search(r':|},*', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
+snippet fn "nested function"  A
 $1 : ($2) => {
    ${3:${VISUAL}}
 
 },
 $0
 endsnippet
-snippet " "nested string" "len(snip.buffer) > snip.line+1 and re.search(r':', snip.buffer[snip.line]) == None and re.search(r'^ *}|:', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':') == None and onNextLine(snip, r'^ *}|:')"
+snippet " "nested string"  A
 $1: "$2",
 $0
 endsnippet
-snippet { "nested object" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet { "nested object"  A
 $1 : {
     $2
 },
 $0
 endsnippet
-snippet ] "key integretation" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet ] "key integretation"  A
 [$1]: $2,
 $0
 endsnippet
-snippet [ "nested array" "len(snip.buffer) > snip.line+1 and re.search(r' *},*|:', snip.buffer[snip.line+1])" Ae
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet [ "nested array"  A
 $1 : [
    $2
 ],
 $0
 endsnippet
 priority 1
-snippet [ "array"  "len(snip.buffer) > snip.line+1 and re.search(r']', snip.buffer[snip.line+1])" eA
+
+context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
+snippet [ "array"   e
 [
     $1
 ],
@@ -174,32 +266,42 @@ snippet "(?<== )\[" "array"  Ar
 ]
 endsnippet	
 priority 2
-snippet { "object"  "len(snip.buffer) > snip.line+1 and re.search(r']', snip.buffer[snip.line+1])" eA
+
+context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
+snippet { "object"   A
 {
     $1
 },
 $0
 endsnippet	
 priority 1
-snippet ' "quote" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
+snippet ' "quote"  Ae
 
 const $1 = '$2'
 
 $0
 endsnippet
-snippet ` "backtick" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
+snippet ` "backtick"  Ab
 
 const $1 = \`$2\`
 
 $0
 endsnippet
-snippet " "string" "len(snip.buffer) > snip.line+1 and (re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)" Aeb
+
+context "notTheEndOfFile(snip) and (re.search(r'\[|\],|},|{|,$|>|<', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)"
+snippet " "string"  Ab
 
 const $1 = "$2"
 
 $0
 endsnippet
-snippet "\[" "array" "len(snip.buffer) > snip.line+1 or re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" Areb
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" 
+snippet "\[" "array"  Arb
 
 const $1 = [
    $2
@@ -217,7 +319,9 @@ const $1 = {
 $0
 endsnippet
 priority 1
-snippet fn "function" "len(snip.buffer) > snip.line+1 or re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None" Aeb
+
+context "notTheEndOfFile(snip) and re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None"
+snippet fn "function"  Ab
 
 const $1 = ($2) =>  {
     $3
@@ -226,7 +330,9 @@ const $1 = ($2) =>  {
 
 $0
 endsnippet
-snippet "{" "object" "len(snip.buffer) > snip.line+1 and re.search(r'\[|{|,$|\<|>', snip.buffer[snip.line-1]) == None" Areb
+
+context "notTheEndOfFile(snip) and re.search(r'\[|{|,$|\<|>', snip.buffer[snip.line-1]) == None"
+snippet "{" "object"  Arb
 
 const $1 = {
     $2
@@ -235,7 +341,7 @@ $0
 
 endsnippet
 priority 1
-snippet cla "class" A
+snippet cls "class" A
 class $1 {
     $2
 
@@ -243,7 +349,9 @@ class $1 {
 
 }
 endsnippet
-snippet  ty "type" "re.search(r':', snip.buffer[snip.line]) == None" Abe
+
+context "re.search(r':', snip.buffer[snip.line]) == None"
+snippet  ty "type"  Ab
 type $1 = {
     $2
 }
@@ -257,10 +365,23 @@ import $2 from "$1"
 endsnippet
 	
 snippet : "key value pair" A
-$1 : $2 
+$1 : $2, 
 $0
 endsnippet
-snippet '"(?!")' "string" Ar
+
+context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
+snippet " "double quote"  Ab
+"$1",
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
+snippet ' "single quote"  Ab
+'$1',
+endsnippet
+snippet '"(?!")' "single quotes" Ar
+'$1'
+endsnippet
+snippet '"(?!")' "double quotes" Ar
 "$1"
 endsnippet
 snippet sc "styled component"
@@ -355,7 +476,9 @@ snippet red "Ramda reduce"  Aib
 R.reduce(${1:func}, ${2:init}, ${3:collection})
 endsnippet
 
-snippet red "Ramda reduce" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet red "Ramda reduce"  Ai
 R.reduce(${1:func}, ${2:init}),
 endsnippet
 
@@ -363,7 +486,8 @@ snippet rtp "Ramda toPairs"  Aib
 R.toPairs(${1:obj})
 endsnippet
 
-snippet rtp "Ramda toPairs" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rtp "Ramda toPairs"  Ai
 R.toPairs,
 endsnippet
 
@@ -371,7 +495,8 @@ snippet rv "Ramda values"  Aib
 R.values(${1:obj})
 endsnippet
 
-snippet rv "Ramda values" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rv "Ramda values"  Ai
 R.values,
 endsnippet
 
@@ -379,7 +504,8 @@ snippet rfl "Ramda filter"  Aib
 R.filter(${1:isWhatImLookingFor}, ${2:collection})
 endsnippet
 
-snippet rfl "Ramda filter" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) " Aei
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rfl "Ramda filter"  Ai
 R.filter(${1:isWhatImLookingFor}),
 endsnippet
 
@@ -387,7 +513,8 @@ snippet rfi "Ramda find"  Aib
 R.find(${1:needle}, ${2:haystack})
 endsnippet
 
-snippet rfi "Ramda find" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rfi "Ramda find"  Ai
 R.find(${1:needle}),
 endsnippet
 
@@ -396,7 +523,8 @@ snippet rm "Ramda map"  Aib
 R.map(${1:func}, ${2: collection})
 endsnippet
 
-snippet rm "Ramda map" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rm "Ramda map"  Ai
 R.map(${1:func}),
 endsnippet
 
@@ -405,7 +533,8 @@ snippet rev "Ramda evolve"  Aib
 R.evolve(${1:transform}, ${2:object})
 endsnippet
 
-snippet rev "Ramda evolve" "len(snip.buffer) > snip.line+1 and re.search(r'\)\(|,$', snip.buffer[snip.line+1])" Aei 
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rev "Ramda evolve"  Ae 
 R.evolve(${1:transform}),
 endsnippet
 
@@ -420,7 +549,7 @@ snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
 R.assoc("${1:prop}", ${2:value}, ${3:object})
 endsnippet
 	
-snippet rc "Ramda compose" AiB
+snippet rc "Ramda compose" Aib
 R.compose(
     $2
 )($1)
@@ -487,7 +616,7 @@ render() {
 }
 endsnippet
 
-snippet "^[ ]*do" "destructure Object" Air
+snippet "^[ ]*do" "destructure Object" "re.search(r'\)\(|,$|\<|\>', snip.buffer[snip.line-1]) == None" Aei
 const {
     $2
 } = $1
@@ -519,6 +648,7 @@ endsnippet
 snippet ss "setState" Aw
 this.setState((prevState) => {
     $0
+
 })
 endsnippet
 

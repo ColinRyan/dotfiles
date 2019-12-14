@@ -10,14 +10,27 @@ call vundle#begin()
 " Plugins
 
 
-Plugin 'fvictorio/vim-extract-variable' 
+Plugin 'jason0x43/vim-js-indent' 
 
+
+Plugin 'leafgarland/typescript-vim' 
+
+
+Plugin 'ColinRyan/sin' 
+
+" Plugin 'vim-scripts/ingo-library' 
+
+" Plugin 'inkarkat/vim-mark' 
+
+Plugin 'jeetsukumaran/vim-markology' 
+
+" Plugin 'Yilin-Yang/vim-markbar' 
+
+Plugin 'fvictorio/vim-extract-variable' 
 
 Plugin 'justinmk/vim-sneak' 
 
-
 Plugin 'vim-scripts/matchit.zip' 
-
 
 Plugin 'fvictorio/vim-yank-queue' 
 
@@ -43,7 +56,7 @@ Plugin 'tweekmonster/dyslexic.vim'
 
 " Plugin 'ludovicchabant/vim-gutentags' 
 
-Plugin 'kentaro/vim-textobj-function-php' 
+" Plugin 'kentaro/vim-textobj-function-php' 
 
 Plugin 'tommcdo/vim-lion' 
 
@@ -91,9 +104,9 @@ Plugin 'raghur/vim-textobj-line'
 
 Plugin 'otheree/jspc.vim'
 
-Plugin 'poetic/vim-textobj-javascript'
+" Plugin 'poetic/vim-textobj-javascript'
 
-Plugin 'thinca/vim-textobj-function-javascript'
+" Plugin 'thinca/vim-textobj-function-javascript'
 
 Plugin 'whatyouhide/vim-textobj-xmlattr'
      
@@ -131,7 +144,7 @@ Plugin 'elzr/vim-json'
     
 " Plugin 'MaxMellon/vim-jsx-pretty'
     
-Plugin 'kana/vim-textobj-function'
+" Plugin 'kana/vim-textobj-function'
     
 Plugin 'kana/vim-textobj-user'
     
@@ -259,6 +272,15 @@ Plugin 'w0rp/ale'
 "Plugin 'neomake/neomake'
 
 
+
+
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
+
+
+
 let javaScript_plugin_flow = 1
 
 " vimwiki VimWiki
@@ -299,21 +321,22 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
-\    'javascript': ['eslint', 'flow'],
-\    'javascript.jsx': ['eslint', 'flow'],
+\    'javascript': ['eslint', 'flow', 'tsserver'],
+\    'javascript.jsx': ['eslint', 'flow', 'tsserver'],
 \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
-\    'flow': ['eslint', 'flow'],
+\    'flow': ['eslint', 'flow', 'tsserver'],
 \    'json': [],
-\    'jsx': [ 'eslint', 'flow']
+\    'elm': ['elm_ls'],
+\    'jsx': [ 'eslint', 'flow', 'tsserver']
 \
 \}
 
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
 \    'python': ['black', 'isort'],
-\    'javascript': ['prettier-eslint', 'importjs'],
-\    'javascript.jsx': ['prettier-eslint'. 'importjs'],
-\    'jsx': [ 'prettier-eslint', 'importjs']
+\    'javascript': ['eslint', 'importjs'],
+\    'javascript.jsx': ['eslint'. 'importjs'],
+\    'jsx': [ 'eslint', 'importjs']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -442,6 +465,24 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls']
         \}
 
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <esc>
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
 
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', 'Up', '<denite:move_to_next_line>', 'noremap')
@@ -467,11 +508,27 @@ let g:dispatch_compilers['phpunit'] = 'phpunit'
 " Debugger
 
 let g:vebugger_leader='<leader>d'
+
+
+" Abbreviations
+
+
+
 """"""""""""""""""""""
 " Mapping
+"
+" remember: <bar> instead of | in mappings
 
 
+nnoremap <leader>q :if (bufname("%") == "") <bar> :q <bar> else <bar> :wq <bar> endif<cr>
 
+vnoremap dd :g/./d<cr>
+vnoremap dc :d/console/d<cr>
+
+let b:coc_root_patterns = ['.git', '.env']
+
+
+inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <leader>I   }I
 
@@ -485,6 +542,9 @@ nnoremap zj zj^
 
 
 
+
+
+
 nmap mcat vat<localleader>mc  
 
 inoremap <silent><expr> <TAB>
@@ -494,11 +554,68 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "<C-y>" : "\<C-g>u\<CR>"
 
+function!s:check_bac_space() abort
+    let col = col('.') - 1
+    return !col }} getline('.')[col -1] =~# '\s'
+endfunction
 
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd :call CocAction("jumpDefinition") <cr> 
 nmap <silent> gr <Plug>(coc-references)
+
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+" Remap for rename current word
+nmap <leader>rnw <Plug>(coc-rename)
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 
 
 nnoremap <leader>A :AV<cr>
@@ -573,7 +690,6 @@ nnoremap <expr> j (v:count > 1 ? "m'" . v:count : "") . 'gj'
 
 nnoremap <leader>/ :Denite grep<cr>  
 
-nnoremap <leader>q :call QuickFixToggle()<cr>
 nnoremap <leader>l :call LocationListToggle()<cr>
 " I never use the following. Change PublicPrivateToggle to just togle and use it!
 " 2018-09-12 Wed 05:44 PM
@@ -581,7 +697,7 @@ nnoremap <leader>l :call LocationListToggle()<cr>
 
 " let g:openclose = toggle#Normal('dd', 'u')
 " nnoremap <space> :exe g:openclose.funcall()<cr>
-nnoremap <space> zazt
+nnoremap <space><space> zazt
 
 
 
@@ -596,7 +712,7 @@ nnoremap <leader>wf :vsplit ~/vimwiki/improvements.wiki<CR>O<esc>i<C-R>=strftime
 
 " Forgot this existed
 " 2018-09-12 Wed 05:44 PM
-nnoremap <leader>rn :Rename
+nnoremap <leader>rnf :Rename
 
 nnoremap <leader>zj :call NextClosedFold('j')<cr>
 nnoremap <leader>zk :call NextClosedFold('k')<cr>
@@ -667,8 +783,8 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 nnoremap <leader>u :UltiSnipsEdit<CR>
 "move line up
-nnoremap <s-j> ddj<s-p>
-nnoremap <s-k> ddk<s-p>
+nnoremap <s-j> ddj<s-p>==
+nnoremap <s-k> ddk<s-p>==
     
 nmap <C-_> gcc
 vmap <C-_> gc
@@ -690,8 +806,8 @@ nnoremap <F5> :set invpaste paste?<Enter>
 imap <F5> <C-O><F5>
 
 " make a split and switch to it
-nnoremap <leader>v :vnew<CR>
-nmap <leader>V :vnew<CR><C-f>
+nnoremap <leader>V :vnew<CR>
+nmap <leader>v :vnew<CR><C-f>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -865,7 +981,7 @@ endf
 
 highlight Folded ctermbg=black ctermfg=white
 
-autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
+autocmd! bufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
 
 
 " Color 
@@ -884,6 +1000,11 @@ command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt
 
 
 " augroups
+
+
+augroup  onexit
+    autocmd!
+augroup end 
 
 augroup  wiki
 augroup end 
@@ -904,6 +1025,7 @@ augroup  nvimrc
     autocmd! bufwritepost $MYVIMRC source $MYVIMRC
     autocmd! bufwritepost */nvim/skeletons :SkeletonsReload
     autocmd! bufLeave $MYVIMRC :w | :bdelete
+    autocmd! bufLeave .nvimrc :w | :bdelete
     autocmd! bufEnter $MYVIMRC call Initvim()
 augroup end 
 

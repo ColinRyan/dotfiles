@@ -85,22 +85,22 @@ bindsym $mod+Shift+Right move right
 # Workspaces
 
 assign [class="alacritty"] 1
-assign [class="chromium"] 1
+assign [class="chromium"] 2
 assign [class="mysql-workbench"] 4
 assign [class="phpstorm"] 3
-assign [class="firefox-developer"] 2
+# assign [class="firefox-developer"] 2
 
-workspace 1 output eDP-1
+workspace 1 output HDMI-2
+workspace 2 output HDMI-1
 workspace 3 output eDP-1
 workspace 4 output eDP-1
-workspace 2 output HDMI-1
 
-exec --no-startup-id i3-msg "workspace 1; exec alacritty -e tmuxinator patientme"
+exec --no-startup-id i3-msg "workspace 2; exec alacritty -e tmuxinator patientme"
 #exec --no-startup-id i3-msg "workspace 1; exec i3-sensible-terminal -t dl -e tmux -2;"
 exec --no-startup-id i3-msg "workspace 1; exec chromium;"
-exec --no-startup-id i3-msg "workspace 2; exec firefox-developer-edition;"
+# exec --no-startup-id i3-msg "workspace 2; exec firefox-developer-edition;"
 # exec --no-startup-id i3-msg "workspace 3; exec phpstorm"
-exec --no-startup-id i3-msg "workspace 4; exec mysql-workbench; workspace 1"
+# exec --no-startup-id i3-msg "workspace 4; exec mysql-workbench; workspace 1"
 
 # split in horizontal orientation
 bindsym $mod+h split h

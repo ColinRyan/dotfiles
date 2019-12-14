@@ -9,8 +9,29 @@
            "command": "bash-language-server",
            "filetypes": ["sh"],
            "args": ["start"]
+        },
+        "elmLS": {
+          "command": "elm-language-server",
+          "filetypes": ["elm"],
+          "rootPatterns": ["elm.json"],
+          "initializationOptions": {
+            "elmAnalyseTrigger": "change"
+          }
+        },
+        "flow": {
+          "command": "flow",
+          "args": ["lsp"],
+          "filetypes": ["javascript", "javascriptreact"],
+          "initializationOptions": {},
+          "requireRootPattern": true,
+          "settings": {},
+          "rootPatterns": [".flowconfig"]
         }
         
-    }
+    },
+    "diagnostic.displayByAle": true,
+    "codeLens.enable": true,
+    "tsserver.enableJavascript": false
+    
 }
 

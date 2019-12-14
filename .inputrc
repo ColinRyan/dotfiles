@@ -16,10 +16,11 @@ $if mode=vi
 $endif
 
 "\C-w":"tmux select-pane -t 1 \\; resize-pane -Z \\; send-keys nvim Enter\C-m"
-"\C-n":"nv\C-m"
+"\C-n":"tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z && nv\C-m"
 "\C-p":"tmux send-keys mvp Enter\C-m"
 "\C-o":"tmux send-keys selectProject Enter\C-m"
-"\C-b":"vb\C-m"
+"\C-x":"tmux kill-session\C-m"
+"\C-b":"cd ~ &&  tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z && vb\C-m cd -\C-m"
 
 
 set show-all-if-unmodified on
