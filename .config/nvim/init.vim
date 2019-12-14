@@ -10,13 +10,24 @@ call vundle#begin()
 " Plugins
 
 
+Plugin 'bakpakin/fennel.vim' 
+
+
+Plugin 'Olical/aniseed' 
+
+Plugin 'rhysd/git-messenger.vim' 
+
+Plugin 'FooSoft/vim-argwrap' 
+
+Plugin 'mattn/emmet-vim' 
+
 " Plugin 'OmniSharp/omnisharp-vim' 
 
 Plugin 'liuchengxu/vista.vim' 
 
 Plugin 'ColinRyan/sin' 
 
-Plugin 'fvictorio/vim-extract-variable'
+" Plugin 'fvictorio/vim-extract-variable'
 
 Plugin 'justinmk/vim-sneak'
 
@@ -48,15 +59,15 @@ Plugin 'tweekmonster/dyslexic.vim'
 
 " Plugin 'ludovicchabant/vim-gutentags' 
 
-Plugin 'kentaro/vim-textobj-function-php' 
+" Plugin 'kentaro/vim-textobj-function-php' 
 
 Plugin 'tommcdo/vim-lion' 
 
-Plugin 'bps/vim-textobj-python' 
+" Plugin 'bps/vim-textobj-python' 
 
 Plugin 'kana/vim-textobj-lastpat' 
 
-Plugin 'godlygeek/tabular' 
+" Plugin 'godlygeek/tabular' 
 
 Plugin 'pbrisbin/vim-mkdir' 
 
@@ -68,7 +79,7 @@ Plugin 'Julian/vim-textobj-variable-segment'
 
 Plugin 'wellle/targets.vim'
 
-Plugin 'rhysd/vim-textobj-anyblock' 
+" Plugin 'rhysd/vim-textobj-anyblock' 
 
 " Plugin 'thinca/vim-textobj-between' "This caused a bug in delete function
 
@@ -92,11 +103,11 @@ Plugin 'itchyny/calendar.vim'
 
 Plugin 'michaeljsmith/vim-indent-object'
 
-Plugin 'raghur/vim-textobj-line'
+" Plugin 'raghur/vim-textobj-line'
 
-Plugin 'otheree/jspc.vim'
+Plugin 'othree/jspc.vim'
 
-Plugin 'poetic/vim-textobj-javascript'
+" Plugin 'poetic/vim-textobj-javascript'
 
 " Plugin 'thinca/vim-textobj-function-javascript'
 
@@ -106,7 +117,7 @@ Plugin 'whatyouhide/vim-textobj-xmlattr'
 
 " Plugin 'carlitux/deoplete-ternjs'
      
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
      
 " Plugin 'chemzqm/vim-jsx-improve'
      
@@ -116,7 +127,7 @@ Plugin 'tpope/vim-projectionist'
 
 Plugin 'ColinRyan/vim-skeletons'
 
-Plugin 'roxma/LanguageServer-php-neovim'
+" Plugin 'roxma/LanguageServer-php-neovim'
      
 Plugin 'jceb/vim-orgmode'
      
@@ -130,11 +141,11 @@ Plugin 'c9s/phpunit.vim'
      
 " Plugin 'autozimu/LanguageClient-neovim'
      
-Plugin 'Shougo/echodoc.vim'
+" Plugin 'Shougo/echodoc.vim'
      
 Plugin 'elzr/vim-json'
     
-" Plugin 'MaxMellon/vim-jsx-pretty'
+Plugin 'MaxMellon/vim-jsx-pretty'
     
 " Plugin 'kana/vim-textobj-function'
     
@@ -212,7 +223,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 "Plugin 'Valloric/YouCompleteMe'
 
-Plugin 'shawncplus/phpcomplete.vim'
+" Plugin 'shawncplus/phpcomplete.vim'
 
 Plugin 'benmills/vimux'
 
@@ -225,7 +236,7 @@ Plugin 'lambdatoast/elm.vim'
 " Plugin 'swekaj/php-foldexpr.vim'
 Plugin 'rayburgemeestre/phpfolding.vim'
 
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 Plugin 'joonty/vim-taggatron'
 
@@ -237,11 +248,11 @@ Plugin 'othree/html5.vim'
 
 Plugin 'tpope/vim-surround'
 
-Plugin 'weierophinney/argumentrewrap'
+" Plugin 'weierophinney/argumentrewrap'
 
 Plugin 'airblade/vim-gitgutter'
 
-Plugin 'ternjs/tern_for_vim'
+" Plugin 'ternjs/tern_for_vim'
 
 " Plugin 'othree/yajs.vim'
 
@@ -263,6 +274,17 @@ Plugin 'w0rp/ale'
 
 "Plugin 'neomake/neomake'
 
+" Lion
+
+let b:lion_squeeze_spaces = 1
+
+" Git Gutter
+
+let g:gitgutter_max_signs = 1200
+let g:gitgutter_diff_args = "-w"
+" Surround
+
+let g:surround_indent = 0
 
 " OmniSharp
 
@@ -274,7 +296,18 @@ let g:OmniSharp_server_stdio = 1
 
 " VISTA
 
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 1
+
+" The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
 let g:vista_default_executive = 'coc'
+let g:vista_sidebar_width = 60
+
+" Sneak
 
 let g:sneak#label = 1
 
@@ -331,8 +364,11 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \    'php': ['phpcbf','php_cs_fixer'],
 \    'python': ['black', 'isort'],
-\    'javascript': ['eslint', 'importjs'],
-\    'javascript.jsx': ['eslint'. 'importjs'],
+\    'css': ['prettier'],
+\    'sass': ['prettier'],
+\    'scss': ['prettier'],
+\    'javascript': ['eslint', 'importjs', 'prettier'],
+\    'javascript.jsx': ['eslint'. 'importjs', 'prettier'],
 \    'jsx': [ 'eslint', 'importjs']
 \}
 
@@ -497,7 +533,22 @@ abbr tcui terria.catalog.userAddedDataGroup.items
 
 
 " Mapping
-"
+
+
+nnoremap <leader>x :ArgWrap<cr>  
+
+
+nnoremap <leader>gb :Gblame -w<cr> 
+
+
+nmap pe w%pp=`]
+
+
+nnoremap <space>gs /scss<cr>:noh<cr>gf
+
+
+
+
 " Remember <bar instead of |
 
 nnoremap  <leader>q :if bufname("%") == "" <bar> :q <bar> else <bar> :wq <bar> endif<cr>
@@ -569,12 +620,13 @@ nnoremap zj zj^
 
 nmap mcat vat<localleader>mc  
 
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <c-space> coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -583,7 +635,7 @@ endfunction
 
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gd :call CocAction("jumpDefinition")<cr>
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
@@ -609,7 +661,9 @@ vnoremap pp p
 vnoremap po "_dP
 
 nnoremap <expr> p PutOperator()
-nnoremap <silent> pp p
+nnoremap <silent> pp o<esc>p=`]
+
+nmap <silent> P P=`]
 
 nnoremap C-I C-I  
 nnoremap C-O C-O  
@@ -775,13 +829,13 @@ vmap <C-_> gc
 
 
 " deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : deoplete#mappings#manual_complete()
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<C-h>"
 " Fold Toggle
 " nnoremap <space> zazt
 
 " Tagbar Toggle
 " not used often 2018-09-12 Wed 05:45 PM
-nnoremap <leader>f :TagbarToggle<CR>
+nnoremap <leader>f :Vista!!<CR>
 
 " Toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -863,6 +917,7 @@ nnoremap <left> <nop>
 nnoremap <right> <nop>
 
 
+nnoremap <leader>. :vsplit ~/.config/nvim/fnl/config/init.fnl<cr>
 nnoremap <leader><leader> :vsplit $MYVIMRC<cr>
 
 noremap <leader>i "ip
@@ -877,33 +932,16 @@ nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer -split=floating<CR>
 
 syntax on
 
-" always show signcolumns
-set signcolumn=yes
 
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
 
-set scrolloff=999 " Changes how the cursor behaves
-" set termguicolors
-set exrc " project based vimrc
-set shortmess=a " It deals with prompts and fixes a bug for me
 
-set modelines=0
 
-set pastetoggle=<F5>
-
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set cino=f.5s
-" set cindent
 
 set encoding=utf-8
 " set scrolloff=3
 set autoindent
-" set cindent
-set smartindent
+set cindent
+" set smartindent
 set showmode
 set showcmd
 set hidden
@@ -917,7 +955,6 @@ set ruler
 set backspace=indent,eol,start
 set laststatus=2
 " set relativenumber " set line numbers to relative
-set nonumber " remove line numbers
 set undofile
 set backupcopy=yes 
 
@@ -1018,23 +1055,23 @@ augroup  nvimrc
     autocmd! bufEnter .nvimrc inoremap <buffer> <tab> <esc>:wall<cr>ZZ
     autocmd! bufwritepost $MYVIMRC source $MYVIMRC
     autocmd! bufwritepost */nvim/skeletons :SkeletonsReload
-    autocmd! bufLeave $MYVIMRC :w | :bdelete
+    autocmd! bufLeave $MYVIMRC :
     autocmd! bufEnter $MYVIMRC call Initvim()
 augroup end 
 
-augroup  jsx
+augroup jsx
     autocmd!
     autocmd FileType jsx LoadJsxCommands()
 augroup end
  
 
 augroup editor
-    au  BufLeave   * if (len(@%)        < 1)  | :wa |        endif
-    au  FocusLost  * if (len(@%)        < 1)  | :wa |        endif
-    au  VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>="  | endif
-    au  VimResized * if (winwidth('%') <  70) | exe "normal! \<c-w>|"  | endif
-    au  bufEnter   * if (winwidth('%') >= 70) | exe "normal! \<c-w>="| endif
-    au  bufEnter   * if (winwidth('%') <  70) | exe "normal! \<c-w>|"| endif
+    au  BufLeave   * if (len(@%)       <  1)  | :wa |        endif
+    au  FocusLost  * if (len(@%)       <  1)  | :wa |        endif
+    au  VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
+    au  VimResized * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
+    au  bufEnter   * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
+    au  bufEnter   * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
 augroup end
 
 augroup js
@@ -1465,7 +1502,7 @@ function! PutOperator(...) abort
   endif
   let visual = get({'line': 'V', 'block': "\<c-v>"}, a:1, 'v')
   let [rv, rt] = [@@, getregtype('"')]
-  execute 'normal! `[' . visual . '`]"' . v:register . 'p'
+  execute 'normal! `[' . visual . '`]"' . v:register . ']p'
   if v:register == '"'
     call setreg('"', rv, rt)
   endif
@@ -1510,3 +1547,6 @@ function translateWordUnderCursor()
 end
 
 EOF
+
+
+lua require("config/bootstrap")

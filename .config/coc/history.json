@@ -29,5 +29,33 @@
         "next"
       ]
     }
+  },
+  "commands": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "Q@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2222222-===========w2jk",
+        "tsserver",
+        "tserver",
+        "tsservergoto",
+        "gotoPr",
+        "ju"
+      ]
+    }
+  },
+  "actions": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "Remove"
+      ]
+    }
+  },
+  "lists": {
+    "%2Fmnt%2Fc%2FUsers%2Fcolin": {
+      "ryan%2Fprojects%2Fsis-front-end%2FClient": [
+        "outline",
+        "link",
+        "sym"
+      ]
+    }
   }
 }

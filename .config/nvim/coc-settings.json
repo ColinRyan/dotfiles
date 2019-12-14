@@ -13,7 +13,18 @@
         
     },
     "diagnostic.displayByAle": true,
+    "tsserver.log":"normal",
+    "javascript.implementationsCodeLens.enable": true,
+    "suggest.noselect": false,
+    "suggest.floatEnable": true,
+    "suggest.enablePreview" : true,
+    "codeLens.enable": true,
+    "javascript.suggest.completeFunctionCalls": true,
+    "javascript.showUnused": true,
+    "coc.preferences.enableFloatHighlight": true,
     "tsserver.implicitProjectConfig.checkJs": true,
-    "tsserver.implicitProjectConfig.experimentalDecorators": true
+    "tsserver.implicitProjectConfig.experimentalDecorators": true,
+    "javascript.suggest.autoImports": true
+    
 }
 

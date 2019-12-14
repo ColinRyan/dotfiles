@@ -1,0 +1,731 @@
+global !p
+
+def gotoViewStateProperties(name):
+    vim.command("normal gg")
+    vim.command('exe search("knockout.track")')
+    vim.command("normal zo")
+    vim.command("normal j")
+    snip.expand_anon("    '" + name + "',$0\n")
+    vim.command("normal ctrl+i")
+    vim.command("normal ctrl+o")
+
+def notTheEndOfFile(snip):
+    return len(snip.buffer) > snip.line+1 
+def onCurrentLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line])
+def onPreviousLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line-1])
+def onNextLine(snip, regex):
+    return re.search(regex, snip.buffer[snip.line+1])
+endglobal
+
+post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
+snippet vs "ViewState Prop" Abi
+this.$1 = $2
+$0
+endsnippet
+
+snippet intl "internationalizeation" i
+intl.formatMessage({id: '$1'})$2
+endsnippet
+snippet <b "button" Abi
+<button 
+  type='button'
+  onClick={${7:(e) => {
+    console.log("click")
+  }}}
+  className={Styles.${6:btn}}
+  disabled={${5:false}}
+  title={intl.formatMessage({
+    id: '${4:app.title}',
+    defaultMessage: '${3:DEFAULT TITLE}'
+  })}
+>
+  <FormattedMessage 
+    id='${2:app.message}' 
+	defaultMessage='${1:DEFAULT MESSAGE}'
+  />
+</button>
+
+endsnippet
+snippet oc "onClick"
+onClick={$1}$0
+endsnippet
+
+snippet S. "Styles" A
+Styles.$1
+endsnippet
+
+snippet r{ "return object" Abi
+return {
+    $1
+}
+endsnippet
+
+snippet cn "classname" Ai
+className={${1:Styles.}} $2
+endsnippet
+
+snippet mm "method"
+$1 = ($2) => {
+    $3
+}
+$0
+endsnippet
+snippet dqs "document.querySelector" Abi
+
+const $1 = document.querySelector("$2")
+
+endsnippet
+	
+snippet .ih "innerHTML"
+
+$1.innerHTML = \`$2\`
+
+$0
+endsnippet
+snippet dba "document.body" Abi
+
+document.body.appendChild($1)
+
+$0
+endsnippet
+snippet dce "document.createElement" Abi
+
+const $1 = document.createElement('$2')
+
+$0
+endsnippet
+snippet ).ca "catch" Ai
+).catch((err) => {
+    console.error(err)
+});
+
+$0
+endsnippet
+snippet .th "then" Ai
+.then((${1:res}) => {
+    $2
+})$0
+endsnippet
+snippet eh "component enhancement"
+const $4 = enhance(
+		{
+		    $3
+
+		},
+		{
+		    is: $1,
+
+		},
+		[
+		    $2
+		])
+$0
+endsnippet
+snippet ? "ternary"  Ai
+($1) ? $2 : $3
+endsnippet
+snippet wy "test"
+`!p snip.rv = snip.v.text`
+endsnippet
+priority 2
+snippet <{ "flow object in type" Ai
+<{}
+endsnippet	
+snippet cs "styled component" Ab
+const $1 = styled.$2\`
+   $3
+\`
+$0
+endsnippet
+snippet isc "import styled components" Ab
+import styled from "styled-components"
+endsnippet
+snippet "uu "user" Ai
+"user
+endsnippet
+snippet ps "prevState" Abw
+prevState
+endsnippet
+snippet rr "return" Ab
+return $0
+endsnippet
+
+context "notTheEndOfFile(snip) and (onNextLine(snip, r'`') or onCurrentLine(snip,r'`'))"
+snippet $ "template"  A
+\${$1}$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
+snippet ` "backtick"  A
+\`${1:${VISUAL}}\`,
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'^ *}$', snip.buffer[snip.line+1])"
+snippet ` "single quote"  A
+$1: '$2',
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
+snippet " "string"  A
+"${1:${VISUAL}}",
+$0
+endsnippet
+priority 1
+snippet '(?<=\$){' "object" Air
+{$1}
+endsnippet	
+priority 2
+snippet '(?<=, ){' "object" Air
+{$1}$0
+endsnippet	
+snippet '(?<=[=\(]){' "object" Air
+{$1}$0
+endsnippet	
+priority 1
+snippet '(?<![=\$]){' "object" "len(snip.buffer) > snip.line+1 and re.search(r':|}*', snip.buffer[snip.line+1]) == None" Aier
+{
+    $1
+}
+endsnippet	
+priority 1
+snippet '\((?!\))' "braces" Air
+($1)
+endsnippet
+priority 3
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
+snippet ' "nested quote"  A
+$1: '$2',
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
+snippet ` "nested backtick"  A
+$1: \`$2\`,
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
+snippet fn "nested function"  A
+$1 : ($2) => {
+   ${3:${VISUAL}}
+
+},
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r'^ *}|:')"
+snippet " "nested string"  A
+$1: "$2",
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet { "nested object"  A
+$1 : {
+    $2
+},
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet ] "key integretation"  A
+[$1]: $2,
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
+snippet [ "nested array"  A
+$1 : [
+   $2
+],
+$0
+endsnippet
+priority 1
+
+context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
+snippet [ "array"   e
+[
+    $1
+],
+$0
+endsnippet	
+snippet "(?<=: )\[" "array"  Ar
+[
+    $1
+],
+$0
+endsnippet	
+snippet "(?<== )\[" "array"  Ar
+[
+    $1
+]
+endsnippet	
+priority 2
+
+context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
+snippet { "object"   A
+{
+    $1
+},
+$0
+endsnippet	
+priority 1
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
+snippet ' "quote"  Ae
+
+const $1 = '$2'
+
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
+snippet ` "backtick"  Ab
+
+const $1 = \`$2\`
+
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and (re.search(r'\[|\],|},|{|,$|>|<', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)"
+snippet " "string"  Ab
+
+const $1 = "$2"
+
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" 
+snippet "\[" "array"  Arb
+
+const $1 = [
+   $2
+]
+
+$0
+endsnippet
+priority 4
+snippet "{" "object in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Areb
+
+const $1 = {
+    $2
+}
+
+$0
+endsnippet
+priority 1
+
+context "notTheEndOfFile(snip) and re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None"
+snippet fn "function"  Ab
+
+const $1 = ($2) =>  {
+    $3
+
+}
+
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\[|{|,$|\<|>', snip.buffer[snip.line-1]) == None"
+snippet "{" "object"  Arb
+
+const $1 = {
+    $2
+}
+$0
+
+endsnippet
+priority 1
+snippet cls "class" A
+class $1 {
+    $2
+
+	// # Methods
+
+}
+endsnippet
+
+context "re.search(r':', snip.buffer[snip.line]) == None"
+snippet  ty "type"  Ab
+type $1 = {
+    $2
+}
+endsnippet
+snippet cc "constant" Ab
+const $1 = ${2:${VISUAL}}
+$0
+endsnippet
+snippet "^im" "import" Ar
+import $2 from "$1"
+endsnippet
+	
+snippet : "key value pair" A
+$1 : $2, 
+$0
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
+snippet " "double quote"  Ab
+"$1",
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
+snippet ' "single quote"  Ab
+'$1',
+endsnippet
+snippet "'(?!')" "single quotes" Ar
+'$1'
+endsnippet
+snippet '"(?!")' "double quotes" Ar
+"$1"
+endsnippet
+snippet sc "styled component"
+styled.$1`
+    $2
+`
+endsnippet
+
+snippet rif "R.ifElse"
+R.ifElse(
+  $2,
+  $3,
+  $4
+)($1)
+endsnippet
+
+snippet ex "expect"
+expect($1).toBe($2)	
+endsnippet
+snippet test "create test"
+test($1, () => {
+   $2
+})
+$3
+endsnippet
+snippet func "function loading into variable"
+const $1 = ($2) => {
+    ${3:${VISUAL}}
+}
+endsnippet
+
+snippet fn "function" Ai
+($1) => {
+   ${2:${VISUAL}}
+
+}
+endsnippet
+snippet ato "translate object"
+  {
+	  $1: $2.interpolate({
+	  inputRange: [$3, $4],
+	  outputRange: [$5, $6]
+			  })
+  }
+endsnippet
+snippet ant "animated timing"
+Animated.timing(
+    this.state.animation.$1,
+	{
+	    toValue: ${2:1},
+		duration: ${3:1000},
+		$3
+	}
+).start()
+endsnippet
+snippet dsp "destructure screenProps" i
+  {
+screenProps: {
+        $1
+			 }
+  }
+endsnippet
+snippet rpo "path or" i
+R.pathOr(${1:default},[${2:path}],${3:object})
+endsnippet
+	
+snippet cdu "componet did update"
+componentDidUpdate(prevProps, prevState) {
+    $1
+}
+endsnippet
+	
+snippet tp "type Promise" i
+Promise<${1:mixed}>
+endsnippet
+
+
+snippet : "key value"
+$1:$2,
+$3
+endsnippet
+
+snippet ta "type array" i
+Array<$1>
+endsnippet
+
+
+
+
+snippet red "Ramda reduce"  Aib
+
+R.reduce(${1:func}, ${2:init}, ${3:collection})
+endsnippet
+
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet red "Ramda reduce"  Ai
+R.reduce(${1:func}, ${2:init}),
+endsnippet
+
+snippet rtp "Ramda toPairs"  Aib
+R.toPairs(${1:obj})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rtp "Ramda toPairs"  Ai
+R.toPairs,
+endsnippet
+
+snippet rv "Ramda values"  Aib
+R.values(${1:obj})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rv "Ramda values"  Ai
+R.values,
+endsnippet
+
+snippet rfl "Ramda filter"  Aib
+R.filter(${1:isWhatImLookingFor}, ${2:collection})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
+snippet rfl "Ramda filter"  Ai
+R.filter(${1:isWhatImLookingFor}),
+endsnippet
+
+snippet rfi "Ramda find"  Aib
+R.find(${1:needle}, ${2:haystack})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rfi "Ramda find"  Ai
+R.find(${1:needle}),
+endsnippet
+
+
+snippet rm "Ramda map"  Aib
+R.map(${1:func}, ${2: collection})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rm "Ramda map"  Ai
+R.map(${1:func}),
+endsnippet
+
+
+snippet rev "Ramda evolve"  Aib 
+R.evolve(${1:transform}, ${2:object})
+endsnippet
+
+context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
+snippet rev "Ramda evolve"  Ae 
+R.evolve(${1:transform}),
+endsnippet
+
+snippet fl "flatlist"
+<FlatList
+    data={${2: [{id: "1"}]}}
+	keyExtractor={(item) => item.id}
+	renderItem={${1:(item) => <Text>cat</Text>}}
+/>
+endsnippet
+snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
+R.assoc("${1:prop}", ${2:value}, ${3:object})
+endsnippet
+	
+snippet rc "Ramda compose" Aib
+R.compose(
+    $2
+)($1)
+endsnippet
+	
+snippet psa "prevState assoc" Aib
+R.assoc($1, $2, prevState)
+endsnippet
+	
+snippet gdsfp "getDerivedStateFromProps"
+static getDerivedStateFromProps(nextProps, currentState) {
+    $1
+}
+endsnippet
+snippet op "onPress" i
+onPress={() => {
+    $1
+
+}}
+endsnippet
+snippet ts "this.state" i
+this.state
+endsnippet
+snippet ns "navigation state"
+const { params } = this.props.navigation.state
+endsnippet
+
+snippet nav "navigate" i
+this.props.navigation.navigate($1)
+endsnippet
+
+snippet ? "ternary" i
+? $1 : $2
+endsnippet
+
+snippet cv "const"
+const $1 = $2
+endsnippet
+snippet sp "screenProps" i
+this.props.screenProps.
+endsnippet
+
+snippet api "api request"
+const res = await api.${1:get}(
+            $2,
+			$3
+      )
+endsnippet
+
+
+snippet t "type"
+type $1 = {
+    $2
+}
+endsnippet
+
+snippet i "import"
+import $2 from "$1"
+endsnippet
+
+snippet r "render"
+render() {
+	return ($1)
+}
+endsnippet
+
+snippet "^[ ]*do" "destructure Object" "re.search(r'\)\(|,$|\<|\>', snip.buffer[snip.line-1]) == None" Aei
+const {
+    $2
+} = $1
+endsnippet
+
+snippet rcl "react class"
+class $1 extends React.component{
+
+	constructor(props) {
+	    super(props)
+		this.state = {
+		    $3
+		}
+	}
+
+    //# Funcs
+
+    //# Lifecyle
+	$4
+
+	render() {
+		return (
+		    $2
+	   )
+	}
+}
+endsnippet
+
+snippet ss "setState" Aw
+this.setState((prevState) => {
+    $0
+
+})
+endsnippet
+
+snippet af "anon function" i
+($1) => $2
+endsnippet
+
+snippet scu "shouldComponetUpdate"
+shouldComponentUpdate(nextProps, nextState) {
+    return ${1: false}
+}
+endsnippet
+	
+snippet ti "textInput"
+<TextInput
+    style={{$3}}
+	placeholder="$2"
+	onChangeText={$1 => this.setState({$1})}
+	value={this.state.$1}
+/>
+endsnippet
+	
+snippet c "constructor"
+constructor(props) {
+    super(props)
+	this.state = {
+	   $1
+	}
+}
+endsnippet
+
+snippet user "prints out the coreProps user as variables"
+const {
+    first_name,
+	last_name,
+	birthday,
+	gender,
+	picture,
+	health_providers: {
+	    FamilyDoctor,
+		Pharmacy,
+		Phsiotherapist,
+		Optometrist
+	}
+} = this.props.screenProps.user
+endsnippet
+
+snippet sfc "stateless functional component"
+const $1 = ($2) => {
+
+}
+endsnippet
+
+
+snippet pub "public function"
+$1 = ($2) => {
+    $3
+}
+endsnippet
+
+snippet apub "async public function"
+async $1($2) {
+    $3
+}
+endsnippet
+
+snippet cdm "componentDidMount"
+async componentDidMount() {
+    $1
+}
+endsnippet
+	
+snippet clv "console log value" Ai
+console.log("$1", $1)
+endsnippet
+
+
+snippet clt "console log test"
+console.log('test')
+endsnippet
