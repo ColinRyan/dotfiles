@@ -10,12 +10,51 @@ call vundle#begin()
 " Plugins
 
 
+Plugin 'vimtaku/vim-textobj-keyvalue' 
+
+
+Plugin 'voldikss/vim-translator' 
+
+
+Plugin 'ryanoasis/vim-devicons' 
+
+
+Plugin 'sodapopcan/vim-twiggy' 
+
+
+Plugin 'junegunn/gv.vim' 
+
+
+Plugin 'neoclide/denite-git' 
+
+
+Plugin 'liuchengxu/vim-clap' 
+
+
+Plugin 'Olical/conjure' 
+
+
+Plugin 'tpope/vim-abolish' 
+
+
+Plugin 'whiteinge/diffconflicts' 
+
+
+" Plugin 'camspiers/lens.vim' 
+
+
+Plugin 'camspiers/animate.vim' 
+
+
+Plugin 'blueyed/vim-diminactive' 
+
+
 Plugin 'bakpakin/fennel.vim' 
 
 
 Plugin 'Olical/aniseed' 
 
-Plugin 'rhysd/git-messenger.vim' 
+Plugin 'ColinRyan/git-messenger.vim' 
 
 Plugin 'FooSoft/vim-argwrap' 
 
@@ -29,11 +68,11 @@ Plugin 'ColinRyan/sin'
 
 " Plugin 'fvictorio/vim-extract-variable'
 
-Plugin 'justinmk/vim-sneak'
+" Plugin 'justinmk/vim-sneak'
 
 Plugin 'vim-scripts/matchit.zip'
 
-" Plugin 'easymotion/vim-easymotion' 
+Plugin 'easymotion/vim-easymotion' 
 
 Plugin 'fvictorio/vim-yank-queue' 
 
@@ -133,7 +172,7 @@ Plugin 'jceb/vim-orgmode'
      
 " Plugin 'roxma/nvim-completion-manager'
      
-Plugin 'junegunn/vim-peekaboo'
+" Plugin 'junegunn/vim-peekaboo'
      
 Plugin 'tpope/vim-cucumber'
      
@@ -274,9 +313,22 @@ Plugin 'w0rp/ale'
 
 "Plugin 'neomake/neomake'
 
+
+
+" Easymotion
+let g:EasyMotion_do_mapping = 0
+
+
+" Translation
+
+let g:translator_target_lang = 'fr'
+
+
+
+
 " Lion
 
-let b:lion_squeeze_spaces = 1
+let g:lion_squeeze_spaces = 1
 
 " Git Gutter
 
@@ -351,6 +403,7 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
+\    'vimscript': ['vint'],
 \    'javascript': ['eslint', 'flow', 'tsserver'],
 \    'javascript.jsx': ['eslint', 'flow', 'tsserver'],
 \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
@@ -367,9 +420,10 @@ let g:ale_fixers = {
 \    'css': ['prettier'],
 \    'sass': ['prettier'],
 \    'scss': ['prettier'],
-\    'javascript': ['eslint', 'importjs', 'prettier'],
-\    'javascript.jsx': ['eslint'. 'importjs', 'prettier'],
-\    'jsx': [ 'eslint', 'importjs']
+\    'vimscript': ['vint'],
+\    'javascript': ['importjs', 'prettier'],
+\    'javascript.jsx': ['importjs', 'prettier'],
+\    'jsx': [ 'importjs', 'prettier']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -395,7 +449,6 @@ let g:tagcommands["php"] = {"tagfile":".php.tags", "cmd": "ctags","args":"-R --e
 let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R"}
 let g:tagcommands["javascript.jsx"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R"}
 
-let g:taggatron_verbose = 0
 
 let test#strategy = "neovim"
 
@@ -435,7 +488,7 @@ let g:closetag_close_shortcut = '<leader>>'
 let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
 let skeletons#autoRegister = 1
 
-" let g:jsx_ext_required = 0
+let g:jsx_ext_required = 0
 
 let g:javscript_plugin_flow = 1
 
@@ -468,14 +521,21 @@ if executable('rg')
     let g:ctrlp_use_caching = 0
 
 
-
+    call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
     call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+    call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading', '--ignore'])
     call denite#custom#var('grep', 'recursive_opts', [])
     call denite#custom#var('grep', 'pattern_opts', ['--regexp'])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
 
+    call denite#custom#source('file/rec', 'sorters', ['sorter_sublime'])
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
+else
+  call denite#custom#var('file/rec', 'command',
+      \ ['grep', '--follow', '--nocolor', '--nogroup', '-g', ''])
 endif
 
 let g:tagbar_autoclose = 1
@@ -500,12 +560,22 @@ let g:LanguageClient_serverCommands = {
         \}
 
 
+" Denite Settings
+
+let g:webdevicons_enable_denite = 1
+" allow grep source filtering on either path or text
+call denite#custom#source('grep', 'converters', ['converter_abbr_word'])
+
+call denite#custom#option('default', 'prompt', '>')
+call denite#custom#option('default', 'cursor_wrap', v:true)
+
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', 'Up', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 call denite#custom#map('insert', 'Down', '<denite:move_to_previous_line>', 'noremap')
 
 "Vimux settings
+
 
 let g:VimuxUseNearest = 1
 
@@ -533,6 +603,24 @@ abbr tcui terria.catalog.userAddedDataGroup.items
 
 
 " Mapping
+
+nmap <silent> <Leader>tl <Plug>TranslateR
+vmap <silent> <Leader>tl <Plug>TranslateRV
+
+nnoremap <leader>gg :Twiggy<cr>
+nnoremap <leader>gs :vertical Git<cr>
+nnoremap <silent> <Leader>lr <Plug>TranslateR
+nnoremap <leader>gl :Denite -split=floating gitlog<cr>  
+
+nnoremap <leader>gr :Gr<cr>  
+
+nnoremap <leader>gw :Gw<cr>  
+
+
+nnoremap " :Clap registers<cr>
+
+
+nmap s <Plug>(easymotion-overwin-f2)
 
 
 nnoremap <leader>x :ArgWrap<cr>  
@@ -768,9 +856,11 @@ nmap <localleader>gs /# Stories<cr>:noh<cr>]]ztzO
 
 
 
-nmap <localleader>gl /# Lifecycle<cr>:noh<cr>]]ztzO
+nmap <localleader>gls /# Local State<cr>:noh<cr>]]ztzO
+nmap <localleader>glc /# Lifecycle<cr>:noh<cr>]]ztzO
 nmap <localleader>gr / render()<cr>:noh<cr>ztzO
 nmap <localleader>gm /" Mapping<cr>:noh<cr>zt
+
 
 nnoremap <localleader>xx ][ 
 
@@ -800,6 +890,10 @@ nnoremap <leader>mi  :call AddType("\# Imports", "i")<CR>
 nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR>
 nnoremap <leader>mt  :call AddType("\# Types", "t")<CR>
 
+nnoremap <leader>ml  :call AddType("\# Local State", "us")<CR>
+
+nnoremap <leader>me  :call AddType("\# Effects", "ue")<CR>
+
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
@@ -811,7 +905,7 @@ nnoremap <C-v>  :wq<CR>
 nnoremap <C-q> :wq<CR> 
 inoremap <C-q> :wq<CR> 
 
-nnoremap <C-f> :CtrlPMixed<cr>
+nnoremap <C-f> :<C-u>Denite -split=floating -start-filter file/rec <CR>
 
 " let mapleader = "\<space>"
 
@@ -917,7 +1011,7 @@ nnoremap <left> <nop>
 nnoremap <right> <nop>
 
 
-nnoremap <leader>. :vsplit ~/.config/nvim/fnl/config/init.fnl<cr>
+nnoremap <leader>. :vsplit ~/.config/nvim/fnl/dotfiles/init.fnl<cr>
 nnoremap <leader><leader> :vsplit $MYVIMRC<cr>
 
 noremap <leader>i "ip
@@ -937,6 +1031,7 @@ syntax on
 
 
 
+:set iskeyword+=-
 set encoding=utf-8
 " set scrolloff=3
 set autoindent
@@ -948,10 +1043,6 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set wildignore+=*/.git/*,*/tmp/*,*.swp
-set visualbell
-set cursorline
-set ttyfast
-set ruler
 set backspace=indent,eol,start
 set laststatus=2
 " set relativenumber " set line numbers to relative
@@ -962,15 +1053,9 @@ set backupcopy=yes
 "nnoremap / /\v
 "vnoremap / /\v
 
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
 " set hlsearch
 
 
-set wrap
 set textwidth=79
 set formatoptions=tcqrn1
 set colorcolumn=85
@@ -1023,7 +1108,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 let base16colorspace=256
 
-colorscheme darcula
 
 
 command! W w !sudo tee % > /dev/null
@@ -1061,6 +1145,7 @@ augroup end
 
 augroup jsx
     autocmd!
+    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
     autocmd FileType jsx LoadJsxCommands()
 augroup end
  
@@ -1068,17 +1153,17 @@ augroup end
 augroup editor
     au  BufLeave   * if (len(@%)       <  1)  | :wa |        endif
     au  FocusLost  * if (len(@%)       <  1)  | :wa |        endif
-    au  VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
-    au  VimResized * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
-    au  bufEnter   * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
-    au  bufEnter   * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
+    " au  VimResized * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
+    " au  VimResized * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
+    " au  bufEnter   * if (winwidth('%') >= 70) | exe "normal! \<c-w>=" |  endif
+    " au  bufEnter   * if (winwidth('%') <  70) | exe "normal! \<c-w>   |" | endif
 augroup end
 
 augroup js
     autocmd!
     autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
     " autocmd FileType javascript,typescript,json,jsx colorscheme sin
-    autocmd FileType javascript,typescript,json,jsx colorscheme darcula
+    " autocmd FileType javascript,typescript,json,jsx colorscheme sin
 
 augroup end
 
@@ -1099,6 +1184,7 @@ augroup end
 augroup init.vim
     autocmd!
     autocmd! bufwritepost init.vim source $MYVIMRC
+    " autocmd! bufwritepost init.fnl :call AniseedEvalFile($HOME . "/.config/nvim/fnl/dotfiles/init.fnl")
     autocmd! bufLeave init.vim g:toggle_config=0
     autocmd! bufLeave init.vim source $MYVIMRC
     autocmd! FileType help wincmd L
@@ -1285,7 +1371,7 @@ fun! JavascriptSettings()
 
     set foldtext=JavascriptFoldText()
 
-    set foldlevelstart=2
+    set foldlevelstart=1
 
     set foldlevel=2
 
@@ -1368,7 +1454,7 @@ endf
 fun! AddType(anchor, trigger)
     let g:takeMeBack = 1
     execute "normal! m':1/" . a:anchor . "\<CR>jo\<esc>o\<esc>ko" . a:trigger . " "
-    call UltiSnips#ExpandSnippetOrJump() | echom "catsass"
+    call UltiSnips#ExpandSnippetOrJump() 
 endf
 
 fun! Initvim()
@@ -1538,6 +1624,8 @@ function translateWordUnderCursor()
     translations["public"] = "private"
     translations["private"] = "protected"
     translations["protected"] = "public"
+    translations["real-time"] = "historical"
+    translations["historical"] = "real-time"
     
     if translations[wordToTranslate] then 
         vim.api.nvim_command("normal! ciw" .. translations[wordToTranslate] )
@@ -1549,4 +1637,4 @@ end
 EOF
 
 
-lua require("config/bootstrap")
+lua require("aniseed.dotfiles")

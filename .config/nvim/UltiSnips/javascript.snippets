@@ -17,6 +17,9 @@ def onPreviousLine(snip, regex):
     return re.search(regex, snip.buffer[snip.line-1])
 def onNextLine(snip, regex):
     return re.search(regex, snip.buffer[snip.line+1])
+
+def nestedInObject(snip):
+   return notTheEndOfFile(snip) and (onNextLine(snip, r' *},*|:') or onPreviousLine(snip, r'},')) and onCurrentLine(snip, r':') == None
 endglobal
 
 post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
@@ -25,6 +28,16 @@ this.$1 = $2
 $0
 endsnippet
 
+snippet us "useState" aib
+const [$1, $2] = React.useState($3)$0
+
+endsnippet
+snippet ue "useEffect" aib
+useEffect(() => {
+    $2
+}, [$1])
+$0
+endsnippet
 snippet intl "internationalizeation" i
 intl.formatMessage({id: '$1'})$2
 endsnippet
@@ -124,7 +137,7 @@ const $4 = enhance(
 $0
 endsnippet
 snippet ? "ternary"  Ai
-($1) ? $2 : $3
+(${1:${VISUAL}}) ? $2 : $3
 endsnippet
 snippet wy "test"
 `!p snip.rv = snip.v.text`
@@ -169,8 +182,8 @@ $1: '$2',
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
-snippet " "string"  A
+context "notTheEndOfFile(snip) and onNextLine(snip,r'^ *]' )"
+snippet " "string"  Ae
 "${1:${VISUAL}}",
 $0
 endsnippet
@@ -192,7 +205,8 @@ snippet '(?<![=\$]){' "object" "len(snip.buffer) > snip.line+1 and re.search(r':
 }
 endsnippet	
 priority 1
-snippet '\((?!\))' "braces" Air
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r'\(\)') == None"
+snippet ( "braces" Aei
 ($1)
 endsnippet
 priority 3
@@ -218,14 +232,14 @@ $1 : ($2) => {
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r'^ *}|:')"
-snippet " "nested string"  A
+context "notTheEndOfFile(snip) and (onNextLine(snip, r' *},*|:') or onPreviousLine(snip, r'},')) and onCurrentLine(snip, r':') == None"
+snippet " "nested string"  Ae
 $1: "$2",
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
-snippet { "nested object"  A
+context "nestedInObject(snip)"
+snippet { "nested object"  Ae
 $1 : {
     $2
 },
@@ -274,10 +288,10 @@ snippet { "object"   A
 },
 $0
 endsnippet	
-priority 1
+priority 2
 
-context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
-snippet ' "quote"  Ae
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$',snip.buffer[snip.line-1]) == None and onCurrentLine(snip, r'=|\'\'') == None "
+snippet ' "single quote"  Ae
 
 const $1 = '$2'
 
@@ -292,8 +306,9 @@ const $1 = \`$2\`
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and (re.search(r'\[|\],|},|{|,$|>|<', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)"
-snippet " "string"  Ab
+priority 2
+context "notTheEndOfFile(snip) and (re.search(r'\[|\],|},|{|,$|>|<',snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None) and onCurrentLine(snip, r'\"\"') == None"
+snippet " "double quote"  Abe
 
 const $1 = "$2"
 
@@ -361,7 +376,7 @@ const $1 = ${2:${VISUAL}}
 $0
 endsnippet
 snippet "^im" "import" Ar
-import $2 from "$1"
+import $2 from '$1'
 endsnippet
 	
 snippet : "key value pair" A
@@ -369,21 +384,31 @@ $1 : $2,
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
-snippet " "double quote"  Ab
+context "notTheEndOfFile(snip) and onPreviousLine(snip, r',$')"
+snippet " "double quote"  Abe
 "$1",
 endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
+context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None and onCurrentLine(snip, r'\'\'') == None"
 snippet ' "single quote"  Ab
 '$1',
+
 endsnippet
-snippet "'(?!')" "single quotes" Ar
+
+
+
+priority 1
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r'\'\'') == None"
+snippet ' "single quotes" Aie
 '$1'
 endsnippet
-snippet '"(?!")' "double quotes" Ar
+
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r'\"\"') == None"
+snippet " "double quotes" Aie
 "$1"
 endsnippet
+
 snippet sc "styled component"
 styled.$1`
     $2
@@ -545,7 +570,7 @@ snippet fl "flatlist"
 	renderItem={${1:(item) => <Text>cat</Text>}}
 />
 endsnippet
-snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
+snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" 
 R.assoc("${1:prop}", ${2:value}, ${3:object})
 endsnippet
 	
@@ -579,10 +604,6 @@ endsnippet
 
 snippet nav "navigate" i
 this.props.navigation.navigate($1)
-endsnippet
-
-snippet ? "ternary" i
-? $1 : $2
 endsnippet
 
 snippet cv "const"

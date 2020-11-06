@@ -1,5 +1,6 @@
+workspace.renameCurrentFile
+document.renameCurrentWord
 document.jumpToNextSymbol
 tsserver.goToProjectConfig
 tsserver.openTsServerLog
-document.renameCurrentWord
 workspace.workspaceFolders
