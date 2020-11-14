@@ -21,6 +21,9 @@ def onNextLine(snip, regex):
 endglobal
 
 
+snippet pto "PropType.Object"
+PropTypes.object
+endsnippet
 snippet us "useState"
 const [$1, $2] = React.useState($3)
 $0
@@ -39,23 +42,22 @@ snippet intl "internationalizeation" i
 intl.formatMessage({id: '$1'})$2
 endsnippet
 snippet <b "button" Abi
-<button 
+<input
   type='button'
   onClick={${7:(e) => {
     console.log("click")
   }}}
-  className={Styles.${6:btn}}
+  className={${6:btn}}
   disabled={${5:false}}
   title={intl.formatMessage({
     id: '${4:app.title}',
     defaultMessage: '${3:DEFAULT TITLE}'
   })}
->
-  <FormattedMessage 
-    id='${2:app.message}' 
-	defaultMessage='${1:DEFAULT MESSAGE}'
-  />
-</button>
+  value={intl.formatMessage({
+    id: '${2:app.message}',
+  defaultMessage: '{$3:DEFAULT MESSAGE}'
+  })}
+/>
 
 endsnippet
 snippet oc "onClick"
@@ -286,7 +288,7 @@ $0
 endsnippet	
 priority 1
 
-context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
+context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None and re.search(r':|=', snip.buffer[snip.line]) == None"
 snippet ' "quote"  Ae
 
 const $1 = '$2'
@@ -360,12 +362,7 @@ class $1 {
 }
 endsnippet
 
-context "re.search(r':', snip.buffer[snip.line]) == None"
-snippet  ty "type"  Ab
-type $1 = {
-    $2
-}
-endsnippet
+context "re.search(r':|=', snip.buffer[snip.line]) == None"
 snippet cc "constant" Ab
 const $1 = ${2:${VISUAL}}
 $0
