@@ -218,7 +218,7 @@ $1 : ($2) => {
 $0
 endsnippet
 
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r'^ *}|:')"
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
 snippet " "nested string"  A
 $1: "$2",
 $0
@@ -544,9 +544,6 @@ snippet fl "flatlist"
 	keyExtractor={(item) => item.id}
 	renderItem={${1:(item) => <Text>cat</Text>}}
 />
-endsnippet
-snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
-R.assoc("${1:prop}", ${2:value}, ${3:object})
 endsnippet
 	
 snippet rc "Ramda compose" Aib

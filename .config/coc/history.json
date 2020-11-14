@@ -1,0 +1,16 @@
+{
+  "commands": {
+    "%2Fhome%2Fcolin%2Fprojects%2Faok-elo-graph": [
+      "tsserver",
+      "extract"
+    ],
+    "%2Fhome%2Fcolin%2Fprojects%2FairmInsDjango": [
+      "python"
+    ]
+  },
+  "lists": {
+    "%2Fhome%2Fcolin%2Fprojects%2FairmInsDjango": [
+      "j"
+    ]
+  }
+}

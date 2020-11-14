@@ -18,15 +18,6 @@
             "elmAnalyseTrigger": "change"
           }
         },
-        "flow": {
-          "command": "flow",
-          "args": ["lsp"],
-          "filetypes": ["javascript", "javascriptreact"],
-          "initializationOptions": {},
-          "requireRootPattern": true,
-          "settings": {},
-          "rootPatterns": [".flowconfig"]
-        }
         
     },
     "diagnostic.displayByAle": true,
@@ -41,7 +32,9 @@
     "coc.preferences.enableFloatHighlight": true,
     "tsserver.implicitProjectConfig.checkJs": true,
     "tsserver.implicitProjectConfig.experimentalDecorators": true,
-    "javascript.suggest.autoImports": true
+    "javascript.suggest.autoImports": true,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "python.jediEnabled": false
 
 }
 

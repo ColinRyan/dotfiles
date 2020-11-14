@@ -63,7 +63,7 @@ source ~/.bash_functions
 source ~/.bash_aliases
 # --- Exports --- 
 
-export PATH=$HOME/.gem/ruby/2.6.0/bin:/root/.gem/ruby/2.6.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin
+export PATH=$HOME/.gem/ruby/2.7.0/bin:/root/.gem/ruby/2.7.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin:$HOME/.bin
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export TERM="screen-256color"
 
@@ -84,7 +84,8 @@ export ANDROID_SDK=/opt/android-sdk
 selectProject() 
 {
     directory=$(find ~/projects/ -maxdepth 1 -type d | grep -P "[\w\-]+$" -o | fzf)
-    [[ ! -z "$directory" ]] && mux start project $directory
+
+    [[ ! -z "$directory" ]] && echo $directory > ~/.config/.project && mux start project $directory
 
 } 
 
@@ -94,8 +95,9 @@ startTesting()
     if [[ -f artisan ]]; then
         ./vendor/bin/phpunit
     elif [[ -f package.json ]]; then
-        echo cats
         yarn test
+    # elif [[ -f figwheel-main.edn ]]; then
+	# lein fig:test
     fi
 
 } 
@@ -103,7 +105,11 @@ startTesting()
 
 startEditing() 
 {
-    if [ -f 'App.js' ]; then 
+    dir=$(basename "$PWD")
+    dir=${dir//-/_}
+    if [ -f 'Session.vim' ]; then 
+	    nvim -S Session.vim; 
+    elif [ -f 'App.js' ]; then 
         nvim 'App.js'; 
     elif [ -f 'App.tsx' ]; then 
         nvim 'App.tsx'; 
@@ -121,6 +127,17 @@ startEditing()
         nvim 'src/App.tsx'
     elif [ -f 'generators/app/index.js' ]; then
         nvim 'generators/app/index.js'
+    elif [ -f "src/$dir/core.cljs" ]; then
+	nvim "src/$dir/core.cljs"
+    elif [ -f "handler.js" ]; then
+	nvim "handler.js"
+    elif [ -f "src/main/clojurescript/serverless/functions.cljs" ]; then
+	nvim "src/main/clojurescript/serverless/functions.cljs"
+    elif [ -f ".next.config.js" ]; then
+	nvim "pages/index.tsx"
+
+    elif [ -f "mange.py" ]; then
+	nvim "mange.py"
     else 
         nvim; 
     fi
@@ -131,10 +148,24 @@ startServing()
 {
     if [[ -f artisan ]]; then
         php artisan serve
-    fi
 
-    if [[ -f package.json ]]; then
+    elif [[ -f next.config.js ]]; then
+        npm run dev
+
+    elif [[ -f manage.py ]]; then
+        python manage.py runserver
+
+    elif [[ -f package.json ]]; then
         yarn start
+
+    elif [[ -f figwheel-main.edn ]]; then
+	    lein fig:build
+
+    elif [[ -f docker-compose.yml ]]; then
+	    docker-compose up
+
+    elif [[ -f shadow-cljs.edn ]]; then
+	    shadow-cljs watch app
     fi
 }
 
@@ -150,8 +181,8 @@ mvp()
        return
    fi 
 
-   types=('chrome-extension' 'generator' 'react-native-js' 'parcel-elm' 'react-web-js'
-   'react-web-clojure' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
+   types=('serverless' 'django' 'chrome-extension' 'generator' 'react-native-js' 'parcel-elm' 'react-web-js'
+   'clojure-reagent-frontend' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
    echo "Select a project type"
    projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
 
@@ -171,6 +202,11 @@ mvp()
        yarn create react-app $projectName --typescript
        amplify init
        yarn add aws-amplify aws-amplify-react ramda partial.lenses flutures date-fns @material-ui/core
+   fi
+
+   if [[ $projectType = "serverless" ]]; then
+	   nvm use 11.6
+	   serverless create --template aws-nodejs --path $projectName --name $projectName
    fi
 
    if [[ $projectType = "parcel-elm" ]]; then
@@ -219,13 +255,20 @@ mvp()
        cd ..
    fi
 
-   if [[ $projectType = "react-web-clojure" ]]; then
-       lein new reagent-frontend $projectName
+   if [[ $projectType = "clojure-reagent-frontend" ]]; then
+       lein new shadow-cljs $projectName +reagent
+   fi
+
+
+   if [[ $projectType = "django" ]]; then
+	   django-admin startproject $projectName
    fi
 
    mcd $projectName
    git init
    touch "Readme.md"
+
+   echo $projectName > ~/.config/.project 
    mux start project $projectName
 
 
@@ -555,8 +598,8 @@ tt () {
 # Util
 
 alias r='. ~/.bashrc'
-alias ls='ls -la'
-alias lg='ls | grep'
+alias ls='lsd -la'
+alias lg='lsd | grep'
 alias i='sudo pacman -S'
 alias y='yaourt -S'
 
@@ -573,7 +616,7 @@ alias ts="testing"
 complete -F _testing ts
 alias tmux="tmux -2"
 alias ..="cd .."
-alias uv="cd ~/.vim/bundle && find ./ -maxdepth 1 -type d | xargs -I x bash -c 'cd x; git fetch; git pull; cd -'"
+alias uv="cd ~/.local/share/nvimplugged && find ./ -maxdepth 1 -type d | xargs -I x bash -c 'cd x; git fetch; git pull; cd -'"
 alias c="clear"
 
 # Navigation
@@ -721,3 +764,6 @@ export NVM_DIR="$HOME/.nvm"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"

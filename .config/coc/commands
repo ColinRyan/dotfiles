@@ -1,3 +1,4 @@
+python.upgradePythonLanguageServer
 document.jumpToNextSymbol
 tsserver.goToProjectConfig
 tsserver.openTsServerLog

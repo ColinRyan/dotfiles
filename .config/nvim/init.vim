@@ -2,277 +2,343 @@ set nocompatible
 
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin(stdpath('data') . 'plugged')
 " let Vundle manage Vundle, required
 
 
 " Plugins
 
 
-Plugin 'bakpakin/fennel.vim'
+Plug 'gcmt/taboo.vim' 
 
 
-Plugin 'Olical/aniseed'
+Plug 'w1mvy/vim-denite-tab' 
 
-Plugin 'rhysd/git-messenger.vim'
 
-Plugin 'FooSoft/vim-argwrap'
+Plug 'leafgarland/typescript-vim' 
 
-Plugin 'mattn/emmet-vim'
 
-" Plugin 'OmniSharp/omnisharp-vim'
+Plug 'peitalin/vim-jsx-typescript' 
 
-Plugin 'liuchengxu/vista.vim' 
 
-Plugin 'ColinRyan/sin' 
+Plug 'styled-components/vim-styled-components' 
 
-" Plugin 'fvictorio/vim-extract-variable'
 
-Plugin 'justinmk/vim-sneak'
+Plug 'voldikss/vim-translator' 
 
-Plugin 'vim-scripts/matchit.zip'
 
-" Plugin 'easymotion/vim-easymotion' 
+Plug 'ryanoasis/vim-devicons' 
 
-Plugin 'fvictorio/vim-yank-queue' 
 
-Plugin 'thalesmello/vim-textobj-methodcall' 
+Plug 'sodapopcan/vim-twiggy' 
 
-Plugin 'idanarye/vim-vebugger' 
 
-Plugin 'Shougo/vimproc.vim'
+Plug 'junegunn/gv.vim' 
 
-Plugin 'neoclide/jsonc.vim' 
 
-Plugin 'rbong/pimodoro' 
+Plug 'neoclide/denite-git' 
 
-Plugin 'neoclide/coc.nvim' 
 
-Plugin 'Chun-Yang/vim-textobj-chunk' 
+Plug 'tpope/vim-abolish' 
 
-" Plugin 'neoclide/vim-jsx-improve' 
 
-Plugin 'tweekmonster/dyslexic.vim' 
+Plug 'whiteinge/diffconflicts' 
 
-" Plugin 'jacobsimpson/nvim-example-lua-plugin' 
 
-" Plugin 'ludovicchabant/vim-gutentags' 
+Plug 'camspiers/animate.vim' 
 
-" Plugin 'kentaro/vim-textobj-function-php'
 
-Plugin 'tommcdo/vim-lion' 
+Plug 'blueyed/vim-diminactive' 
 
-" Plugin 'bps/vim-textobj-python'
 
-Plugin 'kana/vim-textobj-lastpat' 
+Plug 'vimtaku/vim-textobj-keyvalue' 
 
-" Plugin 'godlygeek/tabular'
 
-Plugin 'pbrisbin/vim-mkdir' 
+Plug 'tpope/vim-sexp-mappings-for-regular-people' 
 
-Plugin 'alvan/vim-closetag' 
 
-Plugin 'tommcdo/vim-express' 
+Plug 'guns/vim-sexp' 
 
-Plugin 'Julian/vim-textobj-variable-segment' 
 
-Plugin 'wellle/targets.vim'
+Plug 'Olical/conjure' , {'tag':'v3.0.0'}
 
-" Plugin 'rhysd/vim-textobj-anyblock'
 
-" Plugin 'thinca/vim-textobj-between' "This caused a bug in delete function
+" Plug 'liuchengxu/vim-clap' 
 
-Plugin 'mhinz/vim-startify' 
 
-Plugin 'tmux-plugins/vim-tmux-focus-events' 
+Plug 'bakpakin/fennel.vim'
 
-Plugin 'noahfrederick/vim-laravel' 
 
-Plugin 'danro/rename.vim'
+Plug 'Olical/aniseed', {'tag': 'v3.3.0'}
 
-Plugin 'galooshi/vim-import-js' 
+Plug 'rhysd/git-messenger.vim'
 
-Plugin 'brooth/far.vim' 
+Plug 'FooSoft/vim-argwrap'
 
-Plugin 'ton/vim-bufsurf' 
+Plug 'mattn/emmet-vim'
 
-" Plugin 'wokalski/autocomplete-flow' 
+" Plug 'OmniSharp/omnisharp-vim'
 
-Plugin 'itchyny/calendar.vim' 
+Plug 'liuchengxu/vista.vim' 
 
-Plugin 'michaeljsmith/vim-indent-object'
+Plug 'ColinRyan/sin' 
 
-" Plugin 'raghur/vim-textobj-line'
+" Plug 'fvictorio/vim-extract-variable'
 
-Plugin 'othree/jspc.vim'
+" Plug 'justinmk/vim-sneak'
 
-" Plugin 'poetic/vim-textobj-javascript'
+Plug 'vim-scripts/matchit.zip'
 
-" Plugin 'thinca/vim-textobj-function-javascript'
+Plug 'easymotion/vim-easymotion' 
 
-Plugin 'whatyouhide/vim-textobj-xmlattr'
+Plug 'fvictorio/vim-yank-queue' 
+
+Plug 'thalesmello/vim-textobj-methodcall' 
+
+Plug 'idanarye/vim-vebugger' 
+
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+
+Plug 'rbong/pimodoro' 
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'Chun-Yang/vim-textobj-chunk' 
+
+" Plug 'neoclide/vim-jsx-improve' 
+
+Plug 'tweekmonster/dyslexic.vim' 
+
+" Plug 'jacobsimpson/nvim-example-lua-plugin' 
+
+" Plug 'ludovicchabant/vim-gutentags' 
+
+" Plug 'kentaro/vim-textobj-function-php'
+
+Plug 'tommcdo/vim-lion' 
+
+" Plug 'bps/vim-textobj-python'
+
+" Plug 'kana/vim-textobj-lastpat' 
+
+" Plug 'godlygeek/tabular'
+
+Plug 'pbrisbin/vim-mkdir' 
+
+Plug 'alvan/vim-closetag' 
+
+Plug 'tommcdo/vim-express' 
+
+Plug 'Julian/vim-textobj-variable-segment' 
+
+Plug 'wellle/targets.vim'
+
+" Plug 'rhysd/vim-textobj-anyblock'
+
+" Plug 'thinca/vim-textobj-between' "This caused a bug in delete function
+
+Plug 'mhinz/vim-startify' 
+
+Plug 'tmux-plugins/vim-tmux-focus-events' 
+
+Plug 'noahfrederick/vim-laravel' 
+
+Plug 'danro/rename.vim'
+
+Plug 'galooshi/vim-import-js' 
+
+Plug 'brooth/far.vim' 
+
+Plug 'ton/vim-bufsurf' 
+
+" Plug 'wokalski/autocomplete-flow' 
+
+Plug 'itchyny/calendar.vim' 
+
+Plug 'michaeljsmith/vim-indent-object'
+
+" Plug 'raghur/vim-textobj-line'
+
+Plug 'othree/jspc.vim'
+
+" Plug 'poetic/vim-textobj-javascript'
+
+" Plug 'thinca/vim-textobj-function-javascript'
+
+Plug 'whatyouhide/vim-textobj-xmlattr'
      
-" Plugin 'jelera/vim-javascript-syntax'
+" Plug 'jelera/vim-javascript-syntax'
 
-" Plugin 'carlitux/deoplete-ternjs'
+" Plug 'carlitux/deoplete-ternjs'
      
-" Plugin 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
      
-" Plugin 'chemzqm/vim-jsx-improve'
+" Plug 'chemzqm/vim-jsx-improve'
      
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
-Plugin 'tpope/vim-projectionist'
+Plug 'tpope/vim-projectionist'
 
-Plugin 'ColinRyan/vim-skeletons'
+Plug 'ColinRyan/vim-skeletons'
 
-" Plugin 'roxma/LanguageServer-php-neovim'
+" Plug 'roxma/LanguageServer-php-neovim'
      
-Plugin 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
      
-" Plugin 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
      
-Plugin 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
      
-Plugin 'tpope/vim-cucumber'
+Plug 'tpope/vim-cucumber'
      
-Plugin 'c9s/phpunit.vim'
+Plug 'c9s/phpunit.vim'
      
-" Plugin 'autozimu/LanguageClient-neovim'
+" Plug 'autozimu/LanguageClient-neovim'
      
-Plugin 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
      
-Plugin 'elzr/vim-json'
+Plug 'elzr/vim-json'
     
-Plugin 'MaxMellon/vim-jsx-pretty'
+Plug 'MaxMellon/vim-jsx-pretty'
     
-" Plugin 'kana/vim-textobj-function'
+" Plug 'kana/vim-textobj-function'
     
-Plugin 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-user'
     
-Plugin 'kana/vim-operator-user'
+Plug 'kana/vim-operator-user'
     
-" Plugin 'rafi/vim-denite-z'
+" Plug 'rafi/vim-denite-z'
     
-Plugin 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', {'do': ':UpdateRemotePlugins'}
     
-" Plugin 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
     
-" Plugin 'sampson-chen/sack'
+" Plug 'sampson-chen/sack'
 
-Plugin 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim'
 
-" Plugin 'brooth/far.vim'
+" Plug 'brooth/far.vim'
 
-Plugin 'blueshirts/darcula'
+Plug 'blueshirts/darcula'
 
-Plugin 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'
 
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
-Plugin 'machakann/vim-swap'
+Plug 'machakann/vim-swap'
 
-" Plugin 'adoy/vim-php-refactoring-toolbox'
+" Plug 'adoy/vim-php-refactoring-toolbox'
 
-" Plugin 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 
-Plugin 'sniphpets/sniphpets'
+Plug 'sniphpets/sniphpets'
 
-Plugin 'sniphpets/sniphpets-common'
+Plug 'sniphpets/sniphpets-common'
 
-" Plugin 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim'
 
-" Plugin 'padawan-php/deoplete-padawan'
+" Plug 'padawan-php/deoplete-padawan'
 
-Plugin 'docteurklein/neovim-php'
+Plug 'docteurklein/neovim-php'
 
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
-Plugin 'noahfrederick/vim-composer'
+Plug 'noahfrederick/vim-composer'
 
-Plugin 'simnalamburt/vim-mundo'
+Plug 'simnalamburt/vim-mundo'
 
-Plugin 'ColinRyan/auto-pairs'
+Plug 'ColinRyan/auto-pairs'
 
-Plugin 'gmarik/Vundle.vim'
+" Plug 'gmarik/Vundle.vim'
 
-" Plugin 'easymotion/vim-easymotion'
 
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
-Plugin 'StanAngeloff/php.vim'
+Plug 'StanAngeloff/php.vim'
  
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
-Plugin 'jwalton512/vim-blade'
+Plug 'jwalton512/vim-blade'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
-" Plugin 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 
-" Plugin 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
-"Plugin 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 
-" Plugin 'shawncplus/phpcomplete.vim'
+" Plug 'shawncplus/phpcomplete.vim'
 
-Plugin 'benmills/vimux'
+Plug 'benmills/vimux'
 
-" Plugin 'joonty/vdebug'
+" Plug 'joonty/vdebug'
 
-Plugin 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
-Plugin 'lambdatoast/elm.vim'
+Plug 'lambdatoast/elm.vim'
 
-" Plugin 'swekaj/php-foldexpr.vim'
-Plugin 'rayburgemeestre/phpfolding.vim'
+" Plug 'swekaj/php-foldexpr.vim'
+Plug 'rayburgemeestre/phpfolding.vim'
 
-" Plugin 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
-Plugin 'joonty/vim-taggatron'
+Plug 'joonty/vim-taggatron'
 
-Plugin 'janko-m/vim-test'
+Plug 'janko-m/vim-test'
 
-Plugin 'mattn/gist-vim'
+Plug 'mattn/gist-vim'
 
-Plugin 'othree/html5.vim'
+Plug 'othree/html5.vim'
 
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
-" Plugin 'weierophinney/argumentrewrap'
+" Plug 'weierophinney/argumentrewrap'
 
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
-" Plugin 'ternjs/tern_for_vim'
+" Plug 'ternjs/tern_for_vim'
 
-" Plugin 'othree/yajs.vim'
+" Plug 'othree/yajs.vim'
 
-" Plugin 'othree/javascript-libraries-syntax.vim'
+" Plug 'othree/javascript-libraries-syntax.vim'
 
-" Plugin 'othree/es.next.syntax.vim'
+" Plug 'othree/es.next.syntax.vim'
 
-" Plugin 'isRuslan/vim-es6'
+" Plug 'isRuslan/vim-es6'
 
-" Plugin 'lvht/phpcd.vim'
+" Plug 'lvht/phpcd.vim'
 
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
-"Plugin 'joonty/vim-phpqa.git'
+"Plug 'joonty/vim-phpqa.git'
 
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
-"Plugin 'neomake/neomake'
+"Plug 'neomake/neomake'
+
+call plug#end()
+
+
+" tabs
+
+set sessionoptions+=tabpages,globals
+
+" call vundle#end()            " required
+" Easymotion
+
+let g:EasyMotion_do_mapping = 0
 
 " Lion
 
@@ -351,13 +417,13 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
 \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
-\    'javascript': ['eslint', 'flow', 'tsserver'],
-\    'javascript.jsx': ['eslint', 'flow', 'tsserver'],
+\    'javascript': ['flow', 'tsserver'],
+\    'javascript.jsx': ['flow', 'tsserver'],
 \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
-\    'flow': ['eslint', 'flow', 'tsserver'],
+\    'flow': ['flow', 'tsserver'],
 \    'json': [],
 \    'elm': ['elm_ls'],
-\    'jsx': [ 'eslint', 'flow', 'tsserver'],
+\    'jsx': [ 'flow', 'tsserver'],
 \    'cs': [ 'OmniSharp' ]
 \
 \}
@@ -368,9 +434,9 @@ let g:ale_fixers = {
 \    'css': ['prettier'],
 \    'sass': ['prettier'],
 \    'scss': ['prettier'],
-\    'javascript': ['eslint', 'importjs', 'prettier'],
-\    'javascript.jsx': ['eslint'. 'importjs', 'prettier'],
-\    'jsx': [ 'eslint', 'importjs']
+\    'javascript': ['importjs', 'prettier'],
+\    'javascript.jsx': ['importjs', 'prettier'],
+\    'jsx': [ 'importjs']
 \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
@@ -404,6 +470,9 @@ let test#strategy = "neovim"
 
 
 autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * :call vista#RunForNearestMethodOrFunction()
+
+
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -417,7 +486,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Keep Plugin commands between vundle#begin/end.
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
 
 filetype plugin indent on
 
@@ -533,6 +601,33 @@ let g:vebugger_leader='<leader>d'
 
 """"""""""""""""""""""
 " Mapping
+
+
+nnoremap <leader>nt :tabnew<cr>
+
+
+nnoremap gt :Denite tab<cr>
+
+nmap <silent> <Leader>tl <Plug>TranslateR
+vmap <silent> <Leader>tl <Plug>TranslateRV
+
+nnoremap <leader>gg :Twiggy<cr> 
+nnoremap <leader>gs :vertical Gstatus<cr> 
+nnoremap <silent> <Leader>lr <Plug>TranslateR
+nnoremap <leader>gr :Gr<cr> 
+
+nnoremap <leader>gw :Gw<cr> 
+
+" nnoremap " :Clap registers<cr> 
+
+nmap s <Plug>(easymotion-s2)
+
+
+" nnoremap <leader>b :Clap buffers<cr>  
+
+
+" nnoremap <leader>y :Clap yanks<cr>  
+" nnoremap " :Clap registers<cr>  
 
 
 nnoremap <leader>x :ArgWrap<cr>
@@ -750,6 +845,8 @@ nnoremap <leader>wf :vsplit ~/vimwiki/improvements.wiki<CR>O<esc>i<C-R>=strftime
 nnoremap <leader>rnf :Rename
 nmap <leader>rnw <Plug>(coc-rename)
 
+nnoremap <leader>rnt :TabooRename 
+
 " This goes to open or closed. BUUUUG
 nnoremap <leader>zj :call NextClosedFold('j')<cr>
 nnoremap <leader>zk :call NextClosedFold('k')<cr>
@@ -805,15 +902,16 @@ nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 " Never use it 2018-09-12 Wed 05:44 PM
-nnoremap <leader>w :w<cr> 
+nnoremap <leader>w :mks!<cr>:w<cr> 
 
 nnoremap <C-v>  :wq<CR> 
 
-nnoremap <C-q> :wq<CR> 
-inoremap <C-q> :wq<CR> 
+nnoremap <C-q> ::wq<CR> 
+inoremap <C-q> ::wq<CR> 
 
 nnoremap <C-f> :CtrlPMixed<cr>
 
+" nnoremap <C-f> :<C-u>Denite -split=floating -start-filter file/rec <CR>
 " let mapleader = "\<space>"
 
 let g:AutoPairsFlyMode = 0
@@ -919,13 +1017,13 @@ nnoremap <right> <nop>
 
 
 nnoremap <leader>. :vsplit ~/.config/nvim/fnl/config/init.fnl<cr>
-nnoremap <leader><leader> :vsplit $MYVIMRC<cr>
+map <leader><leader> :vsplit $MYVIMRC<cr>
 
 noremap <leader>i "ip
 nnoremap <C-Tab> :call toggle#Buffer()<CR>
 
 
-nnoremap <leader>b :<C-u>Denite buffer -split=floating<CR>
+" nnoremap <leader>b :<C-u>Denite buffer -split=floating<CR>
 nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer -split=floating<CR>
 
 " Config
@@ -1083,8 +1181,8 @@ augroup end
 augroup js
     autocmd!
     autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
-    " autocmd FileType javascript,typescript,json,jsx colorscheme sin
-    autocmd FileType javascript,typescript,json,jsx colorscheme darcula
+    autocmd FileType javascript,typescript,json,jsx colorscheme sin
+    " autocmd FileType javascript,typescript,json,jsx colorscheme darcula
 
 augroup end
 
@@ -1303,6 +1401,8 @@ fun! JavascriptSettings()
 
 
     let javaScript_fold = 1
+
+    autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 
     set tags=./.js.tags;/
