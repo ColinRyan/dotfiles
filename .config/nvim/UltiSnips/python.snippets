@@ -1,0 +1,38 @@
+snippet map "map" Ai
+map($1,$2)
+$0
+endsnippet
+
+snippet list "list" A
+list($1)
+$0
+endsnippet
+
+snippet fil "filter" A
+filter($1)
+$0
+endsnippet
+
+snippet fn "function" Aib
+def $1($2):
+    $3
+$0
+endsnippet
+
+snippet cv "new variable" Aib
+$1 = $0
+endsnippet
+
+snippet i "import modules" 
+from $1 import $2 
+$0
+endsnippet
+
+snippet rr "return" Aib
+return $0
+endsnippet
+
+
+snippet clv "logger debug" Ai
+logger.debug("$1", $1)
+endsnippet

@@ -1,0 +1,27 @@
+snippet ex "new ex command"
+$1:
+    user.vim_command_mode_exterm(":$2\n")
+$0
+endsnippet
+
+snippet insert "a voice" A
+$1:
+   user.vim_insert_mode("$2")
+$0
+endsnippet
+
+snippet term "it creates a terminal voice command"
+$1: "$2\n"
+$0
+endsnippet
+
+snippet key "creates a key function"
+	key($1)
+	$0
+endsnippet
+
+snippet normal "a voice command" A
+$1:
+    user.vim_normal_mode("$2")
+$0
+endsnippet
