@@ -22,7 +22,7 @@ URxvt.saveLines:            50
 URxvt.internalBorder:       3
 URxvt.lineSpace:            0
 
-URxvt.termName:             rxvt-unicode-256color
+!-URxvt.termName:             rxvt-unicode-256color
 
 ! Fonts
 URxvt.allow_bold:           false

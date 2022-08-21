@@ -8,7 +8,7 @@
 
 (set nvim.o.relativenumber false)
 ;; always show signcolumns
-(set nvim.o.signcolumn "yes")
+(set nvim.o.signcolumn "no")
 ;; Smaller updatetime for CursorHold & CursorHoldI
 (set nvim.o.updatetime 300)
 ;; Changes how the cursor behaves(set scrolloff 999)
@@ -29,6 +29,13 @@
 ;; set cindent
 
 (set nvim.o.undofile true)
+
+
+(set nvim.o.encoding "utf-8")
+(set nvim.o.autoindent true)
+(set nvim.o.cindent true)
+
+
 
 
 

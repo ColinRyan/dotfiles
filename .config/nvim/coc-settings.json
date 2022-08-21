@@ -1,5 +1,13 @@
 {
     "languageserver": {
+        "graphql": {
+          "command": "graphql-lsp",
+          "args": ["server", "-m", "stream"],
+          "filetypes": ["typescript", "typescriptreact", "graphql"],
+          "settings": {
+            "graphql-config.load.legacy": true
+          }
+        },
         "phplang": {
            "command": "php",
            "args": ["vendor/felixfbecker/language-server/bin/php-language-server.php"],
@@ -8,7 +16,9 @@
         "bash": {
            "command": "bash-language-server",
            "filetypes": ["sh"],
-           "args": ["start"]
+           "args": ["start"],
+           "ignoredRootPaths": ["~"]
+           
         },
         "elmLS": {
           "command": "elm-language-server",
@@ -17,10 +27,11 @@
           "initializationOptions": {
             "elmAnalyseTrigger": "change"
           }
-        },
+        }
         
     },
-    "diagnostic.displayByAle": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.displayByAle": false,
     "tsserver.log":"normal",
     "javascript.implementationsCodeLens.enable": true,
     "suggest.noselect": false,

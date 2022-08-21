@@ -530,7 +530,6 @@ autocmd! BufEnter webpack.mix.js set foldtext=MyWebpackMixFolds()
 
 let base16colorspace=256
 
-colorscheme sin
 
 
 command! W w !sudo tee % > /dev/null
@@ -555,7 +554,6 @@ augroup js
     autocmd FileType javascript,typescript,json,jsx syntax region bracketFold start="\[" end="\]" transparent fold
     autocmd FileType javascript,typescript,json,jsx syntax sync fromstart
     autocmd FileType javascript,typescript,json,jsx set foldmethod=syntax
-    autocmd FileType javascript,typescript,json,jsx colorscheme sin
 augroup end
 
 augroup snippets

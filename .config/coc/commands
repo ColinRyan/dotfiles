@@ -1,3 +1,15 @@
+python.setInterpreter
+python.setInterpreter
+pyright.version
+tsserver.goToProjectConfig
+tsserver.goToProjectConfig
+tsserver.goToProjectConfig
+workspace.renameCurrentFile
+tsserver.organizeImports
+react-refactor.extractToFile
+git.showCommit
+python.setInterpreter
+python.enableLinting
 python.upgradePythonLanguageServer
 document.jumpToNextSymbol
 tsserver.goToProjectConfig

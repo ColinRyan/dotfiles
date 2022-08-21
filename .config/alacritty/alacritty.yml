@@ -31,7 +31,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: none
+  decorations: full
   dynamic_title: true
 
 # Display tabs using this many cells (changes require restart)
@@ -177,7 +177,7 @@ bell:
   duration: 0
 
 # Background opacity
-background_opacity: 1.0
+window.opacity: 1.0
 
 # Mouse bindings
 #
@@ -290,7 +290,7 @@ key_bindings:
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }
-  - { key: Subtract, mods: Control, action: DecreaseFontSize             }
+  - { key: NumpadSubtract, mods: Control, action: DecreaseFontSize             }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }

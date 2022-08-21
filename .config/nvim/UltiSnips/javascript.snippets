@@ -22,25 +22,74 @@ def nestedInObject(snip):
    return notTheEndOfFile(snip) and (onNextLine(snip, r' *},*|:') or onPreviousLine(snip, r'},')) and onCurrentLine(snip, r':') == None
 endglobal
 
+
+snippet it "test"
+it("$1", () => {
+  cy.$2
+
+})
+$0
+endsnippet
+
+snippet desc "describe"
+describe("$1", () => {
+  before(() => {
+    cy.visit("http://localhost:3000")
+
+  })
+  $2
+})
+$0
+endsnippet
+
+
+
+
+
 post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
 snippet vs "ViewState Prop" Abi
 this.$1 = $2
 $0
 endsnippet
 
-snippet us "useState" aib
-const [$1, $2] = React.useState($3)$0
 
+
+snippet um "useMutation"
+	
+
+const [$1Mutation, { data, loading, error }] = useMutation($2, {
+		...toastHandler({
+		success: '$3',
+		failure: "$4",
+	}),
+})
+$0
 endsnippet
-snippet ue "useEffect" aib
+
+
+snippet uH "use hook" Aib
+const $1 = use$2($3)$0
+endsnippet
+
+snippet uGs "global state" Aib
+const $1 = useSelector($2)$0
+endsnippet
+
+snippet uS "local state" Aib
+const [$1, $2] = React.useState($3)$0
+endsnippet
+
+snippet ue "useEffect" Aib
 useEffect(() => {
     $2
 }, [$1])
 $0
 endsnippet
+
 snippet intl "internationalizeation" i
 intl.formatMessage({id: '$1'})$2
 endsnippet
+
 snippet <b "button" Abi
 <button 
   type='button'
@@ -136,20 +185,27 @@ const $4 = enhance(
 		])
 $0
 endsnippet
-snippet ? "ternary"  Ai
+
+
+
+snippet ? "ternary"  Ab
+const $1 = ($2) ? $3 : $4
+endsnippet
+
+snippet ? "ternary"  
 (${1:${VISUAL}}) ? $2 : $3
 endsnippet
+
 snippet wy "test"
 `!p snip.rv = snip.v.text`
 endsnippet
 priority 2
-snippet <{ "flow object in type" Ai
-<{}
-endsnippet	
 snippet cs "styled component" Ab
-const $1 = styled.$2\`
-   $3
-\`
+const $1 = styled('$2', ({$theme}) => {
+  return {
+    $3
+  }
+})
 $0
 endsnippet
 snippet isc "import styled components" Ab
@@ -189,7 +245,7 @@ $0
 endsnippet
 priority 1
 snippet '(?<=\$){' "object" Air
-{$1}
+{$1}$0
 endsnippet	
 priority 2
 snippet '(?<=, ){' "object" Air
@@ -198,6 +254,10 @@ endsnippet
 snippet '(?<=[=\(]){' "object" Air
 {$1}$0
 endsnippet	
+priority 0
+snippet { "object" Ai
+{$1}$0
+endsnippet
 priority 1
 snippet '(?<![=\$]){' "object" "len(snip.buffer) > snip.line+1 and re.search(r':|}*', snip.buffer[snip.line+1]) == None" Aier
 {
@@ -207,9 +267,21 @@ endsnippet
 priority 1
 context "notTheEndOfFile(snip) and onCurrentLine(snip, r'\(\)') == None"
 snippet ( "braces" Aei
-($1)
+(${1:${VISUAL}})$0
+
+endsnippet
+priority 0 
+snippet ( "braces" Ai
+(${1:${VISUAL}})$0
 endsnippet
 priority 3
+
+
+context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
+snippet ' "nested ternary"  A
+$1: ($2) ? $3: $4,
+$0
+endsnippet
 
 context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
 snippet ' "nested quote"  A
@@ -262,7 +334,7 @@ endsnippet
 priority 1
 
 context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
-snippet [ "array"   e
+snippet [ "array"   Ae
 [
     $1
 ],
@@ -277,8 +349,12 @@ endsnippet
 snippet "(?<== )\[" "array"  Ar
 [
     $1
-]
+]$0
 endsnippet	
+priority 0
+snippet [ "array" Ai
+[$1]$0
+endsnippet
 priority 2
 
 context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
@@ -333,6 +409,36 @@ const $1 = {
 
 $0
 endsnippet
+snippet ` "backtick quote in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Aeb
+
+const $1 = `$2`
+
+$0
+endsnippet
+
+snippet ' "single quote in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Aeb
+
+const $1 = '$2'
+
+$0
+endsnippet
+
+snippet " "quote in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Aeb
+
+const $1 = "$2"
+
+$0
+endsnippet
+
+snippet [ "array in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Aeb
+
+const $1 = [
+	$2
+]
+
+$0
+endsnippet
+
 priority 1
 
 context "notTheEndOfFile(snip) and re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None"
@@ -496,72 +602,6 @@ endsnippet
 
 
 
-snippet red "Ramda reduce"  Aib
-
-R.reduce(${1:func}, ${2:init}, ${3:collection})
-endsnippet
-
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet red "Ramda reduce"  Ai
-R.reduce(${1:func}, ${2:init}),
-endsnippet
-
-snippet rtp "Ramda toPairs"  Aib
-R.toPairs(${1:obj})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rtp "Ramda toPairs"  Ai
-R.toPairs,
-endsnippet
-
-snippet rv "Ramda values"  Aib
-R.values(${1:obj})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rv "Ramda values"  Ai
-R.values,
-endsnippet
-
-snippet rfl "Ramda filter"  Aib
-R.filter(${1:isWhatImLookingFor}, ${2:collection})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rfl "Ramda filter"  Ai
-R.filter(${1:isWhatImLookingFor}),
-endsnippet
-
-snippet rfi "Ramda find"  Aib
-R.find(${1:needle}, ${2:haystack})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rfi "Ramda find"  Ai
-R.find(${1:needle}),
-endsnippet
-
-
-snippet rm "Ramda map"  Aib
-R.map(${1:func}, ${2: collection})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rm "Ramda map"  Ai
-R.map(${1:func}),
-endsnippet
-
-
-snippet rev "Ramda evolve"  Aib 
-R.evolve(${1:transform}, ${2:object})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rev "Ramda evolve"  Ae 
-R.evolve(${1:transform}),
-endsnippet
 
 snippet fl "flatlist"
 <FlatList
@@ -569,15 +609,6 @@ snippet fl "flatlist"
 	keyExtractor={(item) => item.id}
 	renderItem={${1:(item) => <Text>cat</Text>}}
 />
-endsnippet
-snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" 
-R.assoc("${1:prop}", ${2:value}, ${3:object})
-endsnippet
-	
-snippet rc "Ramda compose" Aib
-R.compose(
-    $2
-)($1)
 endsnippet
 	
 snippet psa "prevState assoc" Aib
@@ -673,10 +704,6 @@ this.setState((prevState) => {
 })
 endsnippet
 
-snippet af "anon function" i
-($1) => $2
-endsnippet
-
 snippet scu "shouldComponetUpdate"
 shouldComponentUpdate(nextProps, nextState) {
     return ${1: false}
@@ -743,7 +770,7 @@ async componentDidMount() {
 endsnippet
 	
 snippet clv "console log value" Ai
-console.log("$1", $1)
+console.debug("$1", $1)
 endsnippet
 
 

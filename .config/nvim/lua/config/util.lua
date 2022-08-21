@@ -1,3 +1,4 @@
+local _2afile_2a = "/home/colin/.config/nvim/fnl/config/util.fnl"
 local nvim = require("aniseed.nvim")
 local function expand(path)
   return nvim.fn.expand(path)
@@ -11,4 +12,4 @@ end
 local function lua_file(path)
   return nvim.ex.luafile(path)
 end
-return {["aniseed/module"] = "config.util", ["config-path"] = nvim.fn.stdpath("config"), ["exists?"] = exists_3f, ["lua-file"] = lua_file, expand = expand, glob = glob}
+return {["aniseed/module"] = "config.util", expand = expand, glob = glob, ["exists?"] = exists_3f, ["lua-file"] = lua_file, ["config-path"] = nvim.fn.stdpath("config")}

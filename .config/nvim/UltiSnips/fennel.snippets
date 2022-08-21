@@ -1,13 +1,40 @@
+snippet v "vnoremap"
+(noremap :v :$1 :$2)
+	$0
+endsnippet
+
+snippet i "inoremap"
+(noremap :i :$1 :$2)
+	$0
+endsnippet
+
+snippet n "nnoremap"
+(noremap :n :$1 :$2)
+$0
+endsnippet
+
+snippet fn "function" Ab
+(fn $1 [$2]
+  $3
+)
+$0
+endsnippet
+snippet .g "global" Ab
+(set nvim.g.$1 $2)	
+endsnippet
+
+snippet .o "description" Ab
+(set nvim.o.$1 $2)
+$0
+endsnippet
+
 snippet set "set" Ab
 (set $1 $2)
 $0
 endsnippet
-snippet ( "parenthesis" Ab
+
+snippet ( "parenthesis" 
 ($1)
 $0
 endsnippet
 
-snippet nvim "set nvim" Ab
-(set nvim.$1 $2)
-$0
-endsnippet

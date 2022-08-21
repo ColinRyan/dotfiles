@@ -18,3 +18,4 @@
  :exists? exists?
  :lua-file lua-file
  :config-path (nvim.fn.stdpath "config")}
+

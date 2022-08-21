@@ -1,27 +1,18 @@
-// @flow
 // # Imports
 
 import * as React from "react"
-import system from "@rebass/components";
-import  {
-  $3  
-} from "../Core/CoreTypes.js"
 
-// # Types
 
-type localProps = {
-    $2
-}
 
 // # Styled
 
 
-const `!p snip.rv = snip.fn.split('.')[0]` = ({ $1 }: localProps) => {
+const `!p snip.rv = snip.fn.split('.')[0]` = ({ $1 }) => {
   // # Funcs
 
   
   $0
-  return (${4:${VISUAL}})
+  return ($2)
 }
 
 export default `!p snip.rv = snip.fn.split('.')[0]`

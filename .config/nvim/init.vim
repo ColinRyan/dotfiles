@@ -10,6 +10,69 @@ call plug#begin(stdpath('data') . 'plugged')
 " Plugins
 
 
+Plug 'https://gitlab.com/yorickpeterse/nvim-window.git' 
+
+
+Plug 'norcalli/nvim-colorizer.lua' 
+
+
+Plug 'jparise/vim-graphql' 
+
+
+Plug 'mfussenegger/nvim-dap-python' 
+
+
+Plug 'ElmCast/elm-vim' 
+
+
+Plug 'tpope/vim-rhubarb' 
+
+Plug 'fannheyward/telescope-coc.nvim' 
+
+
+Plug 'tommcdo/vim-ninja-feet' 
+
+
+Plug 'nvim-treesitter/nvim-treesitter-textobjects' 
+
+
+Plug 'nvim-lua/popup.nvim'
+
+Plug 'nvim-lua/plenary.nvim'
+
+" Plug 'code-biscuits/nvim-biscuits'
+
+Plug 'mfussenegger/nvim-dap'
+
+Plug 'rcarriga/nvim-dap-ui'
+
+Plug 'Pocco81/DAPInstall.nvim'
+
+Plug 'glepnir/dashboard-nvim'
+
+Plug 'edluffy/specs.nvim'
+
+Plug 'nvim-telescope/telescope.nvim' 
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+
+Plug 'tsbohc/zest.nvim' 
+
+
+Plug 'editorconfig/editorconfig-vim' 
+
+
+Plug 'gennaro-tedesco/nvim-peekup' 
+
+
+Plug 'ojroques/vim-oscyank' 
+
+
+Plug 'Olical/nvim-local-fennel'
+
+Plug 'tpope/vim-obsession' 
+
+
 Plug 'gcmt/taboo.vim' 
 
 
@@ -51,9 +114,7 @@ Plug 'camspiers/animate.vim'
 
 Plug 'blueyed/vim-diminactive' 
 
-
-Plug 'vimtaku/vim-textobj-keyvalue' 
-
+" Plug 'vimtaku/vim-textobj-keyvalue' 
 
 Plug 'tpope/vim-sexp-mappings-for-regular-people' 
 
@@ -61,7 +122,7 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-sexp' 
 
 
-Plug 'Olical/conjure' , {'tag':'v3.0.0'}
+Plug 'Olical/conjure' , {'tag':'v4.25.0'}
 
 
 " Plug 'liuchengxu/vim-clap' 
@@ -70,7 +131,8 @@ Plug 'Olical/conjure' , {'tag':'v3.0.0'}
 Plug 'bakpakin/fennel.vim'
 
 
-Plug 'Olical/aniseed', {'tag': 'v3.3.0'}
+
+Plug 'Olical/aniseed', {'tag': 'v3.23.0'}
 
 Plug 'rhysd/git-messenger.vim'
 
@@ -269,7 +331,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 
 Plug 'scrooloose/nerdtree'
 
@@ -285,7 +347,7 @@ Plug 'benmills/vimux'
 
 Plug 'vimwiki/vimwiki'
 
-Plug 'lambdatoast/elm.vim'
+" Plug 'lambdatoast/elm.vim'
 
 " Plug 'swekaj/php-foldexpr.vim'
 Plug 'rayburgemeestre/phpfolding.vim'
@@ -330,54 +392,121 @@ Plug 'w0rp/ale'
 
 call plug#end()
 
+" Talon
+let &titlestring ='VIM MODE:%{mode()} - (%f) %t'
+set title
+" set title
+" autocmd BufEnter * let &titlestring ='VIM - (%f) %t'
+" set title " required for neovim
+
+" Text Objects
+
+" call textobj#user#plugin('selfclosingtag', {
+"             \   'tag': {
+"             \      'pattern': ['<', '/>'],
+"             \      'select-a': 'aT',
+"             \      'select-i': 'iT',
+"             \   },
+"             \})
+
+
+lua <<EOF
+
+function initFNL()
+
+    local nvim = require("aniseed.nvim")
+    local compile = require("aniseed.compile")
+
+
+    config_dir = nvim.fn.stdpath("config")
+    compile.glob("**/*.fnl", (config_dir .. "/fnl"), (config_dir .. "/lua") )
+    package.loaded["dotfiles.init"] = nil
+    _G["dotfiles.init"] = nil
+    require("dotfiles.init")
+    nvim.command("source $MYVIMRC")
+    print("meow")
+end
+
+function translateWordUnderCursor()
+    local wordToTranslate = vim.api.nvim_call_function("expand", { "<cword>" })
+    local translations = {}
+
+    translations["end"] = "begin"
+    translations["const"] = "let"
+    translations["var"] = "const"
+    translations["let"] = "var"
+    translations["begin"] = "end"
+    translations["px"] = "em"
+    translations["em"] = "rem"
+    translations["rem"] = "px"
+    translations["false"] = "true"
+    translations["False"] = "True"
+    translations["true"] = "false"
+    translations["True"] = "False"
+    translations["public"] = "private"
+    translations["private"] = "protected"
+    translations["protected"] = "public"
+    translations["no"] = "yes"
+    translations["yes"] = "no"
+
+    if translations[wordToTranslate] then 
+        vim.api.nvim_command("normal! ciw" .. translations[wordToTranslate] )
+    else
+        print('word not in translations')
+    end
+end
+
+
+EOF
+
 
 " tabs
 
-set sessionoptions+=tabpages,globals
+" set sessionoptions+=tabpages,globals
 
 " call vundle#end()            " required
 " Easymotion
 
-let g:EasyMotion_do_mapping = 0
+" let g:EasyMotion_do_mapping = 0
 
 " Lion
 
-let b:lion_squeeze_spaces = 1
+" let b:lion_squeeze_spaces = 1
 
 " Git Gutter
 
-let g:gitgutter_max_signs = 1200
-let g:gitgutter_diff_args = "-w"
+" let g:gitgutter_max_signs = 1200
+" let g:gitgutter_diff_args = "-w"
 " Surround
 
-let g:surround_indent = 0
+" let g:surround_indent = 0
 
 " OmniSharp
 
 " Use ctrlp.vim
-let g:OmniSharp_selector_ui = 'ctrlp'  
+" let g:OmniSharp_selector_ui = 'ctrlp'  
 
 " Use the stdio version of OmniSharp-roslyn:
-let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_server_stdio = 1
 
 " VISTA
 
 " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#enable_icon = 1
 
 " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
-let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
-let g:vista_default_executive = 'coc'
-let g:vista_sidebar_width = 60
+" let g:vista#renderer#icons = {
+" \   "function": "\uf794",
+" \   "variable": "\uf71b",
+" \  }
+" let g:vista_default_executive = 'coc'
+" let g:vista_sidebar_width = 60
 
 " Sneak
 
-let g:sneak#label = 1
+" let g:sneak#label = 1
 
-let javaScript_plugin_flow = 1
+" let javaScript_plugin_flow = 1
 
 " vimwiki VimWiki
 
@@ -386,58 +515,58 @@ let javaScript_plugin_flow = 1
             " \{'path': '~/vimwiki/streaming/', 'index': 'index'},
             " \{'path': '~/vimwiki/writing/', 'index': 'index'}
  
-let g:sneak#label = 1
-let g:tmux_navigator_save_on_switch = 2
+" let g:sneak#label = 1
+" let g:tmux_navigator_save_on_switch = 2
 
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#auto_complete_start_length = 1
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#file#enable_buffer_path = 1
+" let g:deoplete#auto_complete_start_length = 1
 
 "Add extra filetypes
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue'
-                \ ]
+" let g:deoplete#sources#ternjs#filetypes = [
+"                 \ 'jsx',
+"                 \ 'javascript.jsx',
+"                 \ 'vue'
+"                 \ ]
 
 " These lines are here for phpcd
 
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_delay = 1000 
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_save = 1
-let g:ale_set_quickfix = 0
-let g:ale_set_loclist = 0
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-let g:ale_fix_on_save = 1
+" let g:ale_javascript_prettier_use_local_config = 1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_delay = 1000 
+" let g:ale_sign_column_always = 1
+" let g:ale_lint_on_save = 1
+" let g:ale_set_quickfix = 0
+" let g:ale_set_loclist = 0
+" let g:ale_open_list = 0
+" let g:ale_keep_list_window_open = 0
+" let g:ale_fix_on_save = 1
 
 
 
-let g:ale_linters = {
-\    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
-\    'javascript': ['flow', 'tsserver'],
-\    'javascript.jsx': ['flow', 'tsserver'],
-\    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
-\    'flow': ['flow', 'tsserver'],
-\    'json': [],
-\    'elm': ['elm_ls'],
-\    'jsx': [ 'flow', 'tsserver'],
-\    'cs': [ 'OmniSharp' ]
-\
-\}
+" let g:ale_linters = {
+" \    'php': ['php','phpcs', 'phpmd', 'phpstan', 'php-cs-fixer', 'phan'],
+" \    'javascript': ['flow', 'tsserver'],
+" \    'javascript.jsx': ['flow', 'tsserver'],
+" \    'python': ['pycodestyle', 'mypy', 'flake8', 'prospector', 'pyflakes'],
+" \    'flow': ['flow', 'tsserver'],
+" \    'json': [],
+" \    'elm': ['elm_ls'],
+" \    'jsx': [ 'flow', 'tsserver'],
+" \    'cs': [ 'OmniSharp' ]
+" \
+" \}
 
-let g:ale_fixers = {
-\    'php': ['phpcbf','php_cs_fixer'],
-\    'python': ['black', 'isort'],
-\    'css': ['prettier'],
-\    'sass': ['prettier'],
-\    'scss': ['prettier'],
-\    'javascript': ['importjs', 'prettier'],
-\    'javascript.jsx': ['importjs', 'prettier'],
-\    'jsx': [ 'importjs']
-\}
+" let g:ale_fixers = {
+" \    'php': ['phpcbf','php_cs_fixer'],
+" \    'python': ['black', 'isort'],
+" \    'css': ['prettier'],
+" \    'sass': ['prettier'],
+" \    'scss': ['prettier'],
+" \    'javascript': ['importjs', 'prettier'],
+" \    ' -pjavascript.jsx': ['importjs', 'prettier'],
+" \    'jsx': [ 'importjs']
+" \}
 
 "let g:neomake_php_enabled_makers = ['php', 'phpmd', 'phpcs']
 
@@ -448,41 +577,28 @@ let g:ale_fixers = {
 
 "autocmd! BufWritePost,BufEnter  * Neomake
 
-let g:vdebug_options = {}
-let g:vdebug_options["path_map"] = {
-            \"/home/colin/projects/patientme/core/api/public": "/home/vagrant/api/public"
-            \}
-let g:vdebug_options["port"] = 9000
-let g:vdebug_options["break_on_open"] = 0
-let g:vdebug_options["on_close"] = 'detach'
 
-let g:gutentags_file_list_command = 'rg --files'
-let g:tagcommands = {}
-let g:tagcommands["php"] = {"tagfile":".php.tags", "cmd": "ctags","args":"-R --exclude=node_modules --exclude=.git --exclude=vendor"}
-let g:tagcommands["javascript"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R."}
-let g:tagcommands["javascript.jsx"] = {"tagfile":".js.tags", "cmd": "ctags","args":"-R."}
+" let g:taggatron_verbose = 0
 
-let g:taggatron_verbose = 0
-
-let test#strategy = "neovim"
+" let test#strategy = "neovim"
 
 "let g:ycm_auto_trigger = 1
 
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * :call vista#RunForNearestMethodOrFunction()
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * :call vista#RunForNearestMethodOrFunction()
 
 
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<leader>e"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/UltiSnips"
-let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME . '/.vim/snippets/UltiSnips']
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsExpandTrigger="<leader>e"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/UltiSnips"
+" let g:UltiSnipsSnippetDirectories = ['UltiSnips', $HOME . '/.vim/snippets/UltiSnips']
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 " Keep Plugin commands between vundle#begin/end.
 " All of your Plugins must be added before the following line
@@ -492,107 +608,108 @@ filetype plugin indent on
 
 "Plugins config
 
-let g:closetag_filenames='*.html,*.xhtml,*.phtml,*.js'
-let g:closetag_xhtml_filenames='*.xhtml,*.jsx,*.js'
-let g:closetag_filetypes='html,xhtml,phtml,js'
-let g:closetag_xhtml_filetypes='xhtml,jsx,js'
-let g:closetag_emptyTags_caseSensitive = 1
-let g:closetag_shortcut = '>'
-let g:closetag_close_shortcut = '<leader>>'
+" let g:closetag_filenames='*.html,*.xhtml,*.phtml,*.js'
+" let g:closetag_xhtml_filenames='*.xhtml,*.jsx,*.js'
+" let g:closetag_filetypes='html,xhtml,phtml,js'
+" let g:closetag_xhtml_filetypes='xhtml,jsx,js'
+
+" let g:closetag_emptyTags_caseSensitive = 1
+" let g:closetag_shortcut = '>'
+" let g:closetag_close_shortcut = '<leader>>'
 
 
-let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
-let skeletons#autoRegister = 1
+" let skeletons#skeletonsDir = "~/.config/nvim/skeletons"
+" let skeletons#autoRegister = 1
 
 " let g:jsx_ext_required = 0
 
-let g:javscript_plugin_flow = 1
+" let g:javscript_plugin_flow = 1
 
 
-let g:loaded_python_provider = 1
-let g:python_host_skip_check=1
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_skip_check=1
-let g:python3_host_prog = '/usr/bin/python3'
+" let g:loaded_python_provider = 1
+" let g:python_host_skip_check=1
+" let g:python_host_prog = '/usr/bin/python'
+" let g:python3_host_skip_check=1
+" let g:python3_host_prog = '/usr/bin/python3'
 
-let g:ctrlp_max_files=30001 
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_working_path_mode = 'wr'
-let g:ctrlp_cmd = 'CtrlPTag'
-let g:ctrlp_lazy_update = 1
-let g:ctrlp_by_filename = 1
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_root_markers =  ['composer.json', '.gitignore']
+" let g:ctrlp_max_files=30001 
+" let g:ctrlp_clear_cache_on_exit = 0
+" let g:ctrlp_working_path_mode = 'wr'
+" let g:ctrlp_cmd = 'CtrlPTag'
+" let g:ctrlp_lazy_update = 1
+" let g:ctrlp_by_filename = 1
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_root_markers =  ['composer.json', '.gitignore']
 
-let g:ctrlp_open_func = { "files": 'GoToMostImportantPlace' }
-if executable('rg')
+" let g:ctrlp_open_func = { "files": 'GoToMostImportantPlace' }
+" if executable('rg')
     " use rg for ack
-    let g:ackprg = 'rg --vimgrep --no-heading'
+    " let g:ackprg = 'rg --vimgrep --no-heading'
 
     " use rg over grep
-    set grepprg=rg\ --color=never
+    " set grepprg=rg\ --color=never
 
     " Use rg in CtrlP
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-    let g:ctrlp_use_caching = 0
+    " let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    " let g:ctrlp_use_caching = 0
 
 
 
-    call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opts', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
+    " call denite#custom#var('grep', 'command', ['rg'])
+    " call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+    " call denite#custom#var('grep', 'recursive_opts', [])
+    " call denite#custom#var('grep', 'pattern_opts', ['--regexp'])
+    " call denite#custom#var('grep', 'separator', ['--'])
+    " call denite#custom#var('grep', 'final_opts', [])
 
-endif
+" endif
 
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_show_linenumbers = 2
-let g:tagbar_compact = 1
+" let g:tagbar_autoclose = 1
+" let g:tagbar_autofocus = 1
+" let g:tagbar_show_linenumbers = 2
+" let g:tagbar_compact = 1
 
-let NERDTreeShowLineNumbers = 1
-
-
-let g:LanguageClient_rootMarkers = ['.flowconfig']
-let g:LanguageClient_autostart = 1
-" let g:LanguageClient_loggingLevel = 'DEBUG'
-let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
-let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
-let g:LanguageClient_diagnosticDisplay = {}
-let g:LanguageClient_serverCommands = {
-    \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
-    \ 'javascript': ['./node_modules/.bin/flow', 'lsp'],
-    \ 'javascript.jsx': ['./node_modules/.bin/flow', 'lsp'],
-    \ 'python': ['pyls']
-        \}
+" let NERDTreeShowLineNumbers = 1
 
 
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', 'Up', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', 'Down', '<denite:move_to_previous_line>', 'noremap')
+" let g:LanguageClient_rootMarkers = ['.flowconfig']
+" let g:LanguageClient_autostart = 1
+" " let g:LanguageClient_loggingLevel = 'DEBUG'
+" let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
+" let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
+" let g:LanguageClient_diagnosticDisplay = {}
+" let g:LanguageClient_serverCommands = {
+"     \ 'php': ['php', $HOME . '/.vim/bundle/LanguageServer-php-neovim/vendor/felixfbecker/language-server/bin/php-language-server.php'],
+"     \ 'javascript': ['./node_modules/.bin/flow', 'lsp'],
+"     \ 'javascript.jsx': ['./node_modules/.bin/flow', 'lsp'],
+"     \ 'python': ['pyls']
+"         \}
+
+
+" call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+" call denite#custom#map('insert', 'Up', '<denite:move_to_next_line>', 'noremap')
+" call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+" call denite#custom#map('insert', 'Down', '<denite:move_to_previous_line>', 'noremap')
 
 "Vimux settings
 
-let g:VimuxUseNearest = 1
+" let g:VimuxUseNearest = 1
 
-let mapleader = ","
-let maplocalleader = "-"
+" let mapleader = ","
+" let maplocalleader = "-"
 
 
 "Vim test
 
-let test#stategy = "vimux"
+" let test#stategy = "vimux"
 
-let g:dispatch_compilers = { }
-let g:dispatch_compilers['./vendor/bin/'] = ''
-let g:dispatch_compilers['phpunit'] = 'phpunit'
+" let g:dispatch_compilers = { }
+" let g:dispatch_compilers['./vendor/bin/'] = ''
+" let g:dispatch_compilers['phpunit'] = 'phpunit'
 
 " Debugger
 
-let g:vebugger_leader='<leader>d'
+" let g:vebugger_leader='<leader>d'
 """"""""""""""""""""""
 
 " Abbreviations
@@ -603,24 +720,27 @@ let g:vebugger_leader='<leader>d'
 " Mapping
 
 
-nnoremap <leader>nt :tabnew<cr>
+" vnoremap <leader>c :OSCYank<CR>  
 
 
-nnoremap gt :Denite tab<cr>
+" nnoremap <leader>nt :tabnew<cr>
 
-nmap <silent> <Leader>tl <Plug>TranslateR
-vmap <silent> <Leader>tl <Plug>TranslateRV
 
-nnoremap <leader>gg :Twiggy<cr> 
-nnoremap <leader>gs :vertical Gstatus<cr> 
-nnoremap <silent> <Leader>lr <Plug>TranslateR
-nnoremap <leader>gr :Gr<cr> 
+" nnoremap gt :Denite tab<cr>
 
-nnoremap <leader>gw :Gw<cr> 
+" nmap <silent> <Leader>tl <Plug>TranslateR
+" vmap <silent> <Leader>tl <Plug>TranslateRV
+
+" nnoremap <leader>gg :Twiggy<cr> 
+" nnoremap <leader>gs :vertical Git<cr> 
+" nnoremap <silent> <Leader>lr <Plug>TranslateR
+" nnoremap <leader>gr :Gr<cr> 
+
+" nnoremap <leader>gw :Gw<cr> 
 
 " nnoremap " :Clap registers<cr> 
 
-nmap s <Plug>(easymotion-s2)
+" nmap s <Plug>(easymotion-s2)
 
 
 " nnoremap <leader>b :Clap buffers<cr>  
@@ -630,54 +750,54 @@ nmap s <Plug>(easymotion-s2)
 " nnoremap " :Clap registers<cr>  
 
 
-nnoremap <leader>x :ArgWrap<cr>
+" nnoremap <leader>x :ArgWrap<cr>
 
 
-nnoremap <leader>gb :Gblame -w<cr>
+" nnoremap <leader>gb :Gblame -w<cr>
 
 
-nmap pe w%pp=`]
+" nmap pe w%pp=`]
 
 
-nnoremap <space>gs /scss<cr>:noh<cr>gf
+" nnoremap <space>gs /scss<cr>:noh<cr>gf
 
 
 
 
 " Remember <bar instead of |
 
-nnoremap  <leader>q :if bufname("%") == "" <bar> :q <bar> else <bar> :wq <bar> endif<cr>
+" nnoremap  <leader>q :if bufname("%") == "" <bar> :q <bar> else <bar> :wq <bar> endif<cr>
 
-vnoremap dd :g/./d<cr>
-vnoremap dc :g/console/d<cr>
+" vnoremap dd :g/./d<cr>
+" vnoremap dc :g/console/d<cr>
 
 " Moving back and forth between lines of same or lower indentation.
-nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
-nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
-nnoremap <silent> [L :call NextIndent(0, 0, 1, 1)<CR>
-nnoremap <silent> ]L :call NextIndent(0, 1, 1, 1)<CR>
-vnoremap <silent> [l <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
-vnoremap <silent> ]l <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
-vnoremap <silent> [L <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
-vnoremap <silent> ]L <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
-onoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
-onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
-onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
-onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
+" nnoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+" nnoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+" nnoremap <silent> [L :call NextIndent(0, 0, 1, 1)<CR>
+" nnoremap <silent> ]L :call NextIndent(0, 1, 1, 1)<CR>
+" vnoremap <silent> [l <Esc>:call NextIndent(0, 0, 0, 1)<CR>m'gv''
+" vnoremap <silent> ]l <Esc>:call NextIndent(0, 1, 0, 1)<CR>m'gv''
+" vnoremap <silent> [L <Esc>:call NextIndent(0, 0, 1, 1)<CR>m'gv''
+" vnoremap <silent> ]L <Esc>:call NextIndent(0, 1, 1, 1)<CR>m'gv''
+" onoremap <silent> [l :call NextIndent(0, 0, 0, 1)<CR>
+" onoremap <silent> ]l :call NextIndent(0, 1, 0, 1)<CR>
+" onoremap <silent> [L :call NextIndent(1, 0, 1, 1)<CR>
+" onoremap <silent> ]L :call NextIndent(1, 1, 1, 1)<CR>
 
 " nmap <leader>ss $%
 
-let b:coc_root_patterns = ['.git', '.env']
+" let b:coc_root_patterns = ['.git', '.env']
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>a  :Telescope coc diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :Telescope coc extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :Telescope coc commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :Telescope coc outline<cr>
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -688,8 +808,10 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " Remap for do codeAction of selected region, ex: `<leader>acap` for current paragraph
-vmap <leader>ac  <Plug>(coc-codeaction-selected)<cr>
+xmap <leader>ac  <Plug>(coc-codeaction-selected)<cr>
 nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>cl  <Plug>(coc-codelens-action)
+nmap ga  <Plug>(coc-codeaction-cursor)
 
 
 xmap if <Plug>(coc-funcobj-i)
@@ -701,8 +823,11 @@ omap af <Plug>(coc-funcobj-a)
 inoremap <silent><expr> <c-space> coc#refresh()
 
 
-nmap <leader>I   }I
+" nmap <leader>I   }I
 
+
+nmap <silent> <leader>j <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>k <Plug>(coc-diagnostic-prev)
 
 nnoremap } :call search('^\s*$', '')<CR>
 nnoremap { :call search('^\s*$', 'b')<CR>
@@ -818,7 +943,7 @@ nnoremap <expr> k (v:count > 1 ? "m'" . v:count : "") . 'gk'
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : "") . 'gj' 
 
 
-nnoremap <leader>/ :Denite grep<cr>  
+nnoremap <leader>/ :Denite grep<cr>
 
 nnoremap <leader>l :call LocationListToggle()<cr>
 " I never use the following. Change PublicPrivateToggle to just togle and use it!
@@ -862,7 +987,9 @@ nmap <localleader>gcc <Plug>gotoClass
 nmap <localleader>gcdm /componentDidMount()<cr>:noh<cr>ztzO
 nmap <localleader>gt /# Types<cr>:noh<cr>ztzO
 nmap <localleader>gf /# Funcs<cr>:noh<cr>]]ztzO
-nmap <localleader>gs /# Stories<cr>:noh<cr>]]ztzO
+nmap <localleader>gs /# Global State<cr>:noh<cr>jztzO
+
+nmap <localleader>ls /# Local State<cr>:noh<cr>jztzO
 
 
 
@@ -879,7 +1006,7 @@ nnoremap tl :TestLast<cr>
 nnoremap tv :TestVisit<cr>  
 
 
-nnoremap <localleader><localleader> :vsplit ./.nvimrc<cr>
+nnoremap <localleader><localleader> :vsplit ./.lnvim.fnl<cr>
 
 
 vnoremap s :s/
@@ -898,20 +1025,35 @@ nnoremap <leader>mi  :call AddType("\# Imports", "i")<CR>
 nnoremap <leader>mut :call AddType("\# Tests", "ut")<CR>
 nnoremap <leader>mt  :call AddType("\# Types", "t")<CR>
 
+nnoremap <leader>msh  :call AddType("\# Hooks", "uH")<CR>
+nnoremap <leader>mse  :call AddType("\# Effects", "ue")<CR>
+
+nnoremap <leader>mls  :call AddType("\# Local State", "uS")<CR>
+
+nnoremap <leader>mgs  :call AddType("\# Global State", "uGs")<CR>
+
+nnoremap <leader>mvc  :call AddType("\# Voice Commands", "normal")<CR>
+
+nnoremap <leader>mivc  :call AddType("\# Voice Commands", "insert")<CR>
+
+nnoremap <leader>mtvc  :call AddType("\# Voice Commands", "term")<CR>
+
+nnoremap <leader>mxvc  :call AddType("\# Voice Commands", "ex")<CR>
+
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 " Never use it 2018-09-12 Wed 05:44 PM
-nnoremap <leader>w :mks!<cr>:w<cr> 
+" nnoremap <leader>w :mks!<cr>:w<cr> 
 
-nnoremap <C-v>  :wq<CR> 
+" nnoremap <C-v>  :wq<CR> 
 
 nnoremap <C-q> ::wq<CR> 
 inoremap <C-q> ::wq<CR> 
 
-nnoremap <C-f> :CtrlPMixed<cr>
+" nnoremap <C-f> :CtrlP<cr>
 
-" nnoremap <C-f> :<C-u>Denite -split=floating -start-filter file/rec <CR>
+" nnoremap <C-f> :Denite -start-filter file/rec <CR>
 " let mapleader = "\<space>"
 
 let g:AutoPairsFlyMode = 0
@@ -944,7 +1086,7 @@ imap <F5> <C-O><F5>
 
 " make a split and switch to it
 nnoremap <leader>V :vnew<CR>
-nmap <leader>v :vnew<CR><C-f>
+" nmap <leader>v :vnew<CR><C-f>
 
 " Movement
 nnoremap <C-e> 5<C-e>
@@ -1016,8 +1158,9 @@ nnoremap <left> <nop>
 nnoremap <right> <nop>
 
 
-nnoremap <leader>. :vsplit ~/.config/nvim/fnl/config/init.fnl<cr>
-map <leader><leader> :vsplit $MYVIMRC<cr>
+nnoremap <leader>. :vsplit ~/.config/nvim/fnl/init.fnl<cr>
+
+nnoremap <leader>, :vsplit $MYVIMRC<cr>
 
 noremap <leader>i "ip
 nnoremap <C-Tab> :call toggle#Buffer()<CR>
@@ -1036,43 +1179,43 @@ syntax on
 
 
 
-set encoding=utf-8
+" set encoding=utf-8
 " set scrolloff=3
-set autoindent
-set cindent
+" set autoindent
+" set cindent
 " set smartindent
-set showmode
-set showcmd
-set hidden
-set wildmenu
-set wildmode=list:longest
-set wildignore+=*/.git/*,*/tmp/*,*.swp
-set visualbell
-set cursorline
-set ttyfast
-set ruler
-set backspace=indent,eol,start
-set laststatus=2
+" set showmode
+" set showcmd
+" set hidden
+" set wildmenu
+" set wildmode=list:longest
+" set wildignore+=*/.git/*,*/tmp/*,*.swp
+" set visualbell
+" set cursorline
+" set ttyfast
+" set ruler
+" set backspace=indent,eol,start
+" set laststatus=2
 " set relativenumber " set line numbers to relative
-set undofile
-set backupcopy=yes 
+" set undofile
+" set backupcopy=yes 
 
 
 "nnoremap / /\v
 "vnoremap / /\v
 
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
+" set ignorecase
+" set smartcase
+" set gdefault
+" set incsearch
+" set showmatch
 " set hlsearch
 
 
-set wrap
+" set wrap
 set textwidth=79
-set formatoptions=tcqrn1
-set colorcolumn=85
+" set formatoptions=tcqrn1
+" set colorcolumn=85
 
 "Codi
 let g:codi#rightalign=1
@@ -1085,16 +1228,16 @@ let g:codi#width=100
 "\__/\__/^-/\_____
 " Folding
 
-set foldenable
+" set foldenable
 
 
 
 
-set foldlevel=0
+" set foldlevel=0
 
-set foldnestmax=20
+" set foldnestmax=20
 
-set foldmethod=indent
+" set foldmethod=indent
 
 fun! Foldex()
     "This functions shows off how folds work
@@ -1122,7 +1265,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 let base16colorspace=256
 
-colorscheme sin
+" colorscheme sin
 
 
 command! W w !sudo tee % > /dev/null
@@ -1134,6 +1277,22 @@ command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | vnew | setlocal bt
 
 
 " augroups
+
+
+augroup  talon
+    autocmd!
+
+    autocmd FileType *.talon call TalonSettings()
+    
+augroup end 
+
+
+augroup fennel
+    autocmd!
+    au BufWritePost ~/.config/nvim/fnl/dotfiles/init.fnl :lua initFNL() 
+
+
+augroup end
 
 
 augroup  onexit
@@ -1180,8 +1339,8 @@ augroup end
 
 augroup js
     autocmd!
-    autocmd FileType javascript,typescript,json,jsx call JavascriptSettings()
-    autocmd FileType javascript,typescript,json,jsx colorscheme sin
+    autocmd FileType javascript,typescript,json,jsx,tsx call JavascriptSettings()
+    " autocmd FileType javascript,typescript,json,jsx colorscheme sin
     " autocmd FileType javascript,typescript,json,jsx colorscheme darcula
 
 augroup end
@@ -1241,6 +1400,13 @@ let g:takeMeBack = 0
 " Funcs
 
 
+fun!  TalonSettings()
+    
+
+    let g:AutoPairsInsert = 0
+endf 
+
+
 fun!  CloseOrSave()
     if bufname("%") == "" | :q  | else | :wq | endif
 endf 
@@ -1281,7 +1447,7 @@ endfunction
 fun!  GoToMostImportantPlace(action, line)
 
     call call('ctrlp#acceptfile', [a:action, a:line])
-    normal -gr
+    " normal -gr
 endf 
 
 
@@ -1421,6 +1587,7 @@ fun! MakePluginMappings()
     endif
 
     if exists(":ALENext")
+        echo "ALE"
         
         nmap <silent> <leader>j <Plug>(ale_next_wrap)
         nmap <silent> <leader>k <Plug>(ale_previous_wrap)
@@ -1431,23 +1598,24 @@ fun! MakePluginMappings()
     endif
     if exists(":Denite")
         
-        nnoremap <leader>eca :execute "Denite -split=floating file/rec:" . "~/.config/nvim/after/ftplugin"<cr>
-        nnoremap <leader>ep :execute "Denite -split=floating file/rec:" . "~/.config/nvim/autoload"<cr>
-        nnoremap <leader>es :execute "Denite -split=floating file/rec:" . skeletons#skeletonsDir<cr>
+        " nnoremap <leader>eca :execute "Denite -split=floating file/rec:" . "~/.config/nvim/after/ftplugin"<cr>
+        " nnoremap <leader>ep :execute "Denite -split=floating file/rec:" . "~/.config/nvim/autoload"<cr>
+        " nnoremap <leader>es :execute "Denite -split=floating file/rec:" . skeletons#skeletonsDir<cr>
+        " nnoremap <leader>efp :execute "Denite -split=floating file/rec:" . "~/.config/nvim/fnl"<cr>
 
                 " Define mappings
-        autocmd FileType denite call s:denite_my_settings()
+        " autocmd FileType denite call s:denite_my_settings()
         function! s:denite_my_settings() abort
-          nnoremap <silent><buffer><expr> <CR>
-          \ denite#do_map('do_action')
-          nnoremap <silent><buffer><expr> d
-          \ denite#do_map('do_action', 'delete')
-          nnoremap <silent><buffer><expr> p
-          \ denite#do_map('do_action', 'preview')
-          nnoremap <silent><buffer><expr> <ESC>
-          \ denite#do_map('quit')
-          nnoremap <silent><buffer><expr> q
-          \ denite#do_map('quit')
+          " nnoremap <silent><buffer><expr> <CR>
+          " \ denite#do_map('do_action')
+          " nnoremap <silent><buffer><expr> d
+          " \ denite#do_map('do_action', 'delete')
+          " nnoremap <silent><buffer><expr> p
+          " \ denite#do_map('do_action', 'preview')
+          " nnoremap <silent><buffer><expr> <ESC>
+          " \ denite#do_map('quit')
+          " nnoremap <silent><buffer><expr> q
+          " \ denite#do_map('quit')
           nnoremap <silent><buffer><expr> i
           \ denite#do_map('open_filter_buffer')
           nnoremap <silent><buffer><expr> <Space>
@@ -1624,35 +1792,4 @@ execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 
-
-lua <<EOF
-
-function translateWordUnderCursor()
-    local wordToTranslate = vim.api.nvim_call_function("expand", { "<cword>" })
-    local translations = {}
-    
-    translations["end"] = "begin"
-    translations["const"] = "let"
-    translations["var"] = "const"
-    translations["let"] = "var"
-    translations["begin"] = "end"
-    translations["px"] = "em"
-    translations["em"] = "rem"
-    translations["rem"] = "px"
-    translations["false"] = "true"
-    translations["true"] = "false"
-    translations["public"] = "private"
-    translations["private"] = "protected"
-    translations["protected"] = "public"
-    
-    if translations[wordToTranslate] then 
-        vim.api.nvim_command("normal! ciw" .. translations[wordToTranslate] )
-    else
-        print('word not in translations')
-    end
-end
-
-EOF
-
-
-lua require("config/bootstrap")
+let g:aniseed#env = v:true

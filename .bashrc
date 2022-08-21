@@ -64,8 +64,8 @@ source ~/.bash_aliases
 # --- Exports --- 
 
 export PATH=$HOME/.gem/ruby/2.7.0/bin:/root/.gem/ruby/2.7.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin:$HOME/.bin
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export TERM="screen-256color"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.luarocks/bin:$PATH"
+export TERM="xterm-256color"
 
 # Nicely formatted terminal prompt
 export NODE_ENV=development
@@ -89,6 +89,21 @@ selectProject()
 
 } 
 
+startDeployment() {
+
+
+	if [[ -f artisan ]]; then
+		echo "N/A"
+	elif [[ -f package.json ]]; then
+
+		echo "N/A"
+	elif [[ -f serverless.yml ]]; then
+		serverless deploy --aws-profile serverless
+		# elif [[ -f figwheel-main.edn ]]; then
+		# lein fig:test
+	fi
+
+}
 
 startTesting() 
 {
@@ -96,6 +111,9 @@ startTesting()
         ./vendor/bin/phpunit
     elif [[ -f package.json ]]; then
         yarn test
+
+    elif [[ -f serverless.yml ]]; then
+	serverless invoke local --function
     # elif [[ -f figwheel-main.edn ]]; then
 	# lein fig:test
     fi
@@ -116,6 +134,12 @@ startEditing()
     elif [ -f 'index.js' ]; then 
         nvim 'index.js'; 
     elif [ -f 'index.tsx' ]; then 
+        nvim 'index.tsx'; 
+    elif [ -f 'src/App.js' ]; then
+        nvim 'src/App.js'
+    elif [ -f 'src/index.js' ]; then
+        nvim 'src/index.js'
+    elif [ -f 'src/index.tsx' ]; then
         nvim 'index.tsx'; 
     elif [ -f 'src/App.js' ]; then
         nvim 'src/App.js'
@@ -149,23 +173,30 @@ startServing()
     if [[ -f artisan ]]; then
         php artisan serve
 
-    elif [[ -f next.config.js ]]; then
-        npm run dev
-
-    elif [[ -f manage.py ]]; then
-        python manage.py runserver
-
-    elif [[ -f package.json ]]; then
-        yarn start
-
-    elif [[ -f figwheel-main.edn ]]; then
-	    lein fig:build
 
     elif [[ -f docker-compose.yml ]]; then
-	    docker-compose up
-
+        docker compose up --build
+    elif [[ -f agi3.local.yml ]]; then
+        docker compose -f agi3.local.yml up 
+    elif [[ -f ./deploy/apps/agi3.local.yml ]]; then
+        nvm use 16.14.2
+        file="${1:-agi3}"
+        docker compose -f ./deploy/apps/$file.local.yml up 
+    elif [[ -f next.config.js ]]; then
+        npm run dev
     elif [[ -f shadow-cljs.edn ]]; then
-	    shadow-cljs watch app
+        npx shadow-cljs watch app
+    elif [[ -f package.json ]]; then
+        npm start
+    elif [[ -f figwheel-main.edn ]]; then
+	    lein fig:build
+    elif [[ -f manage.py ]]; then
+	    python manage.py runserver
+
+    elif [[ -f blitz.config.js ]]; then
+        blitz dev
+    elif grep -q 'fennel-love2d' ".projectrc"; then
+        love .
     fi
 }
 
@@ -181,7 +212,7 @@ mvp()
        return
    fi 
 
-   types=('serverless' 'django' 'chrome-extension' 'generator' 'react-native-js' 'parcel-elm' 'react-web-js'
+   types=('fennel-nvim-plugin'  'blitz.js vanilla' 'fennel-love2d' 'serverless' 'django' 'chrome-extension' 'generator' 'react-native-js' 'elm-pages' 'parcel-elm' 'react-web-js'
    'clojure-reagent-frontend' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
    echo "Select a project type"
    projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
@@ -209,8 +240,18 @@ mvp()
 	   serverless create --template aws-nodejs --path $projectName --name $projectName
    fi
 
+
+
+   if [[ $projectType = "elm-pages" ]]; then
+       nvm use 17.9
+       elm-pages init $projectName
+       cd $projectName
+       npm install
+       cd -
+   fi
+
    if [[ $projectType = "parcel-elm" ]]; then
-       nvm use 11.6
+       nvm use 17.9
        elm-app-gen $projectName
    fi
 
@@ -257,12 +298,40 @@ mvp()
 
    if [[ $projectType = "clojure-reagent-frontend" ]]; then
        lein new shadow-cljs $projectName +reagent
+       npm install
    fi
 
 
    if [[ $projectType = "django" ]]; then
 	   django-admin startproject $projectName
    fi
+
+
+   if [[ $projectType = "fennel-love2d" ]]; then
+       mcd $projectName
+       git clone https://gitlab.com/alexjgriffith/min-love2d-fennel.git .
+       rm -rf .git
+       touch .projectrc
+       echo "fennel-love2d" >> .projectrc
+       cd - 
+   fi
+
+
+   if [[ $projectType = "blitz.js vanilla" ]]; then
+       blitz new $projectName
+       cd $projectName
+   fi
+
+
+   if [[ $projectType = "fennel-nvim-plugin" ]]; then
+       mcd $projectName
+       rm -rf .git
+       curl -fL https://raw.githubusercontent.com/Olical/aniseed/master/scripts/seed.sh | sh
+       ln -s $HOME/project/$projectName $HOME/.local/share/nvimplugged/$projectName 
+       cd - 
+   fi
+
+
 
    mcd $projectName
    git init
@@ -275,21 +344,19 @@ mvp()
    return 1
 } 
 
-# takes a alias name and gets the last command from the history. Makes it an alias
+# takes a alias name and gets the last command from the history. Makes it an
+# alias and puts it in .bash_aliases.
 makeAlias() 
 {
 if [ $# -eq 0 ]; then
     echo "No arguments supplied. You need to pass an alias name"
 else 
-   sed -i /alias $1=/d ~/.bash_aliases 
-cat  <<EOF >> ~/.bash_aliases
-alias $1="$(history | tail -n 2 | cut -c 8- | sed -e '$ d')"
-EOF
-
-    echo $out
-    . ~/.bashrc
+   newAlias=$(history | tail -n 2 | cut -c 8- | sed -e '$ d')
+   escapedNewAlias=${newAlias//\'/\'\\\'\'}
+   echo "alias $1='${escapedNewAlias}'" >> ~/.bash_aliases
+   . ~/.bashrc
 fi 
-} 
+}
 
 npt() 
 {
@@ -307,10 +374,12 @@ makeMacro () {
     if [ $# -eq 0 ]; then
         echo "No arguments supplied. You need to pass a name"
     else 
-        commands=$(history | fzf -m | cut -c 8-)
+        commands="$(fc -rl -40 | fzf -m | awk -F $'\t ' '{print $2}')"
 
-        if [ -z ${command//} ]; then
-            echo "No commands selected."
+        if [ -z "$commands" ]
+	then
+            echo "No commands selected. Be sure to use Tab to select sections
+	    of your history and enter when you're done."
         else 
 # ugly block but it doesn't seem to work any other way
 cat <<EOF >> ~/.bash_functions
@@ -353,7 +422,7 @@ why () {
 }
 #unzip
 uz () {
-    file=$(ls -f *.zip | fzf -1 -0)
+    file=$(/usr/bin/ls -f *.zip | fzf -1 -0)
     dir=$(basename $file .zip)
 
     mkdir $dir
@@ -423,11 +492,12 @@ ff () {
 g () {
 
 
-    options=("*BUG-FIX*" "*REFACTORING*" "*CONFIG*" "*FEATURE*" "*MIGRATION*" "*DOC*" "*BUILD*" "*UTIL*" "*INFRASTRUCTURE*" "*STYLE*")
+    git ls-files --others --exclude-standard | fzf -m --preview 'cat {}' | xargs git add
     git add -p
 
 
     PS3='Select a commit tag:'
+    options=("fix:" "refactoring:" "config:" "feat:" "migration:" "doc:" "build:" "util:" "infrastructure:" "style:")
     select opt in "${options[@]}"
     do 
         case $opt in
@@ -545,33 +615,20 @@ t () {
         touch ~/.todo
     fi
 
-    if [ -f ./.todo ]; then
-        todo='./.todo'
-    else 
-        todo='~/.todo'
-    fi
-
     if [ ! -z "$1" ]; then
-        echo "- $1" >> $todo
+        echo "- $1" >> ~/.todo
     else 
         while read -r p; do
             echo -e "$p"
-        done <$todo
+        done <~/.todo
     fi
 }
 
 # removes tasks
 tt () {
 
-
     if [ ! -f ~/.todo ]; then
         touch ~/.todo
-    fi
-
-    if [ -f ./.todo ]; then
-        todo='./.todo'
-    else 
-        todo='~/.todo'
     fi
 
     oldIFS="$IFS"
@@ -579,7 +636,7 @@ tt () {
     '
     IFS=${IFS:0:1}
     options=('exit')
-    options+=($(cat $todo | grep -v "e\[0m"))
+    options+=($(cat ~/.todo | grep -v "e\[0m"))
     IFS="$oldIFS"
 
 
@@ -657,6 +714,9 @@ alias vc='vim ~/.config/composer/composer.json'
 
 # Git
 
+
+alias gd='git checkout develop && git fetch && git pull origin develop' 
+alias gD='git fetch origin develop:develop && git merge develop' 
 alias gB='git checkout Beta && git fetch && git pull origin Beta && npm run dev'
 alias gP='git checkout Prod && git fetch && git pull origin Prod && npm run dev'
 alias gR='git checkout release && git fetch && git pull origin release'
@@ -684,7 +744,7 @@ alias gb='git branch'
 alias gl='git log'
 alias gc='git commit'
 alias grh='git revert --hard'
-alias gx="git for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch && npm run dev "
+alias gx="git for-each-ref --sort=-committerdate --count=20 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch"
 
 
 # Vagrant
@@ -720,40 +780,6 @@ alias gcb='git checkout -b'
 __git_complete gcb _git_checkout
 alias gb='git branch'
 alias gl='git log'
-alias gc='git commit'
-alias grh='git revert --hard'
-alias gx="git for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch && npm run dev "
-
-
-# Vagrant
-
-alias halt='vagrant halt'
-alias up='vagrant up'
-alias vsh='vagrant ssh'
-alias destroy='vagrant destroy -y'
-alias hh='halt && hs'
-
-
-# Laravel
-
-alias am='php artisan migrate'
-alias ci='composer install'
-alias ac='php artisan cache:clear && php aritsan route:clear && composer dump-autoload'
-
-alias sound='alsamixer'
-alias mn='xrandr --output HDMI-1 --right-of eDP-1 --auto'
-alias mf='xrandr --output HDMI-1 --auto'
-alias tv='xrandr --output HDMI-1 --mode 1600x1200'
-alias sx='startx'
-alias vi3='vim ~/.config/i3/config'
-# source /usr/share/nvm/init-nvm.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [ -f /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/colin/.nvm/versions/node/v9.6.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
@@ -767,3 +793,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Added by serverless binary installer
 export PATH="$HOME/.serverless/bin:$PATH"
+
+
+source /usr/share/nvm/init-nvm.sh
