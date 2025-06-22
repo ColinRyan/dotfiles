@@ -1,32 +1,11 @@
 {
     "languageserver": {
-        "graphql": {
-          "command": "graphql-lsp",
-          "args": ["server", "-m", "stream"],
-          "filetypes": ["typescript", "typescriptreact", "graphql"],
-          "settings": {
-            "graphql-config.load.legacy": true
-          }
-        },
-        "phplang": {
-           "command": "php",
-           "args": ["vendor/felixfbecker/language-server/bin/php-language-server.php"],
-           "filetypes": ["php"]
-        },
         "bash": {
            "command": "bash-language-server",
            "filetypes": ["sh"],
            "args": ["start"],
            "ignoredRootPaths": ["~"]
            
-        },
-        "elmLS": {
-          "command": "elm-language-server",
-          "filetypes": ["elm"],
-          "rootPatterns": ["elm.json"],
-          "initializationOptions": {
-            "elmAnalyseTrigger": "change"
-          }
         }
         
     },
@@ -35,17 +14,39 @@
     "tsserver.log":"normal",
     "javascript.implementationsCodeLens.enable": true,
     "suggest.noselect": false,
-    "suggest.floatEnable": true,
-    "suggest.enablePreview" : true,
     "codeLens.enable": true,
     "javascript.suggest.completeFunctionCalls": true,
     "javascript.showUnused": true,
-    "coc.preferences.enableFloatHighlight": true,
+    "tsserver.useLocalTsdk": true,
+    "tsserver.tsdk": "./node_modules/typescript/lib",
+
     "tsserver.implicitProjectConfig.checkJs": true,
     "tsserver.implicitProjectConfig.experimentalDecorators": true,
     "javascript.suggest.autoImports": true,
+    "typescript.suggest.autoImports": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "python.jediEnabled": false
+    "coc.preferences.promptInput": true,
+    "javascript.suggest.names": true,
+    "javascript.suggest.enabled": true,
+    "typescript.suggest.importStatements": true,
+    "typescript.inlayHints.enable": true,
+    "python.pythonPath": "~/venvs/neovim/bin/python",
+    "ruff.enableExperimentalFormatter": true,
+    "python.formatting.provider": "none",
+    "pyright.inlayHints.variableTypes": false,
+    "pyright.inlayHints.parameterTypes": false,
+    "pyright.inlayHints.functionReturnTypes": false,
+    "python.linting.ruffEnabled": true,
+    "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "eslint.workingDirectories": [
+        {"directory":"./frontend"}
+    ],
+    "eslint.experimental.useFlatConfig": true,
+
+    "prettier.eslintIntegration": true
+
+
+
 
 }
 

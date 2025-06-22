@@ -12,7 +12,36 @@ do
 end
 local nvim = require("aniseed.nvim")
 do end (_2amodule_locals_2a)["nvim"] = nvim
-local function noremap(mode, from, to)
-  return nvim.set_keymap(mode, from, to, {noremap = true})
+local function isNil(value)
+  if (nil == value) then
+    return true
+  else
+    return false
+  end
 end
-_2amodule_2a["noremap"] = noremap
+local function mergeRight(a, b)
+  local right = b
+  if isNil(right) then
+    right = {}
+  else
+  end
+  for key, value in pairs(right) do
+    a[key] = value
+  end
+  return a
+end
+local function remap(mode, from, to, _3foptions)
+  _G.assert((nil ~= to), "Missing argument to on /home/colin/.config/nvim/fnl/util.fnl:19")
+  _G.assert((nil ~= from), "Missing argument from on /home/colin/.config/nvim/fnl/util.fnl:19")
+  _G.assert((nil ~= mode), "Missing argument mode on /home/colin/.config/nvim/fnl/util.fnl:19")
+  local defaultOptions = {noremap = true}
+  return vim.keymap.set(mode, from, to, mergeRight(defaultOptions, _3foptions))
+end
+local function noremap(mode, from, to, _3foptions)
+  _G.assert((nil ~= to), "Missing argument to on /home/colin/.config/nvim/fnl/util.fnl:30")
+  _G.assert((nil ~= from), "Missing argument from on /home/colin/.config/nvim/fnl/util.fnl:30")
+  _G.assert((nil ~= mode), "Missing argument mode on /home/colin/.config/nvim/fnl/util.fnl:30")
+  local defaultOptions = {noremap = true}
+  return vim.keymap.set(mode, from, to, mergeRight(defaultOptions, _3foptions))
+end
+return {remap = remap, noremap = noremap, test = "catsass"}

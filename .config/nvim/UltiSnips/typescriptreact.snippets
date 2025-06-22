@@ -1,65 +1,801 @@
-
 global !p
 
-def gotoViewStateProperties(name):
-    vim.command("normal gg")
-    vim.command('exe search("knockout.track")')
-    vim.command("normal zo")
-    vim.command("normal j")
-    snip.expand_anon("    '" + name + "',$0\n")
-    vim.command("normal ctrl+i")
-    vim.command("normal ctrl+o")
+import subprocess
+import datetime
 
-def notTheEndOfFile(snip):
-    return len(snip.buffer) > snip.line+1 
-def onCurrentLine(snip, regex):
-    return re.search(regex, snip.buffer[snip.line])
-def onPreviousLine(snip, regex):
-    return re.search(regex, snip.buffer[snip.line-1])
-def onNextLine(snip, regex):
-    return re.search(regex, snip.buffer[snip.line+1])
+def get_branch_name():
+  try:
+    branch_name =subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip().decode('utf-8')
+    return "-".join(branch_name.split('-', 2)[:2])
+  except:
+    return "no-branch"
+
+
+
+def debug(text, on = False):
+	if on:
+		print(text)
+
+def has_lineage(lineage = [], row_delta = 0, col_delta = 0, debug_text = ""):
+	debug('====================================', on = debug_text != "")
+	debug(debug_text, on = debug_text != "")
+	debug(datetime.datetime.now(), on = debug_text != "")
+
+
+
+	lineage_string = ','.join(f'"{l}"' for l in lineage )
+	debug(lineage_string, on = debug_text != "")
+
+	command = f"HasNodeLineage([{lineage_string}],line('.') + {row_delta},col('.') + {col_delta})"
+	debug(command, on = debug_text != "")
+
+	result = vim.eval(command)
+	debug(result, on = debug_text != "")
+
+	debug('====================================', on = debug_text != "")
+
+
+	return result
+
+def previous_ast_node_matching_any(index = 0, names = []):
+   result = vim.eval("TreesitterNode(line('.'),col('.') - 1)")
+   if len(result) > index:
+	   if result[index] in names:
+		   return True
+   return False
+
+
+def next_ast_node_matching_any(index = 0, names = []):
+    result = vim.eval("TreesitterNode(line('.'),col('.') + 1)")
+    if len(result) > index:
+        if result[index] in names:
+            return True
+    return False
+
+
+def ast_node_matching_any(index = 0, names = []):
+    result = vim.eval("TreesitterNode(line('.'),col('.'))")
+    if len(result) > index:
+        if result[index] in names:
+            return True
+    return False
+
+
+def get_ast_node(index = 0):
+	result = vim.eval("TreesitterNode(line('.'),col('.'))")
+
+	if len(result) > index:
+		return result[index]
+
+	return ""
+
+
+def previous_check_ast_for():
+	result = vim.eval("TreesitterNode(line('.'),col('.') - 1)")
+
+	return result
+
+
+
+def check_ast_for():
+   result = vim.eval("TreesitterNode(line('.'),col('.'))")
+
+   return result
 endglobal
 
 
-snippet pto "PropType.Object"
-PropTypes.object
+
+
+context "has_lineage(['jsx_element']) or has_lineage(['jsx_text'])"
+snippet if "If jsx" Ae
+<If condition={$1}>
+	{$2}
+</If>
 endsnippet
-snippet us "useState"
-const [$1, $2] = React.useState($3)
+
+
+
+
+context "has_lineage(['statement_block'])"
+snippet mm "useMemo" Ae
+const $1 = useMemo(() => {
+	$3
+}, [$2])
 $0
 endsnippet
-snippet tp "this.props" Ai
-this.props.$0
-endsnippet
 
-post_jump "if snip.tabstop == 0: gotoViewStateProperties(snip.tabstops[1].current_text)"
-snippet vs "ViewState Prop" Abi
-this.$1 = $2
+
+context "has_lineage(['program'])"
+snippet t "type" Aeb
+type $1 = {
+  $2
+}
 $0
 endsnippet
 
-snippet intl "internationalizeation" i
-intl.formatMessage({id: '$1'})$2
-endsnippet
-snippet <b "button" Abi
-<input
-  type='button'
-  onClick={${7:(e) => {
-    console.log("click")
-  }}}
-  className={${6:btn}}
-  disabled={${5:false}}
-  title={intl.formatMessage({
-    id: '${4:app.title}',
-    defaultMessage: '${3:DEFAULT TITLE}'
-  })}
-  value={intl.formatMessage({
-    id: '${2:app.message}',
-  defaultMessage: '{$3:DEFAULT MESSAGE}'
-  })}
-/>
 
+
+context "has_lineage(['identifier', 'ERROR', 'import_statement', 'program'])"
+snippet * "namespac imports" Ae
+* as $1	
 endsnippet
+
+
+context "has_lineage(['import_statement', 'program'])"
+snippet * "namespac imports" Ae
+* as $1	
+endsnippet
+
+
+
+context "has_lineage(['jsx_opening_element', 'jsx_element'])"
+snippet { "jsx" Aie
+{ $1 }$0
+endsnippet
+
+
+context "has_lineage(['jsx_self_closing_element', 'jsx_element'])"
+snippet { "jsx" Ae
+{ $1 }
+endsnippet
+
+context "has_lineage(['import_statement', 'program'])"
+snippet { "named imports" Ae
+{ $1 }
+endsnippet
+
+
+context "previous_ast_node_matching_any(0,['arguments', 'binary_expression', 'parenthesized_expression', 'if_statement', 'jsx_expression', 'ternary_expression', 'member_expression'])"
+snippet and "and" Ae
+&& $1
+endsnippet
+
+
+context "ast_node_matching_any(0,['arguments', 'binary_expression', 'parenthesized_expression', 'if_statement', 'jsx_expression', 'ternary_expression'])"
+snippet or "or" Awe
+|| $1
+endsnippet
+
+context "get_ast_node(0) == 'arguments' or check_ast_for()[0] =='parenthesized_expression'"
+snippet or "or" Abe
+|| $1
+endsnippet
+
+
+
+context "ast_node_matching_any(0, ['jsx_opening_element']) and previous_ast_node_matching_any(0, ['jsx_opening_element'])"
+snippet fn "function" Aie
+$1={($2) => {
+	${3:${VISUAL}}
+}}
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['jsx_expression', 'jsx_opening_element']) and previous_ast_node_matching_any(0, ['jsx_expression'])"
+snippet fn "function" Aie
+($1) => {
+  ${2:${VISUAL}}
+}
+endsnippet
+
+
+
+context "has_lineage(['formal_parameters', 'arrow_function'])"
+snippet { "arguments" Aie
+{ 
+  $1,
+}
+endsnippet
+
+context "has_lineage(['jsx_expression', 'jsx_attribute'])"
+snippet { "object" Aie
+{
+  $1,
+}
+endsnippet
+
+
+context "ast_node_matching_any(0, ['jsx_expression']) or previous_ast_node_matching_any(0, ['arguments'])"
+snippet [ "array" Aie
+[ 
+  $1,
+],
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_expression'"
+snippet ` "backticks" Aie
+`$1`
+endsnippet
+
+
+
+context "ast_node_matching_any(0,['jsx_expression','jsx_closing_element', 'binary_expression','ERROR'])"
+snippet ' "single quote" Awe
+'$1'$0
+endsnippet
+
+
+context "ast_node_matching_any(0,['jsx_expression','jsx_closing_element','binary_expression','ERROR','parenthesized_expression', 'argument', 'if_statement', 'ternary_expression'])"
+snippet " "double quote" Aie
+"$1"$0
+endsnippet
+
+
+context "previous_ast_node_matching_any(0,['jsx_self_closing_element','jsx_opening_element','jsx_closing_element' 'jsx_element'])"
+snippet = "function" Awe
+$1={$2}
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0,['jsx_self_closing_element','jsx_opening_element', 'jsx_element', 'jsx_text'])"
+snippet " "function" Awe
+"$1"$0
+endsnippet
+
+
+context "previous_check_ast_for()[0] == 'jsx_self_closing_element' or previous_check_ast_for()[0] == 'jsx_opening_element'"
+snippet "=" "function" Abe
+$1={$2}$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_self_closing_element'"
+snippet "fn" "function" Abe
+$1={($2) => {
+	${3:${VISUAL}}
+}}
+$0
+endsnippet
+
+
+
+context "ast_node_matching_any(0, ['variable_declarator']) "
+snippet { "object" Aie
+{
+	$1,
+}
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['variable_declarator']) "
+snippet [ "array" Aie
+[
+  $1,
+]
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['variable_declarator']) "
+snippet ' "single quote" Aie
+'$1'$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['variable_declarator']) "
+snippet " "double quote" Aie
+"$1"$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'variable_declarator'"
+snippet "fn" "function" Aie
+($2) => {
+  ${3:${VISUAL}}
+}
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block'"
+snippet "return fn" "function" Ae
+return ($2) => {
+	${3:${VISUAL}}
+}
+endsnippet
+
+
+context "ast_node_matching_any(0, ['statement_block', 'program'])"
+snippet ? "ternary" Abe
+const $1 = $2 ? $3 : $4
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['statement_block', 'program'])"
+snippet ? "ternary" Abe
+const $1 = $2 ? $3 : $4
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' or check_ast_for()[0] == 'program'"
+snippet fn "function" Abe
+const $1 = ($2) => {
+	${3:${VISUAL}}
+}
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_pattern'"
+snippet ' "function" Abe
+$1: '$2',
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'array' or check_ast_for()[0] == 'array_pattern'"
+snippet fn "function" Abe
+($1) => {
+  ${2:${VISUAL}}
+},
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'array' or check_ast_for()[0] == 'array_pattern'"
+snippet { "object" Abe
+{ 
+  $1 
+},
+$0
+endsnippet
+
+
+
+context "check_ast_for()[0] == 'array' or check_ast_for()[0] == 'array_pattern'"
+snippet [ "array" Abe
+[
+  $1 
+],
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'array' or check_ast_for()[0] == 'array_pattern'"
+snippet ` "backticks" Abe
+`$1`,
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['array', 'array_pattern']) or previous_ast_node_matching_any(0, ['array', 'array_pattern'])"
+snippet " "double quote" Awe
+"$1",
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'array' or check_ast_for()[0] == 'array_pattern'"
+snippet "',*" "single quote" Abre
+'$1'asdfs,
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object'"
+snippet ? "function" Abe
+$1: ($2) ? $3 : $4,
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object'"
+snippet ' "function" Abe
+$1: '$2',
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object'"
+snippet fn "function" Abe
+$1: ($2) => {
+  ${3:${VISUAL}}
+},$0
+endsnippet
+
+
+
+context "previous_ast_node_matching_any(0, ['formal_parameters'])"
+snippet ' "single quote" Aie
+'$1'$0
+endsnippet
+
+
+context "previous_ast_node_matching_any(0, ['arguments'])"
+snippet ' "single quote" Aie
+'$1',$0
+endsnippet
+
+
+context "previous_ast_node_matching_any(0, ['arguments'])"
+snippet ` "backticks" Aie
+`$1`,$0
+endsnippet
+
+
+
+context "check_ast_for()[0] == 'arguments' and previous_check_ast_for()[0] == 'identifier'"
+snippet [ "prop" Aie
+[$1]$0
+endsnippet
+
+
+context "has_lineage(['type_identifier', 'type_annotation'], 0, -1)"
+snippet [ "type" Aie
+[$1]$0
+endsnippet
+
+
+
+context "ast_node_matching_any(0,['arguments']) or previous_ast_node_matching_any(0,['arguments'])"
+snippet [ "array" Aie
+[
+  $1,
+],$0
+endsnippet
+
+
+context "has_lineage(['arguments', 'call_expression'])"
+snippet fn "function" Aie
+($2) => {
+  ${3:${VISUAL}}
+},
+endsnippet
+
+
+
+context "check_ast_for()[0] == 'object_pattern'"
+snippet { "object " Abe
+$1: {
+	$2
+},
+$3
+endsnippet
+
+
+context "check_ast_for()[0] == 'object'"
+snippet { "object " Awie
+$1: {
+  $2
+},
+$3
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_pattern'"
+snippet [ "nested array"  Abe
+$1 : [
+	$2
+],
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object'"
+snippet [ "nested array"  Ae
+$1 : [
+  $2
+],
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'pair'"
+snippet [ "key"  Abe
+[$1]
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_pattern' and check_ast_for()[1] != 'pair'"
+snippet " "nested double quote"  Abe
+$1: "$2",
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object' and check_ast_for()[1] != 'pair'"
+snippet ` "nested backticks"  Abe
+$1: \`$2\`,
+endsnippet
+
+
+context "check_ast_for()[0] == 'object' and check_ast_for()[1] != 'pair'"
+snippet " "nested double quote"  Abe
+$1: "$2",
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_pattern'"
+snippet fn "function in an object"  Abiwe
+$1: () => {
+  $2
+},
+$3
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_pattern'"
+snippet = "default value"  Aie
+$1 = $2,
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'formal_parameters'"
+snippet { "destructure function arguments"  Aie
+{
+  $1
+}
+endsnippet
+
+
+context "check_ast_for()[0] == 'program' or (check_ast_for()[1] == 'program' and check_ast_for()[1] == 'ERROR') or check_ast_for()[0] == 'statement_block'"
+snippet { "object in function"  Abe
+const $1 = {
+  $2
+}
+$0
+endsnippet
+
+
+context "ast_node_matching_any(0, ['program', 'statement_block'])"
+snippet ' "single quote" Abe
+const $1 = '$2'
+endsnippet
+
+
+
+context "previous_ast_node_matching_any(0, ['formal_parameters'])"
+snippet " "double quote" Aie
+"$1"
+endsnippet
+
+context "previous_ast_node_matching_any(0, ['arguments'])"
+snippet " "double quote" Aie
+"$1",
+endsnippet
+
+
+context "ast_node_matching_any(0, ['program', 'statement_block'])"
+snippet " "double quote" Abe
+const $1 = "$2"
+endsnippet
+
+
+context "ast_node_matching_any(0, ['program', 'statement_block'])"
+snippet [ "array in function" Abe
+const $1 = [
+	$2,
+]
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'program'"
+snippet in "interface" Abe
+interface $1 {
+  $2: $3,
+  $4
+}
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'program'"
+snippet < "angle brace" Abe
+<$1>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_element'"
+snippet < "jsx" Abe
+<$1 $2 >
+  $3
+</$1>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block'"
+snippet < "jsx" Abe
+return (<$1>
+  $2
+</$1>)
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'object_type'"
+snippet : "type declaration " Abe
+$1:$2,
+$0
+endsnippet
+
+
+
+
+
+context "check_ast_for()[0] == 'program' or check_ast_for()[0] =='statement_block'"
+snippet if "IF"  Abe
+if ($1) {
+	$2
+
+}
+$3
+endsnippet
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet um "useMutation"
+const [$1Mutation, { data, loading, error }] = useMutation($2, {
+		...toastHandler({
+		success: '$3',
+		failure: "$4",
+	}),
+})
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet uh "use hook" Abe
+const $1 = use$2($3)$0
+endsnippet
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet ugs "global state" Abe
+const $1 = useSelector($2)$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet uM "useMemo" Abe
+const $3 = useMemo(() => {
+		$2
+		}, [$1])
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet uE "useEffect" Abe
+useEffect(() => {
+	$2
+}, [$1])
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet uS "local state" Abe
+const [$1, set`!p snip.rv=(t[1][0].upper()+t[1][1:] if (len(t[1]) > 0) else '')`] = useState($3)$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet uc "useCallback" Abe
+const $1 = useCallback(${2:fn,} [$3])
+$0
+endsnippet
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet ue "useEffect" Abe
+useEffect(() => {
+	$2
+}, [$1])
+$0
+endsnippet
+
+
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet rr "return" Abe
+return $0
+endsnippet
+
+
+
+
+context "previous_ast_node_matching_any(0, ['arguments'])"
+snippet { "object" Aie
+{
+	$1
+},
+endsnippet
+
+
+context "check_ast_for()[0] == 'statement_block' and (ast_node_matching_any(1,['arrow_function', 'function','function_declaration']))"
+snippet { "object" Awe
+{
+  $1
+}
+endsnippet
+
+
+
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet { "fragment" Abie
+{$1}
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet << "fragment" Abie
+<>
+  $1
+</>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet page "return object" Abie
+<Page>
+  $1
+</Page>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet form "return object" Abie
+<form>
+  $1
+</form>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet col "return object" Abie
+<Column>
+  $1
+</Column>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet row "return object" Abie
+<Row>
+  $1
+</Row>
+$0
+endsnippet
+
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet span "return object" Abie
+<span>
+  $1
+</span>
+$0
+endsnippet
+
+
+context "check_ast_for()[0] == 'jsx_text'"
+snippet div "return object" Abie
+<div>
+  $1
+</div>
+$0
+endsnippet
+
+
+
+
+
+
+
+
 snippet oc "onClick"
 onClick={$1}$0
 endsnippet
@@ -68,668 +804,53 @@ snippet S. "Styles" A
 Styles.$1
 endsnippet
 
-snippet r{ "return object" Abi
-return {
-    $1
-}
-endsnippet
-
+context "check_ast_for()[0] == 'jsx_opening_element'"
 snippet cn "classname" Ai
 className={${1:Styles.}} $2
 endsnippet
-
-snippet mm "method"
-$1 = ($2) => {
-    $3
-}
-$0
-endsnippet
-snippet dqs "document.querySelector" Abi
-
-const $1 = document.querySelector("$2")
-
-endsnippet
-	
-snippet .ih "innerHTML"
-
-$1.innerHTML = \`$2\`
-
-$0
-endsnippet
-snippet dba "document.body" Abi
-
-document.body.appendChild($1)
-
-$0
-endsnippet
-snippet dce "document.createElement" Abi
-
-const $1 = document.createElement('$2')
-
-$0
-endsnippet
 snippet ).ca "catch" Ai
 ).catch((err) => {
-    console.error(err)
+	console.error(err)
 });
 
 $0
 endsnippet
+
 snippet .th "then" Ai
 .then((${1:res}) => {
-    $2
+	$2
 })$0
 endsnippet
-snippet eh "component enhancement"
-const $4 = enhance(
-		{
-		    $3
 
-		},
-		{
-		    is: $1,
 
-		},
-		[
-		    $2
-		])
-$0
-endsnippet
-snippet ? "ternary"  Ai
-($1) ? $2 : $3
-endsnippet
-snippet wy "test"
-`!p snip.rv = snip.v.text`
-endsnippet
-priority 2
-snippet <{ "flow object in type" Ai
-<{}
-endsnippet	
-snippet cs "styled component" Ab
-const $1 = styled.$2\`
-   $3
-\`
-$0
-endsnippet
-snippet isc "import styled components" Ab
-import styled from "styled-components"
-endsnippet
-snippet "uu "user" Ai
-"user
-endsnippet
-snippet ps "prevState" Abw
-prevState
-endsnippet
-snippet rr "return" Ab
-return $0
-endsnippet
 
-context "notTheEndOfFile(snip) and (onNextLine(snip, r'`') or onCurrentLine(snip,r'`'))"
-snippet $ "template"  A
-\${$1}$0
-endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
-snippet ` "backtick"  A
-\`${1:${VISUAL}}\`,
-$0
-endsnippet
 
-context "notTheEndOfFile(snip) and re.search(r'^ *}$', snip.buffer[snip.line+1])"
-snippet ` "single quote"  A
-$1: '$2',
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'^ *]', snip.buffer[snip.line+1])"
-snippet " "string"  A
-"${1:${VISUAL}}",
-$0
-endsnippet
-priority 1
-snippet '(?<=\$){' "object" Air
-{$1}
-endsnippet	
-priority 2
-snippet '(?<=, ){' "object" Air
-{$1}$0
-endsnippet	
-snippet '(?<=[=\(]){' "object" Air
-{$1}$0
-endsnippet	
-priority 1
-snippet '(?<![=\$]){' "object" "len(snip.buffer) > snip.line+1 and re.search(r':|}*', snip.buffer[snip.line+1]) == None" Aier
-{
-    $1
-}
-endsnippet	
-priority 1
-snippet '\((?!\))' "braces" Air
-($1)
-endsnippet
-priority 3
-
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r':|},*')"
-snippet ' "nested quote"  A
-$1: '$2',
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
-snippet ` "nested backtick"  A
-$1: \`$2\`,
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and onNextLine(snip, r':|},*')"
-snippet fn "nested function"  A
-$1 : ($2) => {
-   ${3:${VISUAL}}
-
-},
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and onCurrentLine(snip, r':|{') == None and onNextLine(snip, r'^ *}|:')"
-snippet " "nested string"  A
-$1: "$2",
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
-snippet { "nested object"  A
-$1 : {
-    $2
-},
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
-snippet ] "key integretation"  A
-[$1]: $2,
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r' *},*|:', snip.buffer[snip.line+1])"
-snippet [ "nested array"  A
-$1 : [
-   $2
-],
-$0
-endsnippet
 priority 1
 
-context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
-snippet [ "array"   e
-[
-    $1
-],
-$0
-endsnippet	
-snippet "(?<=: )\[" "array"  Ar
-[
-    $1
-],
-$0
-endsnippet	
-snippet "(?<== )\[" "array"  Ar
-[
-    $1
-]
-endsnippet	
-priority 2
-
-context "notTheEndOfFile(snip) and re.search(r']', snip.buffer[snip.line+1])"
-snippet { "object"   A
-{
-    $1
-},
-$0
-endsnippet	
-priority 1
-
-context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None and re.search(r':|=', snip.buffer[snip.line]) == None"
-snippet ' "quote"  Ae
-
-const $1 = '$2'
-
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None"
-snippet ` "backtick"  Ab
-
-const $1 = \`$2\`
-
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and (re.search(r'\[|\],|},|{|,$|>|<', snip.buffer[snip.line-1]) == None and re.search(r':', snip.buffer[snip.line]) == None)"
-snippet " "string"  Ab
-
-const $1 = "$2"
-
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\[|\],|},|{|,$', snip.buffer[snip.line-1]) == None" 
-snippet "\[" "array"  Arb
-
-const $1 = [
-   $2
-]
-
-$0
-endsnippet
-priority 4
-snippet "{" "object in function" "re.search(r'=>', snip.buffer[snip.line-1]) != None" Areb
-
-const $1 = {
-    $2
-}
-
-$0
-endsnippet
-priority 1
-
-context "notTheEndOfFile(snip) and re.search(r'\[|{|,$', snip.buffer[snip.line-1]) == None"
-snippet fn "function"  Ab
-
-const $1 = ($2) =>  {
-    $3
-
-}
-
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\[|{|,$|\<|>', snip.buffer[snip.line-1]) == None"
-snippet "{" "object"  Arb
-
-const $1 = {
-    $2
-}
-$0
-
-endsnippet
-priority 1
-snippet cls "class" A
-class $1 {
-    $2
-
-	// # Methods
-
-}
-endsnippet
-
-context "re.search(r':|=', snip.buffer[snip.line]) == None"
 snippet cc "constant" Ab
 const $1 = ${2:${VISUAL}}
 $0
 endsnippet
+
 snippet "^im" "import" Ar
-import $2 from "$1"
-endsnippet
-	
-snippet : "key value pair" A
-$1 : $2, 
-$0
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
-snippet " "double quote"  Ab
-"$1",
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r',$', snip.buffer[snip.line-1]) != None"
-snippet ' "single quote"  Ab
-'$1',
-endsnippet
-snippet "'(?!')" "single quotes" Ar
-'$1'
-endsnippet
-snippet '"(?!")' "double quotes" Ar
-"$1"
-endsnippet
-snippet sc "styled component"
-styled.$1`
-    $2
-`
-endsnippet
-
-snippet rif "R.ifElse"
-R.ifElse(
-  $2,
-  $3,
-  $4
-)($1)
-endsnippet
-
-snippet ex "expect"
-expect($1).toBe($2)	
-endsnippet
-snippet test "create test"
-test($1, () => {
-   $2
-})
-$3
-endsnippet
-snippet func "function loading into variable"
-const $1 = ($2) => {
-    ${3:${VISUAL}}
-}
-endsnippet
-
-snippet fn "function" Ai
-($1) => {
-   ${2:${VISUAL}}
-
-}
-endsnippet
-snippet ato "translate object"
-  {
-	  $1: $2.interpolate({
-	  inputRange: [$3, $4],
-	  outputRange: [$5, $6]
-			  })
-  }
-endsnippet
-snippet ant "animated timing"
-Animated.timing(
-    this.state.animation.$1,
-	{
-	    toValue: ${2:1},
-		duration: ${3:1000},
-		$3
-	}
-).start()
-endsnippet
-snippet dsp "destructure screenProps" i
-  {
-screenProps: {
-        $1
-			 }
-  }
-endsnippet
-snippet rpo "path or" i
-R.pathOr(${1:default},[${2:path}],${3:object})
-endsnippet
-	
-snippet cdu "componet did update"
-componentDidUpdate(prevProps, prevState) {
-    $1
-}
-endsnippet
-	
-snippet tp "type Promise" i
-Promise<${1:mixed}>
-endsnippet
-
-
-snippet : "key value"
-$1:$2,
-$3
-endsnippet
-
-snippet ta "type array" i
-Array<$1>
+import $2 from '$1'
 endsnippet
 
 
 
 
-snippet red "Ramda reduce"  Aib
-
-R.reduce(${1:func}, ${2:init}, ${3:collection})
-endsnippet
 
 
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet red "Ramda reduce"  Ai
-R.reduce(${1:func}, ${2:init}),
-endsnippet
-
-snippet rtp "Ramda toPairs"  Aib
-R.toPairs(${1:obj})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rtp "Ramda toPairs"  Ai
-R.toPairs,
-endsnippet
-
-snippet rv "Ramda values"  Aib
-R.values(${1:obj})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rv "Ramda values"  Ai
-R.values,
-endsnippet
-
-snippet rfl "Ramda filter"  Aib
-R.filter(${1:isWhatImLookingFor}, ${2:collection})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1]) "
-snippet rfl "Ramda filter"  Ai
-R.filter(${1:isWhatImLookingFor}),
-endsnippet
-
-snippet rfi "Ramda find"  Aib
-R.find(${1:needle}, ${2:haystack})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rfi "Ramda find"  Ai
-R.find(${1:needle}),
-endsnippet
-
-
-snippet rm "Ramda map"  Aib
-R.map(${1:func}, ${2: collection})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rm "Ramda map"  Ai
-R.map(${1:func}),
-endsnippet
-
-
-snippet rev "Ramda evolve"  Aib 
-R.evolve(${1:transform}, ${2:object})
-endsnippet
-
-context "notTheEndOfFile(snip) and re.search(r'\)\(|,$', snip.buffer[snip.line+1])"
-snippet rev "Ramda evolve"  Ae 
-R.evolve(${1:transform}),
-endsnippet
-
-snippet fl "flatlist"
-<FlatList
-    data={${2: [{id: "1"}]}}
-	keyExtractor={(item) => item.id}
-	renderItem={${1:(item) => <Text>cat</Text>}}
-/>
-endsnippet
-snippet '(?<!["{$=.a-zA-Z0-9])ra' "Ramda assoc" Awr
-R.assoc("${1:prop}", ${2:value}, ${3:object})
-endsnippet
-	
-snippet rc "Ramda compose" Aib
-R.compose(
-    $2
-)($1)
-endsnippet
-	
-snippet psa "prevState assoc" Aib
-R.assoc($1, $2, prevState)
-endsnippet
-	
-snippet gdsfp "getDerivedStateFromProps"
-static getDerivedStateFromProps(nextProps, currentState) {
-    $1
-}
-endsnippet
-snippet op "onPress" i
-onPress={() => {
-    $1
-
-}}
-endsnippet
-snippet ts "this.state" i
-this.state
-endsnippet
-snippet ns "navigation state"
-const { params } = this.props.navigation.state
-endsnippet
-
-snippet nav "navigate" i
-this.props.navigation.navigate($1)
-endsnippet
-
-snippet ? "ternary" i
-? $1 : $2
-endsnippet
-
-snippet cv "const"
-const $1 = $2
-endsnippet
-snippet sp "screenProps" i
-this.props.screenProps.
-endsnippet
-
-snippet api "api request"
-const res = await api.${1:get}(
-            $2,
-			$3
-      )
-endsnippet
-
-
-snippet t "type"
-type $1 = {
-    $2
-}
-endsnippet
 
 snippet i "import"
 import $2 from "$1"
 endsnippet
 
-snippet r "render"
-render() {
-	return ($1)
-}
-endsnippet
 
-snippet "^[ ]*do" "destructure Object" "re.search(r'\)\(|,$|\<|\>', snip.buffer[snip.line-1]) == None" Aei
-const {
-    $2
-} = $1
-endsnippet
-
-snippet rcl "react class"
-class $1 extends React.component{
-
-	constructor(props) {
-	    super(props)
-		this.state = {
-		    $3
-		}
-	}
-
-    //# Funcs
-
-    //# Lifecyle
-	$4
-
-	render() {
-		return (
-		    $2
-	   )
-	}
-}
-endsnippet
-
-snippet ss "setState" Aw
-this.setState((prevState) => {
-    $0
-
-})
-endsnippet
-
-snippet af "anon function" i
-($1) => $2
-endsnippet
-
-snippet scu "shouldComponetUpdate"
-shouldComponentUpdate(nextProps, nextState) {
-    return ${1: false}
-}
-endsnippet
-	
-snippet ti "textInput"
-<TextInput
-    style={{$3}}
-	placeholder="$2"
-	onChangeText={$1 => this.setState({$1})}
-	value={this.state.$1}
-/>
-endsnippet
-	
-snippet c "constructor"
-constructor(props) {
-    super(props)
-	this.state = {
-	   $1
-	}
-}
-endsnippet
-
-snippet user "prints out the coreProps user as variables"
-const {
-    first_name,
-	last_name,
-	birthday,
-	gender,
-	picture,
-	health_providers: {
-	    FamilyDoctor,
-		Pharmacy,
-		Phsiotherapist,
-		Optometrist
-	}
-} = this.props.screenProps.user
-endsnippet
-
-snippet sfc "stateless functional component"
-const $1 = ($2) => {
-
-}
-endsnippet
-
-
-snippet pub "public function"
-$1 = ($2) => {
-    $3
-}
-endsnippet
-
-snippet apub "async public function"
-async $1($2) {
-    $3
-}
-endsnippet
-
-snippet cdm "componentDidMount"
-async componentDidMount() {
-    $1
-}
-endsnippet
 	
 snippet clv "console log value" Ai
-console.log("$1", $1)
+console.debug("`!p snip.rv=get_branch_name()`", "$1", $1)
 endsnippet
 
 

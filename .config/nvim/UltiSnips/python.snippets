@@ -1,17 +1,12 @@
-snippet map "map" Ai
-map($1,$2)
-$0
-endsnippet
+global !p
 
-snippet list "list" A
-list($1)
-$0
-endsnippet
-
-snippet fil "filter" A
-filter($1)
-$0
-endsnippet
+def has_lineage(lineage = []):
+  print("test")
+  lineage_string = ','.join(f'"{l}"' for l in lineage )
+  command = f"HasNodeLineage([{lineage_string}],line('.'),col('.'))"
+  result = vim.eval(command)
+  return result
+endglobal
 
 snippet fn "function" Aib
 def $1($2):

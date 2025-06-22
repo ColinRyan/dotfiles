@@ -1,40 +1,47 @@
-local _0_0 = nil
+local _2afile_2a = "/home/colin/.config/nvim/fnl/dotfiles/util.fnl"
+local _2amodule_name_2a = "dotfiles.util"
+local _2amodule_2a
 do
-  local name_23_0_ = "dotfiles.util"
-  local loaded_23_0_ = package.loaded[name_23_0_]
-  local module_23_0_ = nil
-  if ("table" == type(loaded_23_0_)) then
-    module_23_0_ = loaded_23_0_
+  package.loaded[_2amodule_name_2a] = {}
+  _2amodule_2a = package.loaded[_2amodule_name_2a]
+end
+local _2amodule_locals_2a
+do
+  _2amodule_2a["aniseed/locals"] = {}
+  _2amodule_locals_2a = (_2amodule_2a)["aniseed/locals"]
+end
+local nvim = require("aniseed.nvim")
+do end (_2amodule_locals_2a)["nvim"] = nvim
+local function isNil(value)
+  if (nil == value) then
+    return true
   else
-    module_23_0_ = {}
+    return false
   end
-  module_23_0_["aniseed/module"] = name_23_0_
-  module_23_0_["aniseed/locals"] = (module_23_0_["aniseed/locals"] or {})
-  module_23_0_["aniseed/local-fns"] = (module_23_0_["aniseed/local-fns"] or {})
-  package.loaded[name_23_0_] = module_23_0_
-  _0_0 = module_23_0_
 end
-local function _1_(...)
-  _0_0["aniseed/local-fns"] = {require = {nvim = "aniseed.nvim"}}
-  return {require("aniseed.nvim"), _0_0["aniseed/locals"].noremap}
-end
-local _2_ = _1_(...)
-local nvim = _2_[1]
-local noremap = _2_[2]
-do local _ = ({nil, _0_0, nil})[2] end
-local noremap0 = nil
-do
-  local v_23_0_ = nil
-  do
-    local v_23_0_0 = nil
-    local function noremap1(mode, from, to)
-      return nvim.set_keymap(mode, from, to, {noremap = true})
-    end
-    v_23_0_0 = noremap1
-    _0_0["noremap"] = v_23_0_0
-    v_23_0_ = v_23_0_0
+local function mergeRight(a, b)
+  local right = b
+  if isNil(right) then
+    right = {}
+  else
   end
-  _0_0["aniseed/locals"]["noremap"] = v_23_0_
-  noremap0 = v_23_0_
+  for key, value in pairs(right) do
+    a[key] = value
+  end
+  return a
 end
-return nil
+local function remap(mode, from, to, _3foptions)
+  _G.assert((nil ~= to), "Missing argument to on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:19")
+  _G.assert((nil ~= from), "Missing argument from on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:19")
+  _G.assert((nil ~= mode), "Missing argument mode on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:19")
+  local defaultOptions = {noremap = true}
+  return vim.keymap.set(mode, from, to, mergeRight(defaultOptions, _3foptions))
+end
+local function noremap(mode, from, to, _3foptions)
+  _G.assert((nil ~= to), "Missing argument to on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:30")
+  _G.assert((nil ~= from), "Missing argument from on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:30")
+  _G.assert((nil ~= mode), "Missing argument mode on /home/colin/.config/nvim/fnl/dotfiles/util.fnl:30")
+  local defaultOptions = {noremap = true}
+  return vim.keymap.set(mode, from, to, mergeRight(defaultOptions, _3foptions))
+end
+return {remap = remap, noremap = noremap, test = "catsass"}
