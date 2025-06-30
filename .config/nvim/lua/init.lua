@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/colin/.config/nvim/fnl/init.fnl"
+local _2afile_2a = "fnl/init.fnl"
 local _2amodule_name_2a = "dotfiles.init"
 local _2amodule_2a
 do

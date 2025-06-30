@@ -5,6 +5,47 @@ stty -ixon
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+# Initialize variables for completion
+
+
+# Helper function to split the command line into words
+
+
+_agi3() {
+    local cur prev 
+
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local prev=${COMP_WORDS[COMP_CWORD-1]}
+
+
+    local commands="gen generate e2e add_config checkout docker_up docker_stop check_environment init_environment clean_environment build_system purge_system configure_aws_cli generate_source_bundle generate_source_bundle_gh docker_pull_local docker_login build_and_push_local_images build_and_push_dev_images build_and_push_prod_images docker_pull_prod docker_login_production deploy_prod deploy_stage deploy_test deploy_dev rebuild_all rebuild_all_and_load_data purge_and_rebuild_all rebuild_for_reinit install_frontend reset_frontend push_init_tables load_stock_dataset export_legacy_init_tables restore_init_tables restore_cadastral restore_mgrs backup_db restore_db restore_complete_backup run_coverage run_backend_tests run_frontend_tests run_precommit run_linters build_pdm build_apidocs generate_pdm django_shell django_pytest cut_release deploy_hotfix bump_version release_start release_finish hotfix_start hotfix_finish"
+
+    local e2e_opts="generate run install"
+    local gen_opts="component page install"
+
+    case "$prev" in
+        gen)
+            COMPREPLY=($(compgen -W "$gen_opts" -- $cur))
+
+            return
+            ;;
+
+        generate)
+            COMPREPLY=($(compgen -W "$gen_opts" -- $cur))
+
+            return
+            ;;
+
+        e2e)
+            COMPREPLY=($(compgen -W "$e2e_opts" -- $cur))
+
+            return
+            ;;
+        *)
+            COMPREPLY=($(compgen -W "$commands" -- $cur))
+            ;;
+    esac
+}
 
 
 _testing()
@@ -37,7 +78,7 @@ __vcs_name() {
     if [ -d .svn ]; then
         echo "- [svn]";
     elif __has_parent_dir ".git"; then
-        echo "- [$(__git_ps1 'git %s')]";
+        echo "$black-[$yellow$(__git_ps1 'git %s')$black]";
     elif __has_parent_dir ".hg"; then
         echo "- [hg $(hg branch)]"
     fi
@@ -63,18 +104,21 @@ source ~/.bash_functions
 source ~/.bash_aliases
 # --- Exports --- 
 
-export PATH=$HOME/.gem/ruby/2.7.0/bin:/root/.gem/ruby/2.7.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin:$HOME/.bin
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.luarocks/bin:$PATH"
+export SYSTEMD_EDITOR=nvim
+export PATH=$HOME/.gem/ruby/2.7.0/bin:$HOME/.gem/ruby/3.3.0/bin:$HOME/.config/composer/vendor/bin:/usr/lib/node_modules:$HOME/.local/bin:$PATH:$HOME/.perl6/bin:$HOME/.bin
+export PATH="$HOME/Apps:$HOME/.slack/bin:$(go env GOPATH)/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.luarocks/bin:$PATH"
 export TERM="xterm-256color"
+export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
+
 
 # Nicely formatted terminal prompt
 export NODE_ENV=development
 export EDITOR=nvim
 export HISTCONTROL=ignoredups:erasedups 
-export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[0;33m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
+export PS1='\n\[$bold\]\[$black\][\[$dk_blue\]\@\[$black\]]-[\[$green\]\u\[$yellow\]@\[$green\]\h\[$black\]]-[\[$pink\]\w\[$black\]]\[\033[033m\]$(__vcs_name) \[\033[00m\]\[$reset\]\n\[$reset\]\$ '
 export GNOME_KEYRING_CONTROL=1
 export ANDROID_SDK=/opt/android-sdk
+
 
 # --- Functions --- 
 
@@ -172,16 +216,15 @@ startServing()
 {
     if [[ -f artisan ]]; then
         php artisan serve
-
-
+    elif [[ -f bun.lockb ]]; then
+        bun run dev
     elif [[ -f docker-compose.yml ]]; then
-        docker compose up --build
-    elif [[ -f agi3.local.yml ]]; then
-        docker compose -f agi3.local.yml up 
+        COMPOSE_BAKE=true docker compose up --build
+    elif [[ -f local.yml ]]; then
+        COMPOSE_BAKE=true docker compose -f local.yml  -f docker-compose.override.yml up --build
     elif [[ -f ./deploy/apps/agi3.local.yml ]]; then
         nvm use 16.14.2
-        file="${1:-agi3}"
-        docker compose -f ./deploy/apps/$file.local.yml up 
+        COMPOSE_BAKE=true docker compose -f ./deploy/apps/agi3.local.yml up $1
     elif [[ -f next.config.js ]]; then
         npm run dev
     elif [[ -f shadow-cljs.edn ]]; then
@@ -213,7 +256,8 @@ mvp()
    fi 
 
    types=('fennel-nvim-plugin'  'blitz.js vanilla' 'fennel-love2d' 'serverless' 'django' 'chrome-extension' 'generator' 'react-native-js' 'elm-pages' 'parcel-elm' 'react-web-js'
-   'clojure-reagent-frontend' 'react-native-clojure' 'parcel-js-vanilla' 'laravel' 'nodejs' 'cli-js')
+   'clojure-reagent-frontend' 'react-native-clojure' 'parcel-js-vanilla'
+   'laravel' 'nodejs' 'cli-js' 'esbuild-ts-vanilla' 'electron-react' 'bun-vite-vanilla-ts' 'bun-vite-react-swc-ts')
    echo "Select a project type"
    projectType=$(IFS=$'\n'; echo "${types[*]}" | fzf -m )
 
@@ -226,120 +270,163 @@ mvp()
    if [[ $projectType = "generator" ]]; then
        nvm use 11.6
        yo generator
-   fi
 
-   if [[ $projectType = "react-web-js" ]]; then
+
+   elif [[ $projectType = "react-amplify" ]]; then
        nvm use 11.6
        yarn create react-app $projectName --typescript
        amplify init
        yarn add aws-amplify aws-amplify-react ramda partial.lenses flutures date-fns @material-ui/core
-   fi
 
-   if [[ $projectType = "serverless" ]]; then
+
+   elif [[ $projectType = "serverless" ]]; then
 	   nvm use 11.6
 	   serverless create --template aws-nodejs --path $projectName --name $projectName
-   fi
 
 
 
-   if [[ $projectType = "elm-pages" ]]; then
+
+   elif [[ $projectType = "elm-pages" ]]; then
        nvm use 17.9
        elm-pages init $projectName
        cd $projectName
        npm install
        cd -
-   fi
 
-   if [[ $projectType = "parcel-elm" ]]; then
+
+   elif [[ $projectType = "parcel-elm" ]]; then
        nvm use 17.9
        elm-app-gen $projectName
-   fi
 
-   if [[ $projectType = "parcel-js-vanilla" ]]; then
+
+   elif [[ $projectType = "parcel-js-vanilla" ]]; then
        nvm use 11.6
        mcd $projectName
        yo parcel-js-vanilla
        cd -
-   fi
 
-   if [[ $projectType = "react-native-js" ]]; then
+
+   elif [[ $projectType = "react-native-js" ]]; then
        nvm use 11.6
        yarn create react-native-app $projectName
-   fi
 
 
-   if [[ $projectType = "chrome-extension" ]]; then
+
+   elif [[ $projectType = "chrome-extension" ]]; then
        nvm use 11.6
        mcd $projectName
        yo chrome-extension
        cd -
-   fi
 
-   if [[ $projectType = "laravel" ]]; then
+
+   elif [[ $projectType = "laravel" ]]; then
        laravel new $projectName
-   fi
 
 
 
-   if [[ $projectType = "nodejs" ]]; then
+
+   elif [[ $projectType = "nodejs" ]]; then
        //
-   fi
 
-   if [[ $projectType = "cli-js" ]]; then
+
+   elif [[ $projectType = "cli-js" ]]; then
        //
-   fi
 
-   if [[ $projectType = "react-native-clojure" ]]; then
+
+   elif [[ $projectType = "react-native-clojure" ]]; then
        lein new expo $projectName
        cd $projectName && yarn install
        lein figwheel
        cd ..
-   fi
 
-   if [[ $projectType = "clojure-reagent-frontend" ]]; then
+
+   elif [[ $projectType = "clojure-reagent-frontend" ]]; then
        lein new shadow-cljs $projectName +reagent
        npm install
-   fi
 
 
-   if [[ $projectType = "django" ]]; then
+
+   elif [[ $projectType = "django" ]]; then
 	   django-admin startproject $projectName
-   fi
 
 
-   if [[ $projectType = "fennel-love2d" ]]; then
+
+   elif [[ $projectType = "fennel-love2d" ]]; then
        mcd $projectName
        git clone https://gitlab.com/alexjgriffith/min-love2d-fennel.git .
        rm -rf .git
        touch .projectrc
        echo "fennel-love2d" >> .projectrc
        cd - 
-   fi
 
 
-   if [[ $projectType = "blitz.js vanilla" ]]; then
+
+   elif [[ $projectType = "blitz.js vanilla" ]]; then
        blitz new $projectName
        cd $projectName
-   fi
 
 
-   if [[ $projectType = "fennel-nvim-plugin" ]]; then
+
+   elif [[ $projectType = "electron-react" ]]; then
+       npm init electron-app@latest $projectName -- --template=webpack-typescript
+       cd $projectName
+       npm install react react-dem
+       npm install --save-dev @types/react @types/react-dom
+       npm install --save-dev @babel/core @babel/preset-react babel-loader
+       npm install baseui styletron-react styletron-engine-monolithic
+
+
+
+
+
+   elif [[ $projectType = "fennel-nvim-plugin" ]]; then
        mcd $projectName
        rm -rf .git
        curl -fL https://raw.githubusercontent.com/Olical/aniseed/master/scripts/seed.sh | sh
        ln -s $HOME/project/$projectName $HOME/.local/share/nvimplugged/$projectName 
        cd - 
+
+
+   elif [[ $projectType = "esbuild-ts-vanilla" ]]; then
+       mcd $projectName
+       git clone git@github.com:ColinRyan/esbuild-starter.git .
+       rm -rf .git
+       npm ci
+       cd - 
+
+
+
+
+   elif [[ $projectType = "bun-vite-vanilla-ts" ]]; then
+       bunx create-vite $projectName --template vanilla-ts
+       mcd $projectName
+       bun install
+       cd - 
+
+
+   elif [[ $projectType = "bun-vite-react-swc-ts" ]]; then
+       nvm use 21
+       bunx create-vite $projectName --template react-swc-ts
+       mcd $projectName
+       bun install
+       cd - 
+   else 
+       echo "No project type selected."
+       return
    fi
 
 
 
+   #
+   #
+   #
    mcd $projectName
    git init
    touch "Readme.md"
 
    echo $projectName > ~/.config/.project 
    mux start project $projectName
-
+   #
 
    return 1
 } 
@@ -489,15 +576,16 @@ ff () {
   grep -rnw "$1" -e "$2"
 }
 
-g () {
+g4 () {
 
-
-    git ls-files --others --exclude-standard | fzf -m --preview 'cat {}' | xargs git add
-    git add -p
+    currentBranch=$(git branch --show-current)
+    tempKey=${currentBranch#*-*-*}
+    key=${currentBranch%"-$tempKey"}
+    key=${key#*/}
 
 
     PS3='Select a commit tag:'
-    options=("fix:" "refactoring:" "config:" "feat:" "migration:" "doc:" "build:" "util:" "infrastructure:" "style:")
+    options=("fix:" "refactoring:" "config:" "feat:" "doc:" "fix:" "infrastructure:" "style:")
     select opt in "${options[@]}"
     do 
         case $opt in
@@ -507,7 +595,34 @@ g () {
 
     read -p 'Create a commit message:' msg
 
-    git commit -m "$tag:$msg"
+    git commit -p -m "$tag ($key):$msg"
+
+}
+
+g () {
+
+    currentBranch=$(git branch --show-current)
+    tempKey=${currentBranch#*-*-*}
+    key=${currentBranch%"-$tempKey"}
+
+
+
+    git ls-files --others --exclude-standard | fzf -m --preview 'cat {}' | xargs git add
+    git add -p
+
+
+    PS3='Select a commit tag:'
+    options=("fix:" "refactoring:" "config:" "feat:" "doc:" "fix:" "infrastructure:" "style:")
+    select opt in "${options[@]}"
+    do 
+        case $opt in
+            *) tag=$opt; break;;
+        esac
+    done
+
+    read -p 'Create a commit message:' msg
+
+    git commit -m "$tag($key):$msg"
         
     
 }
@@ -654,7 +769,7 @@ tt () {
 
 # Util
 
-alias r='. ~/.bashrc'
+alias r='. ~/.bashrc && bind -f ~/.inputrc'
 alias ls='lsd -la'
 alias lg='lsd | grep'
 alias i='sudo pacman -S'
@@ -681,6 +796,8 @@ alias c="clear"
 alias code='cd ~/code'
 alias why='why'
 complete -F _why why
+complete -F _agi3 agi3
+
 alias idea='cd ~/idea'
 
 alias pma='cd ~/projects/patientme/core/api'
@@ -723,8 +840,6 @@ alias gR='git checkout release && git fetch && git pull origin release'
 alias p='git push origin HEAD'
 alias add='git add -p'
 alias com='git commit -m'
-alias go='gotobranch'
-__git_complete go _git_checkout
 alias gpl='git pull origin HEAD'
 alias gph='git push origin HEAD'
 alias gm='git merge'
@@ -744,7 +859,7 @@ alias gb='git branch'
 alias gl='git log'
 alias gc='git commit'
 alias grh='git revert --hard'
-alias gx="git for-each-ref --sort=-committerdate --count=20 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch"
+alias gx="git for-each-ref --sort=-committerdate --count=100 --format='%(refname:short)' refs/heads/ | fzf | xargs -I branch git checkout branch"
 
 
 # Vagrant
@@ -795,4 +910,24 @@ alias gl='git log'
 export PATH="$HOME/.serverless/bin:$PATH"
 
 
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+eval "$(direnv hook bash)"
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+
+
+nvm use 23.8
+. "$HOME/.cargo/env"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export LLVM_CONFIG=/usr/bin/llvm-config

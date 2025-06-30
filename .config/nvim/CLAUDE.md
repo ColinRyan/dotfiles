@@ -139,6 +139,42 @@ The configuration uses Aniseed to compile Fennel to Lua. When editing Fennel fil
 5. Leverage snippets and templates for boilerplate
 6. Commit with Git integration (`<leader>gs`)
 
+## Recent Development (2025-06-22)
+
+### TreeSitter Query Enhancement Project
+Currently implementing custom TreeSitter queries for enhanced TypeScript and TypeScript React syntax highlighting. This project focuses on semantic highlighting that reveals code meaning rather than just syntax.
+
+**Key Features Being Developed:**
+- **React Hook Classification** - Different colors for `useState`, `useEffect`, custom hooks
+- **Component vs HTML Distinction** - Visual separation of React components from HTML elements  
+- **TypeScript Type System** - Enhanced highlighting for built-in types, utility types, Props/State patterns
+- **JSX Attribute Categorization** - Special treatment for event handlers, React internals, dangerous attributes
+- **CSS-in-JS Integration** - Proper CSS highlighting within styled-components
+
+**Implementation Status:**
+- ✅ Specification document created (`Spec.md`) defining behavior and patterns
+- ✅ Query files implemented in `queries/typescript/` and `queries/typescriptreact/`
+- ✅ Custom highlight groups integrated with Sin colorscheme
+- ✅ Semantic highlighting focused on meaning over syntax
+- ✅ Integration with existing Fennel configuration
+
+**Files Implemented:**
+- `Spec.md` - Complete specification of query behavior
+- `queries/typescript/highlights.scm` - TypeScript-specific highlighting with 50+ semantic patterns
+- `queries/typescriptreact/highlights.scm` - React/JSX highlighting with hook classification
+- `fnl/treesitter-highlights.fnl` - Custom highlight group definitions
+- `lua/treesitter-highlights.lua` - Compiled Lua configuration
+- `test-highlights.tsx` - Test file demonstrating all highlight patterns
+
+**Active Features:**
+- React hooks get different colors by purpose (useState=yellow, useEffect=cyan, custom=blue)
+- HTML elements vs React components visually distinct (red vs blue)
+- TypeScript utility types specially highlighted (Partial, Pick, etc.)
+- JSX attributes categorized (events=green, React internals=cyan, dangerous=red+underline)
+- CSS-in-JS gets proper syntax highlighting in template literals
+
+This enhancement will significantly improve the development experience for TypeScript and React codebases by making code patterns more visually apparent.
+
 ## Common Issues
 
 - If CoC language servers aren't working, check `coc-settings.json` paths

@@ -24,3 +24,5 @@ learn
 .electron
 .eclipse
 .rustup
+
+**/.claude/settings.local.json

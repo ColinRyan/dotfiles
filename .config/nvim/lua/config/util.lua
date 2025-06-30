@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/colin/.config/nvim/fnl/config/util.fnl"
+local _2afile_2a = "fnl/config/util.fnl"
 local nvim = require("aniseed.nvim")
 local function expand(path)
   return nvim.fn.expand(path)

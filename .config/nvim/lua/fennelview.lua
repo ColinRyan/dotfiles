@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/colin/.config/nvim/fnl/fennelview.fnl"
+local _2afile_2a = "fnl/fennelview.fnl"
 local function view_quote(str)
   return ("\"" .. str:gsub("\"", "\\\"") .. "\"")
 end

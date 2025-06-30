@@ -1,4 +1,4 @@
-local _2afile_2a = "/home/colin/.config/nvim/fnl/config/init.fnl"
+local _2afile_2a = "fnl/config/init.fnl"
 local core = require("aniseed.core")
 local nvim = require("aniseed.nvim")
 local util = require("config.util")

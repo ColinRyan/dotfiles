@@ -40,3 +40,5 @@ $endif
 "\C-x":"tmux kill-session\C-m"
 "\C-b":"cd ~ &&  tmux list-panes -F '#F' | grep -q Z || tmux resize-pane -Z && vb\C-m cd -\C-m"
 C-t:'t ""\e[D'
+C-s:'startServing\C-m'
+

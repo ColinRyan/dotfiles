@@ -38,5 +38,5 @@ cd ..
 composer global require 'laravel/installer'
 git config --global user.name "Colin Ryan"
 git config --global user.email 'c.ryan@mun.ca'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
 

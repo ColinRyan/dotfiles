@@ -645,9 +645,8 @@
 
 (var parserConfig (treesitterParsers.get_parser_configs))
 
-
-
 (set parserConfig.tsx.filetype_to_parsername [ "javascript" "typescript.tsx" "typescriptreact" "javascriptreact"])
+
 
 ; Smart Yank
 
